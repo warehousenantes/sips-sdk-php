@@ -4,24 +4,38 @@ declare(strict_types=1);
 
 namespace Worldline\Sips\CashManagement;
 
-class ValidateRequest extends \Worldline\Sips\SipsMessage
+use Worldline\Sips\Common\SipsEnvironment;
+use Worldline\Sips\SipsMessage;
+
+class ValidateRequest extends SipsMessage
 {
     protected $currencyCode;
+
     protected $intermediateServiceProviderId;
+
     protected $lastRecoveryIndicator;
+
     protected $operationAmount;
+
     protected $operationOrigin;
+
     protected $s10TransactionReference;
+
     protected $subMerchantAddress;
+
     protected $subMerchantCategoryCode;
+
     protected $subMerchantId;
+
     protected $subMerchantLegalId;
+
     protected $subMerchantShortName;
+
     protected $transactionReference;
 
     public function __construct()
     {
-        $this->connecter = \Worldline\Sips\Common\SipsEnvironment::OFFICE;
+        $this->connecter = SipsEnvironment::OFFICE;
         $this->serviceUrl = 'rs-services/v2/cashManagement/validate';
         $this->interfaceVersion = 'CR_WS_2.3';
         $this->setTransactionReference($this->generateReference());
@@ -30,10 +44,9 @@ class ValidateRequest extends \Worldline\Sips\SipsMessage
     public function generateReference(): string
     {
         $microtime = explode(' ', microtime());
-        $microtime[0] = $microtime[0] * 1000000;
-        $transactionReference = $microtime[1].$microtime[0];
+        $microtime[0] *= 1_000_000;
 
-        return $transactionReference;
+        return $microtime[1].$microtime[0];
     }
 
     public function getOperationAmount()

@@ -5,49 +5,71 @@ declare(strict_types=1);
 namespace Worldline\Sips\CashManagement;
 
 use Worldline\Sips\Common\Field\CardData;
+use Worldline\Sips\Common\Field\S10TransactionReference;
 
 class DuplicateResponse
 {
     protected $acquirerResponseCode;
+
     protected $authorisationId;
+
     protected $complementaryCode;
+
     protected $complementaryInfo;
+
     protected $maskedPan;
+
     protected $panExpiryDate;
+
     protected $paymentMeanBrand;
+
     protected $scoreValue;
+
     protected $scoreColor;
+
     protected $scoreInfo;
+
     protected $scoreProfile;
+
     protected $scoreThreshold;
+
     protected $responseCode;
+
     protected $transactionDateTime;
 
     /**
-     * @var \Worldline\Sips\Common\Field\S10TransactionReference
+     * @var S10TransactionReference
      */
     protected $s10TransactionReference;
 
     protected $transactionReference;
 
     /**
-     * @var \Worldline\Sips\Common\Field\CardData
+     * @var CardData
      */
     protected $cardData;
+
     protected $paymentMeanBrandSelectionStatus;
+
     protected $preAuthorisationProfile;
+
     protected $preAuthorisationProfileValue;
+
     protected $preAuthorisationRuleResultList;
+
     protected $transactionPlatform;
+
     protected $avsPostcodeResponseCode;
+
     protected $avsAddressResponseCode;
+
     protected $errorFieldName;
 
     public function __construct($data)
     {
         foreach ($data as $key => $value) {
             if ('s10TransactionReference' === $key) {
-                $s10 = new \Worldline\Sips\Common\Field\S10TransactionReference();
+                $s10 = new S10TransactionReference();
                 $s10->setS10TransactionId($value['s10TransactionId']);
                 $s10->setS10TransactionIdDate($value['s10TransactionIdDate']);
                 $value = $s10;
@@ -56,6 +78,7 @@ class DuplicateResponse
                 $cardData->hydrate($value);
                 $value = $cardData;
             }
+
             $this->$key = $value;
         }
     }
@@ -130,7 +153,7 @@ class DuplicateResponse
         return $this->transactionDateTime;
     }
 
-    public function getS10TransactionReference(): \Worldline\Sips\Common\Field\S10TransactionReference
+    public function getS10TransactionReference(): S10TransactionReference
     {
         return $this->s10TransactionReference;
     }
@@ -283,7 +306,7 @@ class DuplicateResponse
         return $this;
     }
 
-    public function setS10TransactionReference(\Worldline\Sips\Common\Field\S10TransactionReference $s10TransactionReference)
+    public function setS10TransactionReference(S10TransactionReference $s10TransactionReference)
     {
         $this->s10TransactionReference = $s10TransactionReference;
 

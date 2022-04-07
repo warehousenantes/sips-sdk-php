@@ -132,19 +132,17 @@ class SipsMessage
                 // null values are excluded from the array export
                 continue;
             }
-            if ($value instanceof Field) {
-                // Every value in the sub object must be prefixed by the current key
-                $array[$key] = $value->toArray();
-            } else {
-                $array[$key] = $value;
-            }
+
+            $array[$key] = $value instanceof Field ? $value->toArray() : $value;
         }
+
         unset($array['serviceUrl']);
         unset($array['connecter']);
 
         if (isset($array['s10TransactionReference'])) {
             unset($array['transactionReference']);
         }
+
         ksort($array);
 
         return $array;

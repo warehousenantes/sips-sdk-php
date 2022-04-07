@@ -4,51 +4,93 @@ declare(strict_types=1);
 
 namespace Worldline\Sips\CashManagement;
 
-class DuplicateRequest extends \Worldline\Sips\SipsMessage
+use Worldline\Sips\Common\Field\FraudData;
+use Worldline\Sips\Common\SipsEnvironment;
+use Worldline\Sips\SipsMessage;
+
+class DuplicateRequest extends SipsMessage
 {
     protected $amount;
+
     protected $captureDay;
+
     protected $captureMode;
+
     protected $currencyCode;
+
     protected $customerEmail;
+
     protected $customerId;
+
     protected $customerIpAddress;
 
     /**
-     * @var \Worldline\Sips\Common\Field\FraudData
+     * @var FraudData
      */
     protected $fraudData;
+
     protected $fromTransactionReference;
+
     protected $merchantTransactionDateTime;
+
     protected $orderChannel;
+
     protected $orderId;
+
     protected $returnContext;
+
     protected $transactionReference;
+
     protected $transactionOrigin;
+
     protected $fromMerchantId;
+
     protected $deliveryAddress;
+
     protected $deliveryContact;
+
     protected $billingAddress;
+
     protected $billingContact;
+
     protected $customerAddress;
+
     protected $customerContact;
+
     protected $customerData;
+
     protected $statementReference;
+
     protected $deliveryData;
+
     protected $shoppingCartDetail;
+
     protected $s10TransactionReference;
+
     protected $s10FromTransactionReference;
+
     protected $paymentMeanData;
+
     protected $intermediateServiceProviderId;
+
     protected $subMerchantId;
+
     protected $subMerchantShortName;
+
     protected $subMerchantCategoryCode;
+
     protected $subMerchantLegalId;
+
     protected $subMerchantAddress;
+
     protected $holderAddress;
+
     protected $holderContact;
+
     protected $authenticationData;
+
     protected $travelContext;
+
     protected $orderContext;
 
     /**
@@ -56,7 +98,7 @@ class DuplicateRequest extends \Worldline\Sips\SipsMessage
      */
     public function __construct()
     {
-        $this->connecter = \Worldline\Sips\Common\SipsEnvironment::OFFICE;
+        $this->connecter = SipsEnvironment::OFFICE;
         $this->serviceUrl = 'rs-services/v2/cashManagement/duplicate';
         $this->interfaceVersion = 'CR_WS_2.3';
         $this->setTransactionReference($this->generateReference());
@@ -65,10 +107,9 @@ class DuplicateRequest extends \Worldline\Sips\SipsMessage
     public function generateReference(): string
     {
         $microtime = explode(' ', microtime());
-        $microtime[0] = $microtime[0] * 1000000;
-        $transactionReference = $microtime[1].$microtime[0];
+        $microtime[0] *= 1_000_000;
 
-        return $transactionReference;
+        return $microtime[1].$microtime[0];
     }
 
     public function getAmount()
@@ -106,7 +147,7 @@ class DuplicateRequest extends \Worldline\Sips\SipsMessage
         return $this->customerIpAddress;
     }
 
-    public function getFraudData(): ?\Worldline\Sips\Common\Field\FraudData
+    public function getFraudData(): ?FraudData
     {
         return $this->fraudData;
     }
@@ -320,7 +361,7 @@ class DuplicateRequest extends \Worldline\Sips\SipsMessage
         return $this;
     }
 
-    public function setFraudData(\Worldline\Sips\Common\Field\FraudData $fraudData)
+    public function setFraudData(FraudData $fraudData)
     {
         $this->fraudData = $fraudData;
 

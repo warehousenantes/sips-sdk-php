@@ -4,59 +4,101 @@ declare(strict_types=1);
 
 namespace Worldline\Sips\Checkout;
 
+use Worldline\Sips\Common\Field\S10TransactionReference;
+use Worldline\Sips\Common\SipsEnvironment;
+use Worldline\Sips\SipsMessage;
+
 /**
  * Requests for payment orders via electronic wallets include the following elements:.
  *
  * @author Guiled <guislain.duthieuw@gmail.com>
  */
-class WalletOrderRequest extends \Worldline\Sips\SipsMessage
+class WalletOrderRequest extends SipsMessage
 {
     protected $amount;
+
     protected $captureDay;
+
     protected $captureMode;
+
     protected $cardCSCValue;
+
     protected $cscType;
+
     protected $currencyCode;
+
     protected $customerId;
+
     protected $customerIpAddress;
+
     protected $fraudData;
+
     protected $merchantWalletId;
+
     protected $merchantTransactionDateTime;
+
     protected $orderChannel;
+
     protected $orderId;
+
     protected $paymentMeanId;
+
     protected $returnContext;
+
     protected $transactionReference;
+
     protected $transactionOrigin;
+
     protected $billingAddress;
+
     protected $billingContact;
+
     protected $customerAddress;
+
     protected $customerContact;
+
     protected $deliveryAddress;
+
     protected $deliveryContact;
+
     protected $deliveryData;
+
     protected $customerData;
+
     protected $invoiceReference;
+
     protected $statementReference;
+
     protected $paymentPattern;
+
     protected $holderAddress;
+
     protected $holderContact;
+
     protected $authenticationData;
+
     /**
-     * @var \Worldline\Sips\Common\Field\S10TransactionReference
+     * @var S10TransactionReference
      */
     protected $s10TransactionReference;
+
     protected $intermediateServiceProviderId;
+
     protected $customerLanguage;
+
     protected $orderContext;
+
     protected $travelContext;
+
     protected $paymentMeanData;
+
     protected $holderData;
+
     protected $shoppingCartDetail;
 
     public function __construct()
     {
-        $this->connecter = \Worldline\Sips\Common\SipsEnvironment::OFFICE;
+        $this->connecter = SipsEnvironment::OFFICE;
         $this->serviceUrl = 'rs-services/v2/checkout/walletOrder';
         $this->interfaceVersion = 'IR_WS_2.35';
     }
@@ -216,7 +258,7 @@ class WalletOrderRequest extends \Worldline\Sips\SipsMessage
         return $this->authenticationData;
     }
 
-    public function getS10TransactionReference(): \Worldline\Sips\Common\Field\S10TransactionReference
+    public function getS10TransactionReference(): S10TransactionReference
     {
         return $this->s10TransactionReference;
     }
@@ -473,7 +515,7 @@ class WalletOrderRequest extends \Worldline\Sips\SipsMessage
         return $this;
     }
 
-    public function setS10TransactionReference(\Worldline\Sips\Common\Field\S10TransactionReference $s10TransactionReference)
+    public function setS10TransactionReference(S10TransactionReference $s10TransactionReference)
     {
         $this->s10TransactionReference = $s10TransactionReference;
 

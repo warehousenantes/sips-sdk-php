@@ -7,11 +7,18 @@ namespace Worldline\Sips\Common\Field;
 class ShoppingCartDetail extends Field
 {
     protected $discountAmount;
+
     protected $mainProduct;
+
     protected $mainProductCategoryList;
-    protected $shoppingCartItemList;        //  List of container shoppingCartItem . See the Containers part
+
+    protected $shoppingCartItemList;
+
+    //  List of container shoppingCartItem . See the Containers part
     protected $shoppingCartTotalAmount;
+
     protected $shoppingCartTotalQuantity;
+
     protected $shoppingCartTotalTaxAmount;
 
     public function getDiscountAmount()

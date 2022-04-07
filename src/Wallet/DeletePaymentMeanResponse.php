@@ -7,9 +7,12 @@ namespace Worldline\Sips\Wallet;
 class DeletePaymentMeanResponse
 {
     protected $walletActionDateTime;
+
     protected $walletResponseCode;
 
-    protected $errorFieldName; //	Available if walletResponseCode 12 or 30
+    protected $errorFieldName;
+
+    //	Available if walletResponseCode 12 or 30
 
     public function __construct($data)
     {

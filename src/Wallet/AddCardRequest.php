@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Worldline\Sips\Wallet;
 
+use Worldline\Sips\Common\SipsEnvironment;
+use Worldline\Sips\SipsMessage;
+
 /**
  * This function allows to create a wallet account with a card. The latter is created at the same time as adding the
  * card, if it does not exist. If the card is already recorded in the wallet, then a 94 response code is returned.
@@ -12,7 +15,7 @@ namespace Worldline\Sips\Wallet;
  *
  * @author Guiled <guislain.duthieuw@gmail.com>
  */
-class AddCardRequest extends \Worldline\Sips\SipsMessage
+class AddCardRequest extends SipsMessage
 {
     protected $cardNumber;
 
@@ -33,7 +36,7 @@ class AddCardRequest extends \Worldline\Sips\SipsMessage
      */
     public function __construct()
     {
-        $this->connecter = \Worldline\Sips\Common\SipsEnvironment::OFFICE;
+        $this->connecter = SipsEnvironment::OFFICE;
         $this->serviceUrl = 'rs-services/v2/wallet/addCard';
         $this->interfaceVersion = 'WR_WS_2.31';
     }

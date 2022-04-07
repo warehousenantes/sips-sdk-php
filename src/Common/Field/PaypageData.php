@@ -10,20 +10,12 @@ class PaypageData extends Field
 
     public function getBypassReceiptPage(): ?bool
     {
-        if ('true' === $this->bypassReceiptPage) {
-            return true;
-        }
-
-        return false;
+        return 'true' === $this->bypassReceiptPage;
     }
 
     public function setBypassReceiptPage(bool $bypassReceiptPage): self
     {
-        if ($bypassReceiptPage) {
-            $this->bypassReceiptPage = 'true';
-        } else {
-            $this->bypassReceiptPage = 'false';
-        }
+        $this->bypassReceiptPage = $bypassReceiptPage ? 'true' : 'false';
 
         return $this;
     }

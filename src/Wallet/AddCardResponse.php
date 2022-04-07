@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Worldline\Sips\Wallet;
 
+use Worldline\Sips\Common\Field\WalletPaymentMeanData;
+
 class AddCardResponse
 {
     protected $walletActionateTime;
@@ -22,10 +24,12 @@ class AddCardResponse
             if ('walletPaymentMeanDataList' === $key) {
                 $result = [];
                 foreach ($value as $walletPaymentMeanData) {
-                    $result[] = new \Worldline\Sips\Common\Field\WalletPaymentMeanData($walletPaymentMeanData);
+                    $result[] = new WalletPaymentMeanData($walletPaymentMeanData);
                 }
+
                 $value = $result;
             }
+
             $this->$key = $value;
         }
     }

@@ -37,6 +37,7 @@ class Field
                 }
             }
         }
+
         ksort($array);
 
         return $array;

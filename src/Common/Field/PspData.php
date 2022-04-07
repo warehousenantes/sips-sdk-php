@@ -12,10 +12,7 @@ namespace Worldline\Sips\Common\Field;
  */
 class PspData extends Field
 {
-    protected $data1;
-
-    public function __construct($data1)
+    public function __construct(protected $data1)
     {
-        $this->data1 = $data1;
     }
 }

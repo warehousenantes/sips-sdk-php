@@ -8,11 +8,7 @@ class PostSealCalculator
 {
     public function isCorrectSeal(string $data, string $secretKey, string $seal): bool
     {
-        if ($seal === $this->encrypt($data, $secretKey)) {
-            return true;
-        }
-
-        return false;
+        return $seal === $this->encrypt($data, $secretKey);
     }
 
     public function encrypt(string $sealdata, string $secretKey): string

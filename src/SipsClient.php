@@ -11,32 +11,41 @@ use Worldline\Sips\Common\Seal\PostSealCalculator;
 use Worldline\Sips\Common\SipsEnvironment;
 use Worldline\Sips\Paypage\PaypageResult;
 
+/**
+ * @see \Worldline\Sips\Test\SipsClientTest
+ */
 class SipsClient
 {
     /**
      * @var SipsEnvironment
      */
     protected $environment;
+
     /**
      * @var string
      */
     protected $merchantId;
+
     /**
      * @var string
      */
     protected $secretKey;
+
     /**
      * @var int
      */
     protected $keyVersion;
+
     /**
      * @var string
      */
     protected $sealAlgorithm;
+
     /**
      * @var string
      */
     protected $lastRequestAsJson;
+
     /**
      * @var string
      */
@@ -77,7 +86,7 @@ class SipsClient
         $sealCalculator = new JsonSealCalculator();
         $sealAlgorithm = $this->sealAlgorithm ?? JsonSealCalculator::ALGORITHM_DEFAULT;
         $sealCalculator->calculateSeal($sipsMessage, $this->secretKey, $sealAlgorithm);
-        $json = json_encode($sipsMessage->toArray());
+        $json = json_encode($sipsMessage->toArray(), \JSON_THROW_ON_ERROR);
         $this->lastRequestAsJson = $json;
         $client = new Client([
             'base_uri' => $this->environment->getEnvironment($sipsMessage->getConnecter()),
@@ -91,7 +100,7 @@ class SipsClient
         $request = new Request('POST', $sipsMessage->getServiceUrl(), $headers, $json);
         $response = $client->send($request, ['timeout' => $timeout]);
         $this->lastResponseAsJson = $response->getBody()->getContents();
-        $data = json_decode($this->lastResponseAsJson, true);
+        $data = json_decode($this->lastResponseAsJson, true, 512, \JSON_THROW_ON_ERROR);
         if (!empty($data['seal'])) {
             $validSeal = $sealCalculator->checkSeal($data, $this->getSecretKey(), $sealAlgorithm);
             if (!$validSeal) {
@@ -170,8 +179,7 @@ class SipsClient
         if (!$sealCalculator->isCorrectSeal($data, $this->secretKey, $seal)) {
             throw new \Exception('Invalid seal in response. Response not trusted.');
         }
-        $paypageResult = new PaypageResult($data);
 
-        return $paypageResult;
+        return new PaypageResult($data);
     }
 }

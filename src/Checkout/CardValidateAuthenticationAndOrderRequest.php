@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Worldline\Sips\Checkout;
 
+use Worldline\Sips\Common\Field\S10TransactionReference;
+use Worldline\Sips\Common\SipsEnvironment;
+use Worldline\Sips\SipsMessage;
+
 /**
  * Requests for payment initialization via card with 3-D Secure process.
  * This request initializes a transaction on Sips platform and checks the card enrollment. If the card is enrolled to
@@ -12,15 +16,19 @@ namespace Worldline\Sips\Checkout;
  *
  * @author Guiled <guislain.duthieuw@gmail.com>
  */
-class CardValidateAuthenticationAndOrderRequest extends \Worldline\Sips\SipsMessage
+class CardValidateAuthenticationAndOrderRequest extends SipsMessage
 {
     /**
-     * @var \Worldline\Sips\Common\Field\S10TransactionReference
+     * @var S10TransactionReference
      */
     protected $s10TransactionReference;
+
     protected $messageVersion;
+
     protected $redirectionData;
+
     protected $paResMessage;
+
     protected $intermediateServiceProviderId;
 
     /**
@@ -28,12 +36,12 @@ class CardValidateAuthenticationAndOrderRequest extends \Worldline\Sips\SipsMess
      */
     public function __construct()
     {
-        $this->connecter = \Worldline\Sips\Common\SipsEnvironment::OFFICE;
+        $this->connecter = SipsEnvironment::OFFICE;
         $this->serviceUrl = '/rs-services/v2/checkout/cardValidateAuthenticationAndOrder';
         $this->interfaceVersion = 'IR_WS_2.35';
     }
 
-    public function getS10TransactionReference(): \Worldline\Sips\Common\Field\S10TransactionReference
+    public function getS10TransactionReference(): S10TransactionReference
     {
         return $this->s10TransactionReference;
     }
@@ -58,7 +66,7 @@ class CardValidateAuthenticationAndOrderRequest extends \Worldline\Sips\SipsMess
         return $this->intermediateServiceProviderId;
     }
 
-    public function setS10TransactionReference(\Worldline\Sips\Common\Field\S10TransactionReference $s10TransactionReference)
+    public function setS10TransactionReference(S10TransactionReference $s10TransactionReference)
     {
         $this->s10TransactionReference = $s10TransactionReference;
 

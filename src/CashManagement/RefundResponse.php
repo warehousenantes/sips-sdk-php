@@ -7,12 +7,19 @@ namespace Worldline\Sips\CashManagement;
 class RefundResponse
 {
     protected $acquirerResponseCode;
+
     protected $authorisationId;
+
     protected $newAmount;
+
     protected $newStatus;
+
     protected $operationDateTime;
+
     protected $responseCode;
+
     protected $seal;
+
     protected $errorFieldName;
 
     public function __construct($data)

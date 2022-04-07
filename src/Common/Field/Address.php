@@ -13,42 +13,52 @@ class Address extends Field
      * @var string
      */
     protected $addressAdditional1;
+
     /**
      * @var string
      */
     protected $addressAdditional2;
+
     /**
      * @var string
      */
     protected $addressAdditional3;
+
     /**
      * @var string
      */
     protected $city;
+
     /**
      * @var string
      */
     protected $company;
+
     /**
      * @var string
      */
     protected $country;
+
     /**
      * @var string
      */
     protected $postBox;
+
     /**
      * @var string
      */
     protected $state;
+
     /**
      * @var string
      */
     protected $street;
+
     /**
      * @var string
      */
     protected $streetNumber;
+
     /**
      * @var string
      */

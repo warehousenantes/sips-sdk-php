@@ -4,113 +4,215 @@ declare(strict_types=1);
 
 namespace Worldline\Sips\Paypage;
 
+use Worldline\Sips\Common\Field\S10TransactionReference;
+
 class PaypageResult
 {
     protected $acquirerNativeResponseCode;
+
     protected $acquirerResponseCode;
+
     protected $acquirerResponseIdentifier;
+
     protected $acquirerResponseMessage;
+
     protected $additionalAuthorisationNumber;
+
     protected $amount;
+
     protected $avsAdressResponseCode;
+
     protected $avsPostcodeResponseCode;
+
     protected $authorisationId;
+
     protected $captureDay;
+
     protected $CaptureLimitData;
+
     protected $captureMode;
+
     protected $cardCSCResultCode;
+
     protected $cardProductCode;
+
     protected $cardProductName;
+
     protected $cardProductProfile;
+
     protected $complementaryCode;
+
     protected $complementaryInfo;
+
     protected $creditorId;
+
     protected $currencyCode;
+
     protected $customerBusinessName;
+
     protected $customerCompanyName;
+
     protected $customerEmail;
+
     protected $customerId;
+
     protected $customerIpAddress;
+
     protected $customerLegalId;
+
     protected $customerMobilePhone;
+
     protected $customerPositionOccupied;
+
     protected $dccAmount;
+
     protected $dccExchangeRate;
+
     protected $dccEchangeRateValidity;
+
     protected $dccProvider;
+
     protected $dccStatus;
+
     protected $dccResponseCode;
+
     protected $guaranteeIndicator;
+
     protected $hashPan1;
+
     protected $hashPan2;
+
     protected $holderAuthentMethod;
+
     protected $holderAuthentProgram;
+
     protected $holderAuthentRelegation;
+
     protected $holderAuthentStatus;
+
     protected $instalmentAmaountsList;
+
     protected $instalmentDatesList;
+
     protected $instalmentNumber;
+
     protected $instalmentTransactionReferencesList;
+
     protected $interfaceVersion;
+
     protected $invoiceReference;
+
     protected $issuerCode;
+
     protected $issuerCountryCode;
+
     protected $issuerEnrollementIndicator;
+
     protected $issuerWalletInformation;
+
     protected $keyVersion;
+
     protected $mandateAuthentMethod;
+
     protected $mandateCertificationType;
+
     protected $mandateId;
+
     protected $mandateUsage;
+
     protected $maskedPan;
+
     protected $merchantId;
+
     protected $merchantSessionId;
+
     protected $merchantTransactionDataTime;
+
     protected $merchantWalletId;
+
     protected $orderChannel;
+
     protected $orderId;
+
     protected $panEntryMode;
+
     protected $panExpireDate;
+
     protected $paymentAttemptNumber;
+
     protected $paymentMeanBrand;
+
     protected $paymentMeanBrandSelectionStatus;
+
     protected $paymentMeanData;
+
     protected $paymentMeanId;
+
     protected $paymentMeanTradingName;
+
     protected $paymentMeanType;
+
     protected $paymentMeanPattern;
+
     protected $preAuthenticationColor;
+
     protected $preAuthenticationInfo;
+
     protected $preAuthenticationProfile;
+
     protected $preAuthenticationProfileValue;
+
     protected $preAuthenticationRuleResultList;
+
     protected $preAuthorisationThreshold;
+
     protected $preAuthenticationValue;
+
     protected $preAuthorisationProfile;
+
     protected $preAuthorisationProfileValue;
+
     protected $preAuthorisationRuleResultList;
+
     protected $responseCode;
+
     protected $returnContext;
+
     protected $s10TransactionId;
+
     protected $s10TransactionIdDate;
+
     protected $s10TransactionIdsList;
+
     protected $scoreColor;
+
     protected $scoreInfo;
+
     protected $scoreThreshold;
+
     protected $scoreValue;
+
     protected $settlementMode;
+
     protected $settlementModeComplement;
+
     protected $statementReference;
+
     protected $tokenPan;
+
     protected $transactionActors;
+
     protected $transactionDateTime;
+
     protected $transactionOrigin;
+
     protected $transactionReference;
 
     /**
-     * @var \Worldline\Sips\Common\Field\S10TransactionReference
+     * @var S10TransactionReference
      */
     protected $s10TransactionReference;
+
     protected $walletType;
 
     /**
@@ -124,12 +226,13 @@ class PaypageResult
             $value = explode('=', $value, 2);
             $dataArray[$value[0]] = $value[1];
         }
+
         foreach ($dataArray as $key => $value) {
             $this->$key = $value;
         }
 
         if (!empty($this->s10TransactionId)) {
-            $this->s10TransactionReference = new \Worldline\Sips\Common\Field\S10TransactionReference();
+            $this->s10TransactionReference = new S10TransactionReference();
             $this->s10TransactionReference->setS10TransactionId($this->s10TransactionId);
             $this->s10TransactionReference->setS10TransactionIdDate($this->s10TransactionIdDate);
         }
@@ -633,12 +736,12 @@ class PaypageResult
         return $this->walletType;
     }
 
-    public function getS10TransactionReference(): \Worldline\Sips\Common\Field\S10TransactionReference
+    public function getS10TransactionReference(): S10TransactionReference
     {
         return $this->s10TransactionReference;
     }
 
-    public function setS10TransactionReference(\Worldline\Sips\Common\Field\S10TransactionReference $s10TransactionReference)
+    public function setS10TransactionReference(S10TransactionReference $s10TransactionReference)
     {
         $this->s10TransactionReference = $s10TransactionReference;
 

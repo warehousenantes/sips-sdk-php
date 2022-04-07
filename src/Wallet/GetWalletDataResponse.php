@@ -4,17 +4,25 @@ declare(strict_types=1);
 
 namespace Worldline\Sips\Wallet;
 
+use Worldline\Sips\Common\Field\WalletPaymentMeanData;
+
 class GetWalletDataResponse
 {
     protected $walletCreationDateTime;
+
     protected $walletLastActionDateTime;
+
     protected $walletResponseCode;
 
     /**
      * @var array
      */
-    protected $walletPaymentMeanDataList = []; // List of container walletPaymentMeanData . See the Containers part
-    protected $errorFieldName; //	Available if walletResponseCode 12 or 30
+    protected $walletPaymentMeanDataList = [];
+
+    // List of container walletPaymentMeanData . See the Containers part
+    protected $errorFieldName;
+
+    //	Available if walletResponseCode 12 or 30
 
     public function __construct($data)
     {
@@ -22,10 +30,12 @@ class GetWalletDataResponse
             if ('walletPaymentMeanDataList' === $key) {
                 $result = [];
                 foreach ($value as $walletPaymentMeanData) {
-                    $result[] = new \Worldline\Sips\Common\Field\WalletPaymentMeanData($walletPaymentMeanData);
+                    $result[] = new WalletPaymentMeanData($walletPaymentMeanData);
                 }
+
                 $value = $result;
             }
+
             $this->$key = $value;
         }
     }

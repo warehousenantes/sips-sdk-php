@@ -6,7 +6,13 @@ namespace Worldline\Sips\Paypage;
 
 use Worldline\Sips\Common\Field\Address;
 use Worldline\Sips\Common\Field\Contact;
+use Worldline\Sips\Common\Field\CustomerAccountHistoric;
+use Worldline\Sips\Common\Field\DeliveryData;
+use Worldline\Sips\Common\Field\FraudData;
 use Worldline\Sips\Common\Field\PaypageData;
+use Worldline\Sips\Common\Field\S10TransactionReference;
+use Worldline\Sips\Common\Field\ShoppingCartDetail;
+use Worldline\Sips\Common\SipsEnvironment;
 use Worldline\Sips\SipsMessage;
 
 /**
@@ -21,6 +27,7 @@ class PaypageRequest extends SipsMessage
      * @var int
      */
     protected $amount;
+
     /**
      * Contains the information on the cardholder's authentication.
      *
@@ -28,48 +35,56 @@ class PaypageRequest extends SipsMessage
      * @toto Create the container
      */
     protected $authenticationData;
+
     /**
      * URL provided by the merchant and used by the payment server to automatically notify the merchant of the result of the transaction online.
      *
      * @var string
      */
     protected $automaticResponseUrl;
+
     /**
      * Contains the billing address information for the buyer.
      *
      * @var Address
      */
     protected $billingAddress;
+
     /**
      * Contains the billing contact's information.
      *
      * @var Contact
      */
     protected $billingContact;
+
     /**
      * First successful billing date for the customer address. For example, the merchant gives this information to allow the certification of an electronic signature.
      *
      * @var string YYYYMMMDD
      */
     protected $billingFirstDate;
+
     /**
      * Indicator used by the merchant to bypass the dcc procedure.
      *
      * @var string Y/N
      */
     protected $bypassDcc;
+
     /**
      * Flag indicating that WL Sips must not edit the ticket receipt. This action is at charge of the trader. At the end of the payment, the customer is directly redirected to the response url from the shop (normalReturnUrl).
      *
      * @var string
      */
     protected $bypassReceiptPage;
+
     /**
      * Deadline for settlement.
      *
      * @var int
      */
     protected $captureDay;
+
     /**
      * Payment collection method for the transaction.
      *
@@ -78,6 +93,7 @@ class PaypageRequest extends SipsMessage
      * @see \Worldline\Sips\Values\CaptureMode
      */
     protected $captureMode;
+
     /**
      * Currency code for the transaction. This code is ISO 4217 compatible.
      *
@@ -86,68 +102,70 @@ class PaypageRequest extends SipsMessage
      * @see Worldline\Sips\Values\CurrencyCode
      */
     protected $currencyCode;
+
     /**
      * Date of a 3D Secure transaction successfuly realised for the customer. For example, the merchant gives this information to allow the certification of an electronic signature.
      *
      * @var string YYYYMMDD
      */
     protected $customer3DSTransactionDate;
+
     /**
      * Contains information from the customer's account at the merchant (date of creation, number of transactions in the last 24h, ...).
      *
-     * @var \Worldline\Sips\Common\Field\CustomerAccountHistoric
+     * @var CustomerAccountHistoric
      */
     protected $customerAccountHistoric;
+
     /**
      * Contains the customer's address information.
      *
      * @var Address
      */
     protected $customerAddress;
+
     /**
      * Number of billing realised for the customer address. For example, the merchant gives this information to allow the certification of an electronic signature.
      *
      * @var int
      */
     protected $customerBillingNb;
+
     /**
      * Contains the customer's information.
      *
      * @var Contact
      */
     protected $customerContact;
+
     /**
      * Contains the customer's information.
      *
-     * @var \Worldline\Sips\Common\Field\Contact
+     * @var Contact
      */
     protected $customerData;
+
     /**
      * Successful delivery flag for the customer. For example, the merchant gives this information to allow the certification of an electronic signature.
      *
      * @var string Y/N
      */
     protected $customerDeliverySuccessFlag;
-    /**
-     * Deprecated, replaced by "email" in the container customerContact.
-     *
-     * @var string
-     *
-     * @deprecated
-     */
-    protected $customerEmail;
+
     /**
      * Customer identifier.
      *
      * @var string
      */
     protected $customerId;
+
     /**
      * Buyer's IP address.
      *
      * @var string
      */
     protected $customerIpAddress;
+
     /**
      * Language of the user, used on the payment pages.
      *
@@ -156,24 +174,28 @@ class PaypageRequest extends SipsMessage
      * @see Worldline\Sips\Values\CustomerLanguage
      */
     protected $customerLanguage;
+
     /**
      * Method used to validate the customer phone number. For example, the merchant gives this information to allow the certification of an electronic signature.
      *
      * @var string
      */
     protected $customerPhoneValidationMethod;
+
     /**
      * Online registration date of the customer. For example, the merchant gives this information to allow the certification of an electronic signature.
      *
      * @var string YYYYMMDD
      */
     protected $customerRegistrationDateOnline;
+
     /**
      * On site (Point Of Sale) registration date of the customer. For example, the merchant gives this information to allow the certification of an electronic signature.
      *
      * @var string YYYYMMDD
      */
     protected $customerRegistrationDateProxi;
+
     /**
      * ** NOT DOCUMENTED **.
      *
@@ -182,54 +204,63 @@ class PaypageRequest extends SipsMessage
      * @todo
      */
     protected $customerTimestampIpAddress;
+
     /**
      * Contains the delivery address information.
      *
      * @var Address
      */
     protected $deliveryAddress;
+
     /**
      * Contains the delivery contact's information.
      *
      * @var Contact
      */
     protected $deliveryContact;
+
     /**
      * Contains the delivery information.
      *
-     * @var \Worldline\Sips\Common\Field\DeliveryData
+     * @var DeliveryData
      */
     protected $deliveryData;
+
     /**
      * First successful delivery date at the customer address. For example, the merchant gives this information to allow the certification of an electronic signature.
      *
      * @var string YYYYMMDD
      */
     protected $deliveryFirstDate;
+
     /**
      * Date when the customer has provided the proof to the merchant. For example, the merchant gives this information to allow the certification of an electronic signature.
      *
      * @var string YYYYMMDD
      */
     protected $evidenceAcquisitionDate;
+
     /**
      * Number of the proof provided by the customer. For example, the merchant gives this information to allow the certification of an electronic signature.
      *
      * @var string
      */
     protected $evidenceNumber;
+
     /**
      * Type of proof provided by the customer. For example, the merchant gives this information to allow the certification of an electronic signature.
      *
      * @var string
      */
     protected $evidenceType;
+
     /**
      * Contains the transaction's antifraud rules parameters, allowing the merchant to dynamically customise the rules registered in the merchant configuration.
      *
-     * @var \Worldline\Sips\Common\Field\FraudData
+     * @var FraudData
      */
     protected $fraudData;
+
     /**
      * Cryptographic function used to calculate the hashPan.
      *
@@ -237,6 +268,7 @@ class PaypageRequest extends SipsMessage
      * @var \Worldline\Sips\Common\Field\HashAlgorithm
      */
     protected $hashAlgorithm1;
+
     /**
      * Cryptographic function used to calculate the hashPan.
      *
@@ -244,36 +276,42 @@ class PaypageRequest extends SipsMessage
      * @var \Worldline\Sips\Common\Field\HashAlgorithm
      */
     protected $hashAlgorithm2;
+
     /**
      * Random value (called a seed) provided by the merchant to calculate the hashPan.
      *
      * @var string
      */
     protected $hashSalt1;
+
     /**
      * Random value (called a seed) provided by the merchant to calculate the hashPan.
      *
      * @var string
      */
     protected $hashSalt2;
+
     /**
      * Additional reference of the holder that is communicated to the acquirer system or the issuer system in order to make some additional dedicated checks.
      *
      * @var string
      */
     protected $holderAdditionalReference;
+
     /**
      * Contains the payment mean holder's address information.
      *
      * @var Address
      */
     protected $holderAddress;
+
     /**
      * Contains contact details of the payment mean holder.
      *
      * @var Contact
      */
     protected $holderContact;
+
     /**
      * Contains the payment mean holder's information.
      *
@@ -282,6 +320,7 @@ class PaypageRequest extends SipsMessage
      * @todo create the container
      */
     protected $holderData;
+
     /**
      * Contains the information making it possible to make a payment in instalments.
      *
@@ -290,24 +329,28 @@ class PaypageRequest extends SipsMessage
      * @todo
      */
     protected $instalmentData;
+
     /**
      * Identifier of the Service used by the merchant for the exchanges with the WL Sips platform.
      *
      * @var string
      */
     protected $intermediateServiceProviderId;
+
     /**
      * Invoice reference.
      *
      * @var string
      */
     protected $invoiceReference;
+
     /**
      * Mandate number.
      *
      * @var string
      */
     protected $mandateId;
+
     /**
      * Merchant name (equivalent to the Merchant name registered during the Shop enrollment).
      * If indicated in the payment request, allows to change the name displayed on the 3-D Secure authentication page.
@@ -315,36 +358,42 @@ class PaypageRequest extends SipsMessage
      * @var string
      */
     protected $merchantName;
+
     /**
      * Merchant's session number. Allows consolidation between requests and responses.
      *
      * @var string
      */
     protected $merchantSessionId;
+
     /**
      * Date and time of the transaction, set by the merchant at the merchant's local time (in the merchant's time zone).
      *
      * @var string date time ISO8601
      */
     protected $merchantTransactionDateTime;
+
     /**
      * Merchant web site URL.
      *
      * @var string
      */
     protected $merchantUrl;
+
     /**
      * Customer's Wallet identifier.
      *
      * @var string
      */
     protected $merchantWalletId;
+
     /**
      * Merchant's URL for the return to the shop.
      *
      * @var string
      */
     protected $normalReturnUrl;
+
     /**
      * Order channel used (Internet, Telephone, Post, Fax etc), Internet is the default value.
      * Use of this field should be reconciled with the conditions defined in the acquirer contract.
@@ -354,6 +403,7 @@ class PaypageRequest extends SipsMessage
      * @todo Create the values
      */
     protected $orderChannel;
+
     /**
      * Contains specific information regarding the order context.
      *
@@ -362,12 +412,14 @@ class PaypageRequest extends SipsMessage
      * @todo Create the container
      */
     protected $orderContext;
+
     /**
      * Order number associated with the payment transaction.
      *
      * @var string
      */
     protected $orderId;
+
     /**
      * List of payment methods accepted for a transaction.
      * If this field is not filled out, the WL Sips server recovers the list of payment methods available for the configuration of the shop.
@@ -377,6 +429,7 @@ class PaypageRequest extends SipsMessage
      * @see \Worldline\Sips\Values\PaymentMeanBrandType
      */
     protected $paymentMeanBrandList;
+
     /**
      * Contains specific information regarding the payment method used by the buyer.
      *
@@ -385,6 +438,7 @@ class PaypageRequest extends SipsMessage
      * @todo Create the container
      */
     protected $paymentMeanData;
+
     /**
      * Type of payment (per operation, 1st recurring payment etc).
      *
@@ -393,12 +447,14 @@ class PaypageRequest extends SipsMessage
      * @see \Worldline\Sips\Values\PaymentPattern
      */
     protected $paymentPattern;
+
     /**
      * Contains the parameters for the payment pages, allowing the merchant to dynamically customise the options on payment pages.
      *
      * @var PaypageData
      */
     protected $paypageData;
+
     /**
      * Encoding type of the response expected by the merchant.
      *
@@ -407,12 +463,14 @@ class PaypageRequest extends SipsMessage
      * @todo create the values
      */
     protected $responseEncoding;
+
     /**
      * Identifier of the merchant's secret key used to calculate the imprint of the response.
      *
      * @var int
      */
     protected $responseKeyVersion;
+
     /**
      * Context of a buyer's order.
      * All information transmitted in this field by the merchant during the payment request is sent back in the response without amendment.
@@ -421,78 +479,91 @@ class PaypageRequest extends SipsMessage
      * @var string
      */
     protected $returnContext;
+
     /**
      * List of merchant privative information transmitted by the a Business Score scoring system.
      *
      * @var string
      */
     protected $riskManagementCustomDataList;
+
     /**
      * Contains the identification of the original transaction (to be compliant with WL Sips 1.0).
      *
-     * @var \Worldline\Sips\Common\Field\S10TransactionReference
+     * @var S10TransactionReference
      */
     protected $s10TransactionReference;
+
     /**
      * Information specific to the basket.
      *
-     * @var \Worldline\Sips\Common\Field\ShoppingCartDetail
+     * @var ShoppingCartDetail
      */
     protected $shoppingCartDetail;
+
     /**
      * Reference provided by the merchant which is sent in the payment collection flow. This reference appears on the account statements of the cardholder.
      *
      * @var string
      */
     protected $statementReference;
+
     /**
      * Contains address information of a merchant of the Payment Facilitator in the context of Collecting offer or a Marketplace offer.
      *
-     * @var \Worldline\Sips\Common\Field\Address
+     * @var Address
      */
     protected $subMerchantAddress;
+
     /**
      * MCC Code of the vendor at the Payment Facilitator in a context of Collecting offer or a Marketplace offer.
      *
      * @var string
      */
     protected $subMerchantCategoryCode;
+
     /**
      * Merchant contract number of the Payment Facilitator in the context of Collecting offer or a Marketplace offer (only used for Cetelem).
      *
      * @var string
      */
     protected $subMerchantContractNumber;
+
     /**
      * Merchant identifier of the Payment Facilitator in the context of Collecting offer or a Marketplace offer.
      *
      * @var string
      */
     protected $subMerchantId;
+
     /**
      * Legal identifier of vendor as merchant of the Payment Facilitator, expressed in the legal codification specific to each country.
      *
      * @var string
      */
     protected $subMerchantLegalId;
+
     /**
      * Name of the merchant of the Payment Facilitator in the context of Collecting offer or a Marketplace offer.
      *
      * @var string
      */
     protected $subMerchantName;
+
     /**
      * Short name of the merchant of the Payment Facilitator in the context of Collecting offer or a Marketplace offer.
      *
      * @var string
      */
     protected $subMerchantShortName;
+
     /**
      * Name of the file corresponding to the style sheet (name of the zip file) used to personalize the payment pages.
      *
      * @var string
      */
     protected $templateName;
+
     /**
      * Indicates the players in the transaction.
      *
@@ -501,12 +572,14 @@ class PaypageRequest extends SipsMessage
      * @todo create the values
      */
     protected $transactionActors;
+
     /**
      * Origin of a transaction (for example: name of the programme), set by the merchant. Exemple: "Website A v1.32".
      *
      * @var string
      */
     protected $transactionOrigin;
+
     /**
      * The merchant can choose of referencing his transactions by a transactionId or a transactionReference.
      * transactionReference uniquely identifies a transaction throughout the life of the shop.
@@ -514,6 +587,7 @@ class PaypageRequest extends SipsMessage
      * @var string
      */
     protected $transactionReference;
+
     /**
      * Contains specific information regarding the travel.
      *
@@ -522,6 +596,7 @@ class PaypageRequest extends SipsMessage
      * @todo create the container
      */
     protected $travelContext;
+
     /**
      * Payment value date.
      *
@@ -529,9 +604,24 @@ class PaypageRequest extends SipsMessage
      */
     protected $valueDate;
 
+    /**
+     * @var string
+     */
     public const PAYMENT_MEAN_BRAND_CB = 'CB';
+
+    /**
+     * @var string
+     */
     public const PAYMENT_MEAN_BRAND_MASTERCARD = 'MASTERCARD';
+
+    /**
+     * @var string
+     */
     public const PAYMENT_MEAN_BRAND_VISA = 'VISA';
+
+    /**
+     * @var string
+     */
     public const PAYMENT_MEAN_BRAND_AMEX = 'AMEX';
 
     /**
@@ -539,7 +629,7 @@ class PaypageRequest extends SipsMessage
      */
     public function __construct()
     {
-        $this->connecter = \Worldline\Sips\Common\SipsEnvironment::PAYPAGE;
+        $this->connecter = SipsEnvironment::PAYPAGE;
         $this->serviceUrl = 'rs-services/v2/paymentInit';
         $this->interfaceVersion = 'IR_WS_2.35';
         $this->setTransactionReference($this->generateReference());
@@ -556,10 +646,9 @@ class PaypageRequest extends SipsMessage
     public function generateReference(): string
     {
         $microtime = explode(' ', microtime());
-        $microtime[0] = $microtime[0] * 1000000;
-        $transactionReference = $microtime[1].$microtime[0];
+        $microtime[0] *= 1_000_000;
 
-        return $transactionReference;
+        return $microtime[1].$microtime[0];
     }
 
     public function getAmount(): ?int
@@ -634,6 +723,7 @@ class PaypageRequest extends SipsMessage
 
             return $this;
         }
+
         throw new \InvalidArgumentException('Invalid captureMode. Choose between AUTHOR_CAPTURE, IMMEDIATE or VALIDATION.');
     }
 
@@ -701,6 +791,7 @@ class PaypageRequest extends SipsMessage
 
             return $this;
         }
+
         throw new \InvalidArgumentException('Invalid currencyCode. Select a valid code from the data dictionary.');
     }
 
@@ -789,6 +880,7 @@ class PaypageRequest extends SipsMessage
 
             return $this;
         }
+
         throw new \InvalidArgumentException('Invalid customerLanguage. Select a valid code from the data dictionary.');
     }
 
@@ -899,6 +991,7 @@ class PaypageRequest extends SipsMessage
 
             return $this;
         }
+
         throw new \InvalidArgumentException('Invalid orderChannel. Choose between INTERNET, MOTO or INAPP');
     }
 
@@ -983,12 +1076,12 @@ class PaypageRequest extends SipsMessage
         $this->bypassReceiptPage = ($bypass ? 'true' : 'false');
     }
 
-    public function getS10TransactionReference(): \Worldline\Sips\Common\Field\S10TransactionReference
+    public function getS10TransactionReference(): S10TransactionReference
     {
         return $this->s10TransactionReference;
     }
 
-    public function setS10TransactionReference(\Worldline\Sips\Common\Field\S10TransactionReference $s10TransactionReference)
+    public function setS10TransactionReference(S10TransactionReference $s10TransactionReference)
     {
         unset($this->transactionReference);
         $this->s10TransactionReference = $s10TransactionReference;
@@ -997,38 +1090,11 @@ class PaypageRequest extends SipsMessage
     }
 
     /**
-     * Get the value of customerEmail.
-     *
-     * @deprecated
-     */
-    public function getCustomerEmail(): string
-    {
-        @trigger_error('Method '.__METHOD__.' is deprecated', \E_USER_DEPRECATED);
-
-        return $this->customerEmail;
-    }
-
-    /**
-     * Set the value of customerEmail.
-     *
-     * @deprecated
-     *
-     * @return self
-     */
-    public function setCustomerEmail(string $customerEmail)
-    {
-        @trigger_error('Method '.__METHOD__.' is deprecated', \E_USER_DEPRECATED);
-        $this->customerEmail = $customerEmail;
-
-        return $this;
-    }
-
-    /**
      * Get the value of fraudData.
      *
-     * @return \Worldline\Sips\Common\Field\FraudData
+     * @return FraudData
      */
-    public function getFraudData(): ?\Worldline\Sips\Common\Field\FraudData
+    public function getFraudData(): ?FraudData
     {
         return $this->fraudData;
     }
@@ -1038,7 +1104,7 @@ class PaypageRequest extends SipsMessage
      *
      * @return self
      */
-    public function setFraudData(\Worldline\Sips\Common\Field\FraudData $fraudData)
+    public function setFraudData(FraudData $fraudData)
     {
         $this->fraudData = $fraudData;
 
@@ -1144,7 +1210,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get contains information from the customer's account at the merchant (date of creation, number of transactions in the last 24h, ...).
      *
-     * @return \Worldline\Sips\Common\Field\CustomerAccountHistoric
+     * @return CustomerAccountHistoric
      */
     public function getCustomerAccountHistoric()
     {
@@ -1154,11 +1220,11 @@ class PaypageRequest extends SipsMessage
     /**
      * Set contains information from the customer's account at the merchant (date of creation, number of transactions in the last 24h, ...).
      *
-     * @param \Worldline\Sips\Common\Field\CustomerAccountHistoric $customerAccountHistoric Contains information from the customer's account at the merchant (date of creation, number of transactions in the last 24h, ...).
+     * @param CustomerAccountHistoric $customerAccountHistoric Contains information from the customer's account at the merchant (date of creation, number of transactions in the last 24h, ...).
      *
      * @return self
      */
-    public function setCustomerAccountHistoric(\Worldline\Sips\Common\Field\CustomerAccountHistoric $customerAccountHistoric)
+    public function setCustomerAccountHistoric(CustomerAccountHistoric $customerAccountHistoric)
     {
         $this->customerAccountHistoric = $customerAccountHistoric;
 
@@ -1192,7 +1258,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get contains the customer's information.
      *
-     * @return \Worldline\Sips\Common\Field\Contact
+     * @return Contact
      */
     public function getCustomerData()
     {
@@ -1202,7 +1268,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Set contains the customer's information.
      *
-     * @param \Worldline\Sips\Common\Field\Contact $customerData contains the customer's information
+     * @param Contact $customerData contains the customer's information
      *
      * @return self
      */
@@ -1360,7 +1426,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get contains the delivery information.
      *
-     * @return \Worldline\Sips\Common\Field\DeliveryData
+     * @return DeliveryData
      */
     public function getDeliveryData()
     {
@@ -1370,11 +1436,11 @@ class PaypageRequest extends SipsMessage
     /**
      * Set contains the delivery information.
      *
-     * @param \Worldline\Sips\Common\Field\DeliveryData $deliveryData contains the delivery information
+     * @param DeliveryData $deliveryData contains the delivery information
      *
      * @return self
      */
-    public function setDeliveryData(\Worldline\Sips\Common\Field\DeliveryData $deliveryData)
+    public function setDeliveryData(DeliveryData $deliveryData)
     {
         $this->deliveryData = $deliveryData;
 
@@ -1960,7 +2026,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get information specific to the basket.
      *
-     * @return \Worldline\Sips\Common\Field\ShoppingCartDetail
+     * @return ShoppingCartDetail
      */
     public function getShoppingCartDetail()
     {
@@ -1970,11 +2036,11 @@ class PaypageRequest extends SipsMessage
     /**
      * Set information specific to the basket.
      *
-     * @param \Worldline\Sips\Common\Field\ShoppingCartDetail $shoppingCartDetail information specific to the basket
+     * @param ShoppingCartDetail $shoppingCartDetail information specific to the basket
      *
      * @return self
      */
-    public function setShoppingCartDetail(\Worldline\Sips\Common\Field\ShoppingCartDetail $shoppingCartDetail)
+    public function setShoppingCartDetail(ShoppingCartDetail $shoppingCartDetail)
     {
         $this->shoppingCartDetail = $shoppingCartDetail;
 
@@ -1984,7 +2050,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get contains address information of a merchant of the Payment Facilitator in the context of Collecting offer or a Marketplace offer.
      *
-     * @return \Worldline\Sips\Common\Field\Address
+     * @return Address
      */
     public function getSubMerchantAddress()
     {
@@ -1994,7 +2060,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Set contains address information of a merchant of the Payment Facilitator in the context of Collecting offer or a Marketplace offer.
      *
-     * @param \Worldline\Sips\Common\Field\Address $subMerchantAddress contains address information of a merchant of the Payment Facilitator in the context of Collecting offer or a Marketplace offer
+     * @param Address $subMerchantAddress contains address information of a merchant of the Payment Facilitator in the context of Collecting offer or a Marketplace offer
      *
      * @return self
      */

@@ -13,6 +13,7 @@ use Worldline\Sips\Paypage\PaypageRequest;
 class JsonSealCalculatorTest extends TestCase
 {
     protected $paypageRequest;
+
     protected $jsonSealCalculator;
 
     /**
@@ -28,6 +29,7 @@ class JsonSealCalculatorTest extends TestCase
         $this->paypageRequest->setTemplateName('custom');
         $this->paypageRequest->setAutomaticResponseUrl('http://test.com');
         $this->paypageRequest->setTransactionReference('test');
+
         $this->jsonSealCalculator = new JsonSealCalculator();
     }
 
@@ -53,10 +55,12 @@ class JsonSealCalculatorTest extends TestCase
         $customerContact = new Contact();
         $customerContact->setFirstname('Firstname');
         $customerContact->setLastname('Lastname');
+
         $this->paypageRequest->setCustomerContact($customerContact);
         $customerAddress = new Address();
         $customerAddress->setCity('CustomerCity');
         $customerAddress->setCountry('CustomerCountry');
+
         $this->paypageRequest->setCustomerAddress($customerAddress);
 
         $expectedSealData = '2http://test.com978CustomerCityCustomerCountryFirstnameLastnameIR_WS_2.35http://localhost/return.phpINTERNETcustomtest';

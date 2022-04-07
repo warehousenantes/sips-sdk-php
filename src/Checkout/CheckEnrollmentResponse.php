@@ -7,11 +7,17 @@ namespace Worldline\Sips\Checkout;
 class CheckEnrollmentResponse
 {
     protected $redirectionUrl;
+
     protected $errorFieldName;
+
     protected $paReqMessage;
+
     protected $redirectionData;
+
     protected $redirectionStatusCode;
+
     protected $messageVersion;
+
     protected $responseCode;
 
     public function __construct($data)

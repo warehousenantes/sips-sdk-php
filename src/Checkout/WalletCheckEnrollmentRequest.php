@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Worldline\Sips\Checkout;
 
+use Worldline\Sips\Common\Field\S10TransactionReference;
+use Worldline\Sips\Common\SipsEnvironment;
+use Worldline\Sips\SipsMessage;
+
 /**
  * Requests for payment initialization via wallet with 3-D Secure process.
  * This request initializes a transaction on Sips platform and checks the card enrollment retrieved from the wallet.
@@ -14,50 +18,87 @@ namespace Worldline\Sips\Checkout;
  *
  * @author Guiled <guislain.duthieuw@gmail.com>
  */
-class WalletCheckEnrollmentRequest extends \Worldline\Sips\SipsMessage
+class WalletCheckEnrollmentRequest extends SipsMessage
 {
     protected $amount;
+
     protected $authenticationData;
+
     protected $billingAddress;
+
     protected $billingContact;
+
     protected $captureDay;
+
     protected $captureMode;
+
     protected $currencyCode;
+
     protected $customerAddress;
+
     protected $customerContact;
+
     protected $customerData;
+
     protected $customerId;
+
     protected $customerIpAddress;
+
     protected $customerLanguage;
+
     protected $deliveryAddress;
+
     protected $deliveryContact;
+
     protected $deliveryData;
+
     protected $fraudData;
+
     protected $holderAddress;
+
     protected $holderContact;
+
     protected $shoppingCartDetail;
+
     protected $invoiceReference;
+
     protected $merchantReturnUrl;
+
     protected $merchantTransactionDateTime;
+
     protected $merchantUrl;
+
     protected $orderChannel;
+
     protected $orderId;
+
     protected $merchantWalletId;
+
     protected $paymentMeanId;
+
     protected $paymentPattern;
+
     protected $returnContext;
+
     protected $statementReference;
+
     protected $transactionOrigin;
+
     protected $transactionReference;
+
     protected $cardCSCValue;
+
     protected $cscType;
 
     /**
-     * @var \Worldline\Sips\Common\Field\S10TransactionReference
+     * @var S10TransactionReference
      */
     protected $s10TransactionReference;
+
     protected $intermediateServiceProviderId;
+
     protected $orderContext;
+
     protected $travelContext;
 
     /**
@@ -65,7 +106,7 @@ class WalletCheckEnrollmentRequest extends \Worldline\Sips\SipsMessage
      */
     public function __construct()
     {
-        $this->connecter = \Worldline\Sips\Common\SipsEnvironment::OFFICE;
+        $this->connecter = SipsEnvironment::OFFICE;
         $this->serviceUrl = 'rs-services/v2/checkout/walletCheckEnrollment';
         $this->interfaceVersion = 'IR_WS_2.35';
     }
@@ -245,7 +286,7 @@ class WalletCheckEnrollmentRequest extends \Worldline\Sips\SipsMessage
         return $this->cscType;
     }
 
-    public function getS10TransactionReference(): \Worldline\Sips\Common\Field\S10TransactionReference
+    public function getS10TransactionReference(): S10TransactionReference
     {
         return $this->s10TransactionReference;
     }
@@ -503,7 +544,7 @@ class WalletCheckEnrollmentRequest extends \Worldline\Sips\SipsMessage
         return $this;
     }
 
-    public function setS10TransactionReference(\Worldline\Sips\Common\Field\S10TransactionReference $s10TransactionReference)
+    public function setS10TransactionReference(S10TransactionReference $s10TransactionReference)
     {
         $this->s10TransactionReference = $s10TransactionReference;
 

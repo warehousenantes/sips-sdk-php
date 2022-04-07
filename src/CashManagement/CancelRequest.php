@@ -4,19 +4,28 @@ declare(strict_types=1);
 
 namespace Worldline\Sips\CashManagement;
 
-class CancelRequest extends \Worldline\Sips\SipsMessage
+use Worldline\Sips\Common\SipsEnvironment;
+use Worldline\Sips\SipsMessage;
+
+class CancelRequest extends SipsMessage
 {
     protected $operationAmount;
+
     protected $currencyCode;
+
     protected $transactionReference;
+
     protected $operationOrigin;
+
     protected $s10TransactionReference;
+
     protected $intermediateServiceProviderId;
+
     protected $customerContact;
 
     public function __construct()
     {
-        $this->connecter = \Worldline\Sips\Common\SipsEnvironment::OFFICE;
+        $this->connecter = SipsEnvironment::OFFICE;
         $this->serviceUrl = 'rs-services/v2/cashManagement/cancel';
         $this->interfaceVersion = 'CR_WS_2.20';
         $this->setTransactionReference($this->generateReference());
@@ -25,10 +34,9 @@ class CancelRequest extends \Worldline\Sips\SipsMessage
     public function generateReference(): string
     {
         $microtime = explode(' ', microtime());
-        $microtime[0] = $microtime[0] * 1000000;
-        $transactionReference = $microtime[1].$microtime[0];
+        $microtime[0] *= 1_000_000;
 
-        return $transactionReference;
+        return $microtime[1].$microtime[0];
     }
 
     public function getOperationAmount()

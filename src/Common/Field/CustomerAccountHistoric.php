@@ -7,14 +7,23 @@ namespace Worldline\Sips\Common\Field;
 class CustomerAccountHistoric extends Field
 {
     protected $addPaymentMeanDate;
+
     protected $changeDate;
+
     protected $creationDate;
+
     protected $customerAccountId;
+
     protected $numberOfAttemptsAddCard24Hours;
+
     protected $numberOfPurchase180Days;
+
     protected $numberOfTransaction24Hours;
+
     protected $numberOfTransactionYear;
+
     protected $passwordChangeDate;
+
     protected $suspiciousActivityIndicator;
 
     public function getAddPaymentMeanDate()

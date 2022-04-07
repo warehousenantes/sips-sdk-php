@@ -7,12 +7,19 @@ namespace Worldline\Sips\Common\Field;
 class DeliveryData extends Field
 {
     protected $deliveryChargeAmount;
+
     protected $estimatedDeliveryDate;
+
     protected $deliveryMode;
+
     protected $deliveryMethod;
+
     protected $deliveryOperator;
+
     protected $estimatedDeliveryDelay;
+
     protected $deliveryAddressCreationDate;
+
     protected $electronicDeliveryIndicator;
 
     public function getDeliveryChargeAmount()

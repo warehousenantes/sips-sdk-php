@@ -13,12 +13,19 @@ namespace Worldline\Sips\Paypage;
 class InitializationResponse
 {
     protected $errorFieldName;
+
     protected $redirectionData;
+
     protected $redirectionStatusCode;
+
     protected $redirectionStatusMessage;
+
     protected $redirectionUrl;
+
     protected $redirectionVersion;
+
     protected $responseCode;
+
     protected $seal;
 
     /**
@@ -101,13 +108,10 @@ class InitializationResponse
         $array = [];
         foreach ($this as $key => $value) {
             if (null !== $value && 'seal' !== $key) {
-                if (\is_int($value) || \is_string($value)) {
-                    $array[$key] = $value;
-                } else {
-                    $array[$key] = $value->toArray();
-                }
+                $array[$key] = \is_int($value) || \is_string($value) ? $value : $value->toArray();
             }
         }
+
         ksort($array);
 
         return $array;

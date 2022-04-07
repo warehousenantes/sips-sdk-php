@@ -5,64 +5,108 @@ declare(strict_types=1);
 namespace Worldline\Sips\Checkout;
 
 use Worldline\Sips\Common\Field\CardData;
+use Worldline\Sips\Common\Field\S10TransactionReference;
 
 class CardOrderResponse
 {
     protected $acquirerResponseCode;
+
     protected $authorisationId;
+
     protected $cardScheme;
+
     protected $complementaryCode;
+
     protected $complementaryInfo;
+
     protected $guaranteeIndicator;
+
     protected $holderAuthentRelegationCode;
+
     protected $holderAuthentStatus;
+
     protected $maskedPan;
+
     protected $responseCode;
+
     protected $returnContext;
+
     protected $scoreColor;
+
     protected $scoreInfo;
+
     protected $scoreProfile;
+
     protected $scoreThreshold;
+
     protected $scoreValue;
+
     protected $transactionDateTime;
+
     protected $tokenPan;
+
     protected $cardCSCResultCode;
+
     protected $avsPostcodeResponseCode;
+
     protected $avsAddressResponseCode;
+
     protected $recurringResponseCode;
+
     protected $acquirerResponseIdentifier;
+
     protected $acquirerResponseMessage;
+
     protected $paymentMeanTradingName;
+
     protected $paymentMeanData;
+
     protected $s10TransactionReference;
+
     protected $transactionReference;
 
     /**
-     * @var \Worldline\Sips\Common\Field\CardData
+     * @var CardData
      */
     protected $cardData;
+
     protected $seal;
+
     protected $preAuthorisationProfile;
+
     protected $preAuthorisationProfileValue;
+
     protected $preAuthorisationRuleResultList;
+
     protected $paymentMeanBrandSelectionStatus;
+
     protected $captureDay;
+
     protected $captureMode;
+
     protected $transactionPlatform;
+
     protected $authorMessageReference;
+
     protected $authorisationTypeLabel;
+
     protected $acceptanceSystemApplicationId;
+
     protected $errorFieldName;
+
     protected $panEntryMode;
+
     protected $walletType;
+
     protected $issuerWalletInformation;
+
     protected $paymentMeanBrand;
 
     public function __construct($data)
     {
         foreach ($data as $key => $value) {
             if ('s10TransactionReference' === $key) {
-                $s10 = new \Worldline\Sips\Common\Field\S10TransactionReference();
+                $s10 = new S10TransactionReference();
                 $s10->setS10TransactionId($value['s10TransactionId']);
                 $s10->setS10TransactionIdDate($value['s10TransactionIdDate']);
                 $value = $s10;
@@ -71,6 +115,7 @@ class CardOrderResponse
                 $cardData->hydrate($value);
                 $value = $cardData;
             }
+
             $this->$key = $value;
         }
     }

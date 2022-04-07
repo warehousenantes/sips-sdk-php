@@ -7,11 +7,17 @@ namespace Worldline\Sips\CashManagement;
 class CancelResponse
 {
     protected $acquirerResponseCode;
+
     protected $newAmount;
+
     protected $newStatus;
+
     protected $operationDateTime;
+
     protected $responseCode;
+
     protected $seal;
+
     protected $errorFieldName;
 
     public function __construct($data)

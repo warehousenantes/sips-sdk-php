@@ -30,12 +30,13 @@ class SipsClientTest extends TestCase
         $customerContact = new Contact();
         $customerContact->setFirstname('Firstname');
         $customerContact->setLastname('Lastname');
+
         $paypageRequest->setCustomerContact($customerContact);
 
         $initResponse = $sipsClient->initialize($paypageRequest);
 
-        $this->assertEquals('INITIALISATION REQUEST ACCEPTED', $initResponse['redirectionStatusMessage'],'Request not accepted.');
-        $this->assertEquals('00', $initResponse['redirectionStatusCode'], 'RedirectionstatusCode is not 00.');
+        $this->assertSame('INITIALISATION REQUEST ACCEPTED', $initResponse['redirectionStatusMessage'], 'Request not accepted.');
+        $this->assertSame('00', $initResponse['redirectionStatusCode'], 'RedirectionstatusCode is not 00.');
     }
 
     public function testPaymentResultSuccess(): void

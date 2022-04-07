@@ -74,6 +74,7 @@ class WalletPaymentMeanData extends Field
             if ('pspData' === $name) {
                 $value = new PspData($value);
             }
+
             $this->$name = $value;
         }
     }

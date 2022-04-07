@@ -4,25 +4,40 @@ declare(strict_types=1);
 
 namespace Worldline\Sips\CashManagement;
 
-class RefundRequest extends \Worldline\Sips\SipsMessage
+use Worldline\Sips\Common\SipsEnvironment;
+use Worldline\Sips\SipsMessage;
+
+class RefundRequest extends SipsMessage
 {
     protected $operationAmount;
+
     protected $currencyCode;
+
     protected $interfaceVersion;
+
     protected $transactionReference;
+
     protected $operationOrigin;
+
     protected $paymentMeanData;
+
     protected $s10TransactionReference;
+
     protected $shoppingCartDetail;
+
     protected $intermediateServiceProviderId;
+
     protected $seal;
+
     protected $keyVersion;
+
     protected $sealAlgorithm;
+
     protected $customerContact;
 
     public function __construct()
     {
-        $this->connecter = \Worldline\Sips\Common\SipsEnvironment::OFFICE;
+        $this->connecter = SipsEnvironment::OFFICE;
         $this->serviceUrl = 'rs-services/v2/cashManagement/refund';
         $this->interfaceVersion = 'CR_WS_2.3';
         $this->setTransactionReference($this->generateReference());
@@ -31,10 +46,9 @@ class RefundRequest extends \Worldline\Sips\SipsMessage
     public function generateReference(): string
     {
         $microtime = explode(' ', microtime());
-        $microtime[0] = $microtime[0] * 1000000;
-        $transactionReference = $microtime[1].$microtime[0];
+        $microtime[0] *= 1_000_000;
 
-        return $transactionReference;
+        return $microtime[1].$microtime[0];
     }
 
     public function getOperationAmount()

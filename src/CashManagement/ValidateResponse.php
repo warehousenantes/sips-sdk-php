@@ -7,13 +7,21 @@ namespace Worldline\Sips\CashManagement;
 class ValidateResponse
 {
     protected $acquirerResponseCode;
+
     protected $authorisationId;
+
     protected $newAmount;
+
     protected $newStatus;
+
     protected $operationDateTime;
+
     protected $responseCode;
+
     protected $captureLimitDate;
+
     protected $seal;
+
     protected $errorFieldName;
 
     public function __construct($data)

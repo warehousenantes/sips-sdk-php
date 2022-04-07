@@ -7,14 +7,23 @@ namespace Worldline\Sips\Common\Field;
 class ShoppingCartItem extends Field
 {
     protected $productName;
+
     protected $productDescription;
+
     protected $productCode;
+
     protected $productSKU;
+
     protected $productUnitAmount;
+
     protected $productQuantity;
+
     protected $productTaxRate;
+
     protected $productUnitTaxAmount;
+
     protected $productCategory;
+
     protected $productTaxCategory;
 
     public function getProductName()

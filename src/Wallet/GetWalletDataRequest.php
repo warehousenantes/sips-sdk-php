@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Worldline\Sips\Wallet;
 
+use Worldline\Sips\Common\SipsEnvironment;
+use Worldline\Sips\SipsMessage;
+
 /**
  * This function allows to consult a wallet and payment means associated to it. If the account does not exist,
  * a 01 response code is returned. If the request works,
@@ -11,7 +14,7 @@ namespace Worldline\Sips\Wallet;
  *
  * @author Guiled <guislain.duthieuw@gmail.com>
  */
-class GetWalletDataRequest extends \Worldline\Sips\SipsMessage
+class GetWalletDataRequest extends SipsMessage
 {
     protected $merchantWalletId;
 
@@ -22,7 +25,7 @@ class GetWalletDataRequest extends \Worldline\Sips\SipsMessage
      */
     public function __construct()
     {
-        $this->connecter = \Worldline\Sips\Common\SipsEnvironment::OFFICE;
+        $this->connecter = SipsEnvironment::OFFICE;
         $this->serviceUrl = 'rs-services/v2/wallet/getWalletData';
         $this->interfaceVersion = 'WR_WS_2.12';
     }

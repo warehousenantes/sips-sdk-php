@@ -7,12 +7,34 @@ namespace Worldline\Sips\Common\Seal;
 use Worldline\Sips\Paypage\InitializationResponse;
 use Worldline\Sips\SipsMessage;
 
+/**
+ * @see \Worldline\Sips\Test\Common\Seal\JsonSealCalculatorTest
+ */
 class JsonSealCalculator
 {
+    /**
+     * @var string
+     */
     public const ALGORITHM_SHA256 = 'SHA-256';
+
+    /**
+     * @var string
+     */
     public const ALGORITHM_HMAC_SHA256 = 'HMAC-SHA-256';
+
+    /**
+     * @var string
+     */
     public const ALGORITHM_HMAC_SHA512 = 'HMAC-SHA-512';
+
+    /**
+     * @var string
+     */
     public const ALGORITHM_DEFAULT = self::ALGORITHM_HMAC_SHA256;
+
+    /**
+     * @var string[]
+     */
     public const EXCLUDED_FIELD = ['seal', 'sealAlgorithm', 'keyVersion'];
 
     public function calculateSeal(SipsMessage $sipsMessage, $secretKey, $algorithm = self::ALGORITHM_DEFAULT): void
@@ -48,6 +70,7 @@ class JsonSealCalculator
             if (\in_array($key, self::EXCLUDED_FIELD, true)) {
                 continue;
             }
+
             if (\is_array($value)) {
                 $sealData .= $this->getSealData($value);
             } else {
@@ -61,20 +84,14 @@ class JsonSealCalculator
     public function isCorrectSeal(InitializationResponse $initializationResponse, $secretKey, $sealAlgorithm): bool
     {
         $seal = $this->encrypt($this->getSealData($initializationResponse->toArray()), $secretKey, $sealAlgorithm);
-        if ($seal === $initializationResponse->getSeal()) {
-            return true;
-        }
 
-        return false;
+        return $seal === $initializationResponse->getSeal();
     }
 
     public function checkSeal($response, $secretKey, $sealAlgorithm): bool
     {
         $seal = $this->encrypt($this->getSealData($response), $secretKey, $sealAlgorithm);
-        if ($seal === $response['seal']) {
-            return true;
-        }
 
-        return false;
+        return $seal === $response['seal'];
     }
 }

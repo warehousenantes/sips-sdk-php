@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Worldline\Sips\Diagnostic;
 
+use Worldline\Sips\Common\SipsEnvironment;
 use Worldline\Sips\SipsMessage;
 
 /**
@@ -14,12 +15,14 @@ use Worldline\Sips\SipsMessage;
 class TransactionDataRequest extends SipsMessage
 {
     protected $transactionReference;
+
     protected $s10TransactionReference;
+
     protected $intermediateServiceProviderId;
 
     public function __construct()
     {
-        $this->connecter = \Worldline\Sips\Common\SipsEnvironment::OFFICE;
+        $this->connecter = SipsEnvironment::OFFICE;
         $this->serviceUrl = 'rs-services/v2/diagnostic/getTransactionData';
         $this->interfaceVersion = 'DR_WS_2.23';
     }

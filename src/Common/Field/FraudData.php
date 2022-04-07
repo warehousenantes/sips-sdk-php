@@ -7,25 +7,45 @@ namespace Worldline\Sips\Common\Field;
 class FraudData extends Field
 {
     protected $addressDeliveryBillingMatchIndicator;
+
     protected $allowedCardArea;
+
     protected $allowedCardCountryList;
+
     protected $allowedIpArea;
+
     protected $allowedIpCountryList;
+
     protected $bypass3DS;
+
     protected $bypassCtrlList;
+
     protected $bypassInfoList;
+
     protected $challengeMode3DS;
+
     protected $deniedCardArea;
+
     protected $deniedCardCountryList;
+
     protected $deniedIpArea;
+
     protected $deniedIpCountryList;
+
     protected $merchantCustomerAuthentData;
+
     protected $merchantCustomerAuthentDateTime;
+
     protected $merchantCustomerAuthentMethod;
+
     protected $nameDeliveryCustomerMatchIndicator;
+
     protected $productAvailabilityDate;
+
     protected $productAvailabilityIndicator;
+
     protected $reorderProductIndicator;
+
     protected $riskManagementDynamicSettingList;
 
     public function getBypassCtrlList()

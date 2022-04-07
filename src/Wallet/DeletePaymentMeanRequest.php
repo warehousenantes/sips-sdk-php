@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Worldline\Sips\Wallet;
 
+use Worldline\Sips\Common\SipsEnvironment;
+use Worldline\Sips\SipsMessage;
+
 /**
  * This function allows a merchant to permanently delete one of the payment means of his wallet.
  * If the account or the card does not exist, a 01 response code is returned.
@@ -11,10 +14,12 @@ namespace Worldline\Sips\Wallet;
  *
  * @author Guiled <guislain.duthieuw@gmail.com>
  */
-class DeletePaymentMeanRequest extends \Worldline\Sips\SipsMessage
+class DeletePaymentMeanRequest extends SipsMessage
 {
     protected $merchantWalletId;
+
     protected $paymentMeanId;
+
     protected $intermediateServiceProviderId;
 
     /**
@@ -22,7 +27,7 @@ class DeletePaymentMeanRequest extends \Worldline\Sips\SipsMessage
      */
     public function __construct()
     {
-        $this->connecter = \Worldline\Sips\Common\SipsEnvironment::OFFICE;
+        $this->connecter = SipsEnvironment::OFFICE;
         $this->serviceUrl = 'rs-services/v2/wallet/deletePaymentMean';
         $this->interfaceVersion = 'WR_WS_2.12';
     }

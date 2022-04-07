@@ -4,61 +4,113 @@ declare(strict_types=1);
 
 namespace Worldline\Sips\Checkout;
 
-class CardOrderRequest extends \Worldline\Sips\SipsMessage
+use Worldline\Sips\Common\Field\S10TransactionReference;
+use Worldline\Sips\Common\SipsEnvironment;
+use Worldline\Sips\SipsMessage;
+
+class CardOrderRequest extends SipsMessage
 {
     protected $amount;
+
     protected $captureDay;
+
     protected $captureMode;
+
     protected $cardCSCValue;
+
     protected $cardEffectiveDate;
+
     protected $cardExpiryDate;
+
     protected $cardNumber;
+
     protected $cardSeqNumber;
+
     protected $currencyCode;
+
     protected $customerId;
+
     protected $customerIpAddress;
+
     protected $fraudData;
+
     protected $merchantTransactionDateTime;
+
     protected $orderChannel;
+
     protected $orderId;
+
     protected $returnContext;
+
     protected $transactionReference;
+
     protected $transactionOrigin;
+
     protected $billingAddress;
+
     protected $billingContact;
+
     protected $customerAddress;
+
     protected $customerContact;
+
     protected $deliveryAddress;
+
     protected $deliveryContact;
+
     protected $deliveryData;
+
     protected $holderAddress;
+
     protected $holderContact;
+
     protected $customerData;
+
     protected $authenticationData;
+
     protected $invoiceReference;
+
     protected $statementReference;
+
     protected $paymentPattern;
+
     protected $panType;
+
     protected $paymentMeanBrand;
+
     protected $paymentMeanData;
+
     protected $holderData;
+
     protected $s10TransactionReference;
+
     protected $riskManagementCustomDataList;
+
     protected $shoppingCartDetail;
+
     protected $intermediateServiceProviderId;
+
     protected $paymentMeanBrandSelectionStatus;
+
     protected $subMerchantId;
+
     protected $subMerchantShortName;
+
     protected $subMerchantCategoryCode;
+
     protected $subMerchantLegalId;
+
     protected $subMerchantAddress;
+
     protected $customerLanguage;
+
     protected $travelContext;
+
     protected $orderContext;
 
     public function __construct()
     {
-        $this->connecter = \Worldline\Sips\Common\SipsEnvironment::OFFICE;
+        $this->connecter = SipsEnvironment::OFFICE;
         $this->serviceUrl = 'rs-services/v2/checkout/cardOrder';
         $this->interfaceVersion = 'IR_WS_2.35';
     }
@@ -248,7 +300,7 @@ class CardOrderRequest extends \Worldline\Sips\SipsMessage
         return $this->holderData;
     }
 
-    public function getS10TransactionReference(): \Worldline\Sips\Common\Field\S10TransactionReference
+    public function getS10TransactionReference(): S10TransactionReference
     {
         return $this->s10TransactionReference;
     }
@@ -619,7 +671,7 @@ class CardOrderRequest extends \Worldline\Sips\SipsMessage
         return $this;
     }
 
-    public function setS10TransactionReference(\Worldline\Sips\Common\Field\S10TransactionReference $s10TransactionReference)
+    public function setS10TransactionReference(S10TransactionReference $s10TransactionReference)
     {
         $this->s10TransactionReference = $s10TransactionReference;
 

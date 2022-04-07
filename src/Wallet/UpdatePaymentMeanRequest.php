@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Worldline\Sips\Wallet;
 
+use Worldline\Sips\Common\SipsEnvironment;
+use Worldline\Sips\SipsMessage;
+
 /**
  * This function allows you to update one of the payment means contained in the client's wallet.
  * If the account or the payment mean do not exist, a 01 response code is returned.
@@ -11,11 +14,14 @@ namespace Worldline\Sips\Wallet;
  *
  * @author Guiled <guislain.duthieuw@gmail.com>
  */
-class UpdatePaymentMeanRequest extends \Worldline\Sips\SipsMessage
+class UpdatePaymentMeanRequest extends SipsMessage
 {
     protected $merchantWalletId;
+
     protected $paymentMeanId;
+
     protected $paymentMeanAlias;
+
     protected $intermediateServiceProviderId;
 
     /**
@@ -23,7 +29,7 @@ class UpdatePaymentMeanRequest extends \Worldline\Sips\SipsMessage
      */
     public function __construct()
     {
-        $this->connecter = \Worldline\Sips\Common\SipsEnvironment::OFFICE;
+        $this->connecter = SipsEnvironment::OFFICE;
         $this->serviceUrl = 'rs-services/v2/wallet/updatePaymentMean';
         $this->interfaceVersion = 'WR_WS_2.12';
     }

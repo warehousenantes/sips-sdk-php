@@ -8,10 +8,29 @@ use Worldline\Sips\Common\Exception\InvalidEnvironmentException;
 
 class SipsEnvironment
 {
+    /**
+     * @var string
+     */
     public const PAYPAGE = 'paypage';
+
+    /**
+     * @var string
+     */
     public const OFFICE = 'office';
+
+    /**
+     * @var string
+     */
     public const SIMULATION = 'SIMU';
+
+    /**
+     * @var string
+     */
     public const TEST = 'TEST';
+
+    /**
+     * @var string
+     */
     public const PRODUCTION = 'PROD';
 
     protected $possibleEnvironments = [
@@ -26,6 +45,7 @@ class SipsEnvironment
             self::PRODUCTION => 'https://office-server.sips-services.com/',
         ],
     ];
+
     protected $environment;
 
     /**
@@ -38,6 +58,7 @@ class SipsEnvironment
         if (!\array_key_exists($environment, $this->possibleEnvironments[self::PAYPAGE])) {
             throw new InvalidEnvironmentException('Invalid environment "'.$environment.'"');
         }
+
         $this->environment = $environment;
     }
 
