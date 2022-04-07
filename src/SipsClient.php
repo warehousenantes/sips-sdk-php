@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Worldline\Sips;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Request;
+use Http\Discovery\HttpClientDiscovery;
+use Http\Discovery\MessageFactoryDiscovery;
 use Worldline\Sips\Common\Seal\JsonSealCalculator;
 use Worldline\Sips\Common\Seal\PostSealCalculator;
 use Worldline\Sips\Common\SipsEnvironment;
@@ -41,7 +41,7 @@ class SipsClient
         $this->setKeyVersion($keyVersion);
     }
 
-    public function getEnvironment(): ?string
+    public function getEnvironment(): SipsEnvironment
     {
         return $this->environment;
     }
@@ -51,11 +51,6 @@ class SipsClient
         $this->environment = $environment;
     }
 
-    /**
-     * @param SipsMessage $paymentRequest
-     *
-     * @throws \Exception
-     */
     public function initialize(SipsMessage $sipsMessage): ?array
     {
         $timeout = 0;
@@ -65,21 +60,29 @@ class SipsClient
         $sealCalculator = new JsonSealCalculator();
         $sealAlgorithm = $this->sealAlgorithm ?? JsonSealCalculator::ALGORITHM_DEFAULT;
         $sealCalculator->calculateSeal($sipsMessage, $this->secretKey, $sealAlgorithm);
-        $json = json_encode($sipsMessage->toArray(), \JSON_THROW_ON_ERROR);
+        $json = json_encode($sipsMessage->toArray());
         $this->lastRequestAsJson = $json;
-        $client = new Client([
-            'base_uri' => $this->environment->getEnvironment($sipsMessage->getConnecter()),
-            'timeout' => $timeout,
-            ]);
+
         $headers = [
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
             'timeout' => $timeout,
         ];
-        $request = new Request('POST', $sipsMessage->getServiceUrl(), $headers, $json);
-        $response = $client->send($request, ['timeout' => $timeout]);
+
+        $client = HttpClientDiscovery::find();
+        $messageFactory = MessageFactoryDiscovery::findRequestFactory();
+
+        $response = $client->sendRequest(
+            $messageFactory->createRequest(
+                'POST',
+                $this->environment->getEnvironment($sipsMessage->getConnecter()).$sipsMessage->getServiceUrl(),
+                $headers,
+                $json
+            )
+        );
+
         $this->lastResponseAsJson = $response->getBody()->getContents();
-        $data = json_decode($this->lastResponseAsJson, true, 512, \JSON_THROW_ON_ERROR);
+        $data = json_decode($this->lastResponseAsJson);
         if (!empty($data['seal'])) {
             $validSeal = $sealCalculator->checkSeal($data, $this->getSecretKey(), $sealAlgorithm);
             if (!$validSeal) {
