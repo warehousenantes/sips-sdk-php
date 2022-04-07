@@ -335,7 +335,7 @@ class PaypageRequest extends SipsMessage
      *
      * @see \Worldline\Sips\Values\PaymentMeanBrandType
      */
-    protected ?string $paymentMeanBrandList = null;
+    protected array $paymentMeanBrandList = [];
 
     /**
      * Contains specific information regarding the payment method used by the buyer.
