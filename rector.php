@@ -2,15 +2,6 @@
 
 declare(strict_types=1);
 
-/*
- * This file is part of the Warehouse wareMACHINE.
- *
- * (c) Warehouse <contact@w44.fr>
- *
- * Proprietary and confidential
- * Unauthorized copying of this file, via any medium is strictly prohibited
- */
-
 use Rector\Core\Configuration\Option;
 use Rector\Doctrine\Set\DoctrineSetList;
 use Rector\PHPUnit\Set\PHPUnitSetList;
