@@ -33,7 +33,7 @@ class SipsEnvironment
      */
     public const PRODUCTION = 'PROD';
 
-    protected $possibleEnvironments = [
+    protected array $possibleEnvironments = [
         self::PAYPAGE => [
             self::SIMULATION => 'https://payment-webinit.simu.sips-services.com/',
             self::TEST => 'https://payment-webinit.test.sips-services.com/',

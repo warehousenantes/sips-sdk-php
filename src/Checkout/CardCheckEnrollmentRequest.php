@@ -88,10 +88,7 @@ class CardCheckEnrollmentRequest extends SipsMessage
 
     protected $authenticationData;
 
-    /**
-     * @var S10TransactionReference
-     */
-    protected $s10TransactionReference;
+    protected ?S10TransactionReference $s10TransactionReference = null;
 
     protected $panType;
 

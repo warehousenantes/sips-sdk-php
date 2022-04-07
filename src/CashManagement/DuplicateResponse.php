@@ -37,17 +37,11 @@ class DuplicateResponse
 
     protected $transactionDateTime;
 
-    /**
-     * @var S10TransactionReference
-     */
-    protected $s10TransactionReference;
+    protected ?S10TransactionReference $s10TransactionReference = null;
 
     protected $transactionReference;
 
-    /**
-     * @var CardData
-     */
-    protected $cardData;
+    protected ?CardData $cardData = null;
 
     protected $paymentMeanBrandSelectionStatus;
 

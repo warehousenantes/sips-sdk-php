@@ -10,40 +10,20 @@ class SipsMessage
 {
     /**
      * Connecter where to send the request.
-     *
-     * @var string
      */
-    public $connecter;
+    public ?string $connecter = null;
 
-    /**
-     * @var string
-     */
-    protected $interfaceVersion;
+    protected ?string $interfaceVersion = null;
 
-    /**
-     * @var int
-     */
-    protected $keyVersion;
+    protected ?int $keyVersion = null;
 
-    /**
-     * @var string
-     */
-    protected $merchantId;
+    protected ?string $merchantId = null;
 
-    /**
-     * @var string
-     */
-    protected $seal;
+    protected ?string $seal = null;
 
-    /**
-     * @var string
-     */
-    public $serviceUrl;
+    public ?string $serviceUrl = null;
 
-    /**
-     * @var string
-     */
-    protected $sealAlgorithm;
+    protected ?string $sealAlgorithm = null;
 
     public function getConnecter(): string
     {

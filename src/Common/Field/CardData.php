@@ -8,122 +8,88 @@ class CardData extends Field
 {
     /**
      * Network name associated with the card.
-     *
-     * @var string
      */
-    protected $cardScheme;
+    protected ?string $cardScheme = null;
 
     /**
      * Name of the payment method that is used. It is related to one paymentMeanType.
-     *
-     * @var string
      */
-    protected $cardBrand;
+    protected ?string $cardBrand = null;
 
     /**
      * Product code of the card.
-     *
-     * @var string
      */
-    protected $cardProductCode;
+    protected ?string $cardProductCode = null;
 
     /**
      * Product name of the card.
-     *
-     * @var string
      */
-    protected $cardProductName;
+    protected ?string $cardProductName = null;
 
     /**
      * Indicates whether the card is an Enterprise / Commercial card or not.
-     *
-     * @var string
      */
-    protected $cardCorporateIndicator;
+    protected ?string $cardCorporateIndicator = null;
 
     /**
      * Indicator of existence of a card effective date (Y/N/Empty).
-     *
-     * @var string
      */
-    protected $cardEffectiveDateIndicator;
+    protected ?string $cardEffectiveDateIndicator = null;
 
     /**
      * Indicator of existence of an issue number.
-     *
-     * @var string
      */
-    protected $cardSeqNumberIndicator;
+    protected ?string $cardSeqNumberIndicator = null;
 
     /**
      * Issuer code of the card.
-     *
-     * @var string
      */
-    protected $issuerCode;
+    protected ?string $issuerCode = null;
 
     /**
      * Issuer name of the card.
-     *
-     * @var string
      */
-    protected $issuerName;
+    protected string $issuerName;
 
     /**
      * Country code of the card issuer.
-     *
-     * @var string
      */
-    protected $issuerCountryCode;
+    protected ?string $issuerCountryCode = null;
 
     /**
      * region code of the card issuer.
-     *
-     * @var string
      */
-    protected $issuerRegionCode;
+    protected ?string $issuerRegionCode = null;
 
     /**
      * Minimal length of the PAN.
-     *
-     * @var int
      */
-    protected $panLengthMin;
+    protected ?int $panLengthMin = null;
 
     /**
      * Maximum length of the PAN.
-     *
-     * @var int
      */
-    protected $panLengthMax;
+    protected ?int $panLengthMax = null;
 
     /**
      * Control algorithm applied on the PAN (L/V/N/Empty).
-     *
-     * @var string
      */
-    protected $panCheckAlgorithm;
+    protected ?string $panCheckAlgorithm = null;
 
     /**
      * Profile code of the card.
-     *
-     * @var string
      */
-    protected $cardProductProfile;
+    protected ?string $cardProductProfile = null;
 
     /**
      * Indicates whether the card is a virtual card.
-     *
-     * @var string
      */
-    protected $virtualCardIndicator;
+    protected ?string $virtualCardIndicator = null;
 
     /**
      * Profile name of the card which is displayed on payment electronic ticket in accordance with MPADS requirements.
-     *
-     * @var string
      */
-    protected $cardProductUsageLabel;
+    protected ?string $cardProductUsageLabel = null;
 
     /**
      * Get network name associated with the card.

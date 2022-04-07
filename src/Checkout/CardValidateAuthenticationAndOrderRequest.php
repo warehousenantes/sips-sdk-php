@@ -18,10 +18,7 @@ use Worldline\Sips\SipsMessage;
  */
 class CardValidateAuthenticationAndOrderRequest extends SipsMessage
 {
-    /**
-     * @var S10TransactionReference
-     */
-    protected $s10TransactionReference;
+    protected ?S10TransactionReference $s10TransactionReference = null;
 
     protected $messageVersion;
 

@@ -107,10 +107,7 @@ class CardValidateAuthenticationAndOrderResponse
 
     protected $holderAuthentRelegationCode;
 
-    /**
-     * @var CardData
-     */
-    protected $cardData;
+    protected ?CardData $cardData = null;
 
     protected $authorMessageReference;
 

@@ -24,10 +24,7 @@ class DuplicateRequest extends SipsMessage
 
     protected $customerIpAddress;
 
-    /**
-     * @var FraudData
-     */
-    protected $fraudData;
+    protected ?FraudData $fraudData = null;
 
     protected $fromTransactionReference;
 

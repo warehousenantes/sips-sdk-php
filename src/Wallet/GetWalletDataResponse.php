@@ -14,10 +14,7 @@ class GetWalletDataResponse
 
     protected $walletResponseCode;
 
-    /**
-     * @var array
-     */
-    protected $walletPaymentMeanDataList = [];
+    protected array $walletPaymentMeanDataList = [];
 
     // List of container walletPaymentMeanData . See the Containers part
     protected $errorFieldName;

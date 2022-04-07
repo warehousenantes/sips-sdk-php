@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Rector\Core\Configuration\Option;
+use Rector\Php74\Rector\Property\TypedPropertyRector;
 use Rector\PHPUnit\Set\PHPUnitSetList;
 use Rector\Set\ValueObject\SetList;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
@@ -26,4 +27,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $containerConfigurator->import(PHPUnitSetList::PHPUNIT_CODE_QUALITY);
     $containerConfigurator->import(PHPUnitSetList::PHPUNIT_YIELD_DATA_PROVIDER);
+
+    $services = $containerConfigurator->services();
+    $services->set(TypedPropertyRector::class)
+        ->configure([
+            TypedPropertyRector::INLINE_PUBLIC => true,
+        ]);
 };

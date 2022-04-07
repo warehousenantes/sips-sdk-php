@@ -9,60 +9,27 @@ namespace Worldline\Sips\Common\Field;
  */
 class Contact extends Field
 {
-    /**
-     * @var string
-     */
-    protected $email;
+    protected ?string $email = null;
 
-    /**
-     * @var string
-     */
-    protected $firstname;
+    protected ?string $firstname = null;
 
-    /**
-     * @var string
-     */
-    protected $gender;
+    protected ?string $gender = null;
 
-    /**
-     * @var string
-     */
-    protected $initials;
+    protected ?string $initials = null;
 
-    /**
-     * @var string
-     */
-    protected $lastname;
+    protected ?string $lastname = null;
 
-    /**
-     * @var string
-     */
-    protected $legalId;
+    protected ?string $legalId = null;
 
-    /**
-     * @var string
-     */
-    protected $mobile;
+    protected ?string $mobile = null;
 
-    /**
-     * @var string
-     */
-    protected $phone;
+    protected ?string $phone = null;
 
-    /**
-     * @var string
-     */
-    protected $positionOccupied;
+    protected ?string $positionOccupied = null;
 
-    /**
-     * @var string
-     */
-    protected $title;
+    protected ?string $title = null;
 
-    /**
-     * @var string
-     */
-    protected $workPhone;
+    protected ?string $workPhone = null;
 
     /**
      * @ return string|null

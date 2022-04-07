@@ -9,60 +9,27 @@ namespace Worldline\Sips\Common\Field;
  */
 class Address extends Field
 {
-    /**
-     * @var string
-     */
-    protected $addressAdditional1;
+    protected ?string $addressAdditional1 = null;
 
-    /**
-     * @var string
-     */
-    protected $addressAdditional2;
+    protected ?string $addressAdditional2 = null;
 
-    /**
-     * @var string
-     */
-    protected $addressAdditional3;
+    protected ?string $addressAdditional3 = null;
 
-    /**
-     * @var string
-     */
-    protected $city;
+    protected ?string $city = null;
 
-    /**
-     * @var string
-     */
-    protected $company;
+    protected ?string $company = null;
 
-    /**
-     * @var string
-     */
-    protected $country;
+    protected ?string $country = null;
 
-    /**
-     * @var string
-     */
-    protected $postBox;
+    protected ?string $postBox = null;
 
-    /**
-     * @var string
-     */
-    protected $state;
+    protected ?string $state = null;
 
-    /**
-     * @var string
-     */
-    protected $street;
+    protected ?string $street = null;
 
-    /**
-     * @var string
-     */
-    protected $streetNumber;
+    protected ?string $streetNumber = null;
 
-    /**
-     * @var string
-     */
-    protected $zipCode;
+    protected ?string $zipCode = null;
 
     public function getAddressAdditional1(): ?string
     {

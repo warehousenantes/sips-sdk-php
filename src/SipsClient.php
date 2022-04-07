@@ -16,40 +16,19 @@ use Worldline\Sips\Paypage\PaypageResult;
  */
 class SipsClient
 {
-    /**
-     * @var SipsEnvironment
-     */
-    protected $environment;
+    protected ?SipsEnvironment $environment = null;
 
-    /**
-     * @var string
-     */
-    protected $merchantId;
+    protected ?string $merchantId = null;
 
-    /**
-     * @var string
-     */
-    protected $secretKey;
+    protected ?string $secretKey = null;
 
-    /**
-     * @var int
-     */
-    protected $keyVersion;
+    protected ?int $keyVersion = null;
 
-    /**
-     * @var string
-     */
-    protected $sealAlgorithm;
+    protected ?string $sealAlgorithm = null;
 
-    /**
-     * @var string
-     */
-    protected $lastRequestAsJson;
+    protected ?string $lastRequestAsJson = null;
 
-    /**
-     * @var string
-     */
-    protected $lastResponseAsJson;
+    protected ?string $lastResponseAsJson = null;
 
     /**
      * SipsClient constructor.

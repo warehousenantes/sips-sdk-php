@@ -65,10 +65,7 @@ class CardOrderResponse
 
     protected $transactionReference;
 
-    /**
-     * @var CardData
-     */
-    protected $cardData;
+    protected ?CardData $cardData = null;
 
     protected $seal;
 

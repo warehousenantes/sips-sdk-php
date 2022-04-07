@@ -23,586 +23,449 @@ class PaypageRequest extends SipsMessage
     /**
      * Transaction amount. The amount must be transmitted in the smallest unit of currency.
      * For example in euros: an amount of EUR 10.50 must be transmitted in the form 1050.
-     *
-     * @var int
      */
-    protected $amount;
+    protected ?int $amount = null;
 
     /**
      * Contains the information on the cardholder's authentication.
      *
-     * @var string
      * @toto Create the container
      */
-    protected $authenticationData;
+    protected ?string $authenticationData = null;
 
     /**
      * URL provided by the merchant and used by the payment server to automatically notify the merchant of the result of the transaction online.
-     *
-     * @var string
      */
-    protected $automaticResponseUrl;
+    protected ?string $automaticResponseUrl = null;
 
     /**
      * Contains the billing address information for the buyer.
-     *
-     * @var Address
      */
-    protected $billingAddress;
+    protected ?Address $billingAddress = null;
 
     /**
      * Contains the billing contact's information.
-     *
-     * @var Contact
      */
-    protected $billingContact;
+    protected ?Contact $billingContact = null;
 
     /**
      * First successful billing date for the customer address. For example, the merchant gives this information to allow the certification of an electronic signature.
      *
      * @var string YYYYMMMDD
      */
-    protected $billingFirstDate;
+    protected ?string $billingFirstDate = null;
 
     /**
      * Indicator used by the merchant to bypass the dcc procedure.
      *
      * @var string Y/N
      */
-    protected $bypassDcc;
+    protected ?string $bypassDcc = null;
 
     /**
      * Flag indicating that WL Sips must not edit the ticket receipt. This action is at charge of the trader. At the end of the payment, the customer is directly redirected to the response url from the shop (normalReturnUrl).
-     *
-     * @var string
      */
-    protected $bypassReceiptPage;
+    protected ?string $bypassReceiptPage = null;
 
     /**
      * Deadline for settlement.
-     *
-     * @var int
      */
-    protected $captureDay;
+    protected ?int $captureDay = null;
 
     /**
      * Payment collection method for the transaction.
      *
-     * @var string
-     *
      * @see \Worldline\Sips\Values\CaptureMode
      */
-    protected $captureMode;
+    protected ?string $captureMode = null;
 
     /**
      * Currency code for the transaction. This code is ISO 4217 compatible.
      *
-     * @var string
-     *
      * @see Worldline\Sips\Values\CurrencyCode
      */
-    protected $currencyCode;
+    protected ?string $currencyCode = null;
 
     /**
      * Date of a 3D Secure transaction successfuly realised for the customer. For example, the merchant gives this information to allow the certification of an electronic signature.
      *
      * @var string YYYYMMDD
      */
-    protected $customer3DSTransactionDate;
+    protected ?string $customer3DSTransactionDate = null;
 
     /**
      * Contains information from the customer's account at the merchant (date of creation, number of transactions in the last 24h, ...).
-     *
-     * @var CustomerAccountHistoric
      */
-    protected $customerAccountHistoric;
+    protected ?CustomerAccountHistoric $customerAccountHistoric = null;
 
     /**
      * Contains the customer's address information.
-     *
-     * @var Address
      */
-    protected $customerAddress;
+    protected ?Address $customerAddress = null;
 
     /**
      * Number of billing realised for the customer address. For example, the merchant gives this information to allow the certification of an electronic signature.
-     *
-     * @var int
      */
-    protected $customerBillingNb;
+    protected ?int $customerBillingNb = null;
 
     /**
      * Contains the customer's information.
-     *
-     * @var Contact
      */
-    protected $customerContact;
+    protected ?Contact $customerContact = null;
 
     /**
      * Contains the customer's information.
-     *
-     * @var Contact
      */
-    protected $customerData;
+    protected ?Contact $customerData = null;
 
     /**
      * Successful delivery flag for the customer. For example, the merchant gives this information to allow the certification of an electronic signature.
      *
      * @var string Y/N
      */
-    protected $customerDeliverySuccessFlag;
+    protected ?string $customerDeliverySuccessFlag = null;
 
     /**
      * Customer identifier.
-     *
-     * @var string
      */
-    protected $customerId;
+    protected ?string $customerId = null;
 
     /**
      * Buyer's IP address.
-     *
-     * @var string
      */
-    protected $customerIpAddress;
+    protected ?string $customerIpAddress = null;
 
     /**
      * Language of the user, used on the payment pages.
      *
-     * @var string
-     *
      * @see Worldline\Sips\Values\CustomerLanguage
      */
-    protected $customerLanguage;
+    protected ?string $customerLanguage = null;
 
     /**
      * Method used to validate the customer phone number. For example, the merchant gives this information to allow the certification of an electronic signature.
-     *
-     * @var string
      */
-    protected $customerPhoneValidationMethod;
+    protected ?string $customerPhoneValidationMethod = null;
 
     /**
      * Online registration date of the customer. For example, the merchant gives this information to allow the certification of an electronic signature.
      *
      * @var string YYYYMMDD
      */
-    protected $customerRegistrationDateOnline;
+    protected ?string $customerRegistrationDateOnline = null;
 
     /**
      * On site (Point Of Sale) registration date of the customer. For example, the merchant gives this information to allow the certification of an electronic signature.
      *
      * @var string YYYYMMDD
      */
-    protected $customerRegistrationDateProxi;
+    protected ?string $customerRegistrationDateProxi = null;
 
     /**
      * ** NOT DOCUMENTED **.
      *
-     * @var string
-     *
      * @todo
      */
-    protected $customerTimestampIpAddress;
+    protected ?string $customerTimestampIpAddress = null;
 
     /**
      * Contains the delivery address information.
-     *
-     * @var Address
      */
-    protected $deliveryAddress;
+    protected ?Address $deliveryAddress = null;
 
     /**
      * Contains the delivery contact's information.
-     *
-     * @var Contact
      */
-    protected $deliveryContact;
+    protected ?Contact $deliveryContact = null;
 
     /**
      * Contains the delivery information.
-     *
-     * @var DeliveryData
      */
-    protected $deliveryData;
+    protected ?DeliveryData $deliveryData = null;
 
     /**
      * First successful delivery date at the customer address. For example, the merchant gives this information to allow the certification of an electronic signature.
      *
      * @var string YYYYMMDD
      */
-    protected $deliveryFirstDate;
+    protected ?string $deliveryFirstDate = null;
 
     /**
      * Date when the customer has provided the proof to the merchant. For example, the merchant gives this information to allow the certification of an electronic signature.
      *
      * @var string YYYYMMDD
      */
-    protected $evidenceAcquisitionDate;
+    protected ?string $evidenceAcquisitionDate = null;
 
     /**
      * Number of the proof provided by the customer. For example, the merchant gives this information to allow the certification of an electronic signature.
-     *
-     * @var string
      */
-    protected $evidenceNumber;
+    protected ?string $evidenceNumber = null;
 
     /**
      * Type of proof provided by the customer. For example, the merchant gives this information to allow the certification of an electronic signature.
-     *
-     * @var string
      */
-    protected $evidenceType;
+    protected ?string $evidenceType = null;
 
     /**
      * Contains the transaction's antifraud rules parameters, allowing the merchant to dynamically customise the rules registered in the merchant configuration.
-     *
-     * @var FraudData
      */
-    protected $fraudData;
+    protected ?FraudData $fraudData = null;
 
     /**
      * Cryptographic function used to calculate the hashPan.
-     *
-     * @var string
-     * @var \Worldline\Sips\Common\Field\HashAlgorithm
      */
-    protected $hashAlgorithm1;
+    protected ?string $hashAlgorithm1 = null;
 
     /**
      * Cryptographic function used to calculate the hashPan.
-     *
-     * @var string
-     * @var \Worldline\Sips\Common\Field\HashAlgorithm
      */
-    protected $hashAlgorithm2;
+    protected ?string $hashAlgorithm2 = null;
 
     /**
      * Random value (called a seed) provided by the merchant to calculate the hashPan.
-     *
-     * @var string
      */
-    protected $hashSalt1;
+    protected ?string $hashSalt1 = null;
 
     /**
      * Random value (called a seed) provided by the merchant to calculate the hashPan.
-     *
-     * @var string
      */
-    protected $hashSalt2;
+    protected ?string $hashSalt2 = null;
 
     /**
      * Additional reference of the holder that is communicated to the acquirer system or the issuer system in order to make some additional dedicated checks.
-     *
-     * @var string
      */
-    protected $holderAdditionalReference;
+    protected ?string $holderAdditionalReference = null;
 
     /**
      * Contains the payment mean holder's address information.
-     *
-     * @var Address
      */
-    protected $holderAddress;
+    protected ?Address $holderAddress = null;
 
     /**
      * Contains contact details of the payment mean holder.
-     *
-     * @var Contact
      */
-    protected $holderContact;
+    protected ?Contact $holderContact = null;
 
     /**
      * Contains the payment mean holder's information.
      *
-     * @var string
-     *
      * @todo create the container
      */
-    protected $holderData;
+    protected ?string $holderData = null;
 
     /**
      * Contains the information making it possible to make a payment in instalments.
      *
-     * @var string
-     *
      * @todo
      */
-    protected $instalmentData;
+    protected ?string $instalmentData = null;
 
     /**
      * Identifier of the Service used by the merchant for the exchanges with the WL Sips platform.
-     *
-     * @var string
      */
-    protected $intermediateServiceProviderId;
+    protected ?string $intermediateServiceProviderId = null;
 
     /**
      * Invoice reference.
-     *
-     * @var string
      */
-    protected $invoiceReference;
+    protected ?string $invoiceReference = null;
 
     /**
      * Mandate number.
-     *
-     * @var string
      */
-    protected $mandateId;
+    protected ?string $mandateId = null;
 
     /**
      * Merchant name (equivalent to the Merchant name registered during the Shop enrollment).
      * If indicated in the payment request, allows to change the name displayed on the 3-D Secure authentication page.
-     *
-     * @var string
      */
-    protected $merchantName;
+    protected ?string $merchantName = null;
 
     /**
      * Merchant's session number. Allows consolidation between requests and responses.
-     *
-     * @var string
      */
-    protected $merchantSessionId;
+    protected ?string $merchantSessionId = null;
 
     /**
      * Date and time of the transaction, set by the merchant at the merchant's local time (in the merchant's time zone).
      *
      * @var string date time ISO8601
      */
-    protected $merchantTransactionDateTime;
+    protected ?string $merchantTransactionDateTime = null;
 
     /**
      * Merchant web site URL.
-     *
-     * @var string
      */
-    protected $merchantUrl;
+    protected ?string $merchantUrl = null;
 
     /**
      * Customer's Wallet identifier.
-     *
-     * @var string
      */
-    protected $merchantWalletId;
+    protected ?string $merchantWalletId = null;
 
     /**
      * Merchant's URL for the return to the shop.
-     *
-     * @var string
      */
-    protected $normalReturnUrl;
+    protected ?string $normalReturnUrl = null;
 
     /**
      * Order channel used (Internet, Telephone, Post, Fax etc), Internet is the default value.
      * Use of this field should be reconciled with the conditions defined in the acquirer contract.
      *
-     * @var string
-     *
      * @todo Create the values
      */
-    protected $orderChannel;
+    protected ?string $orderChannel = null;
 
     /**
      * Contains specific information regarding the order context.
      *
-     * @var string
-     *
      * @todo Create the container
      */
-    protected $orderContext;
+    protected ?string $orderContext = null;
 
     /**
      * Order number associated with the payment transaction.
-     *
-     * @var string
      */
-    protected $orderId;
+    protected ?string $orderId = null;
 
     /**
      * List of payment methods accepted for a transaction.
      * If this field is not filled out, the WL Sips server recovers the list of payment methods available for the configuration of the shop.
      *
-     * @var string
-     *
      * @see \Worldline\Sips\Values\PaymentMeanBrandType
      */
-    protected $paymentMeanBrandList;
+    protected ?string $paymentMeanBrandList = null;
 
     /**
      * Contains specific information regarding the payment method used by the buyer.
      *
-     * @var string
-     *
      * @todo Create the container
      */
-    protected $paymentMeanData;
+    protected ?string $paymentMeanData = null;
 
     /**
      * Type of payment (per operation, 1st recurring payment etc).
      *
-     * @var string
-     *
      * @see \Worldline\Sips\Values\PaymentPattern
      */
-    protected $paymentPattern;
+    protected ?string $paymentPattern = null;
 
     /**
      * Contains the parameters for the payment pages, allowing the merchant to dynamically customise the options on payment pages.
-     *
-     * @var PaypageData
      */
-    protected $paypageData;
+    protected ?PaypageData $paypageData = null;
 
     /**
      * Encoding type of the response expected by the merchant.
      *
-     * @var string
-     *
      * @todo create the values
      */
-    protected $responseEncoding;
+    protected ?string $responseEncoding = null;
 
     /**
      * Identifier of the merchant's secret key used to calculate the imprint of the response.
-     *
-     * @var int
      */
-    protected $responseKeyVersion;
+    protected ?int $responseKeyVersion = null;
 
     /**
      * Context of a buyer's order.
      * All information transmitted in this field by the merchant during the payment request is sent back in the response without amendment.
      * Attention : the following characters "|", "«", "»", and «"» are forbidden in this field. If they are used, they will be replaced by blanks.
-     *
-     * @var string
      */
-    protected $returnContext;
+    protected ?string $returnContext = null;
 
     /**
      * List of merchant privative information transmitted by the a Business Score scoring system.
-     *
-     * @var string
      */
-    protected $riskManagementCustomDataList;
+    protected ?string $riskManagementCustomDataList = null;
 
     /**
      * Contains the identification of the original transaction (to be compliant with WL Sips 1.0).
-     *
-     * @var S10TransactionReference
      */
-    protected $s10TransactionReference;
+    protected ?S10TransactionReference $s10TransactionReference = null;
 
     /**
      * Information specific to the basket.
-     *
-     * @var ShoppingCartDetail
      */
-    protected $shoppingCartDetail;
+    protected ?ShoppingCartDetail $shoppingCartDetail = null;
 
     /**
      * Reference provided by the merchant which is sent in the payment collection flow. This reference appears on the account statements of the cardholder.
-     *
-     * @var string
      */
-    protected $statementReference;
+    protected ?string $statementReference = null;
 
     /**
      * Contains address information of a merchant of the Payment Facilitator in the context of Collecting offer or a Marketplace offer.
-     *
-     * @var Address
      */
-    protected $subMerchantAddress;
+    protected ?Address $subMerchantAddress = null;
 
     /**
      * MCC Code of the vendor at the Payment Facilitator in a context of Collecting offer or a Marketplace offer.
-     *
-     * @var string
      */
-    protected $subMerchantCategoryCode;
+    protected ?string $subMerchantCategoryCode = null;
 
     /**
      * Merchant contract number of the Payment Facilitator in the context of Collecting offer or a Marketplace offer (only used for Cetelem).
-     *
-     * @var string
      */
-    protected $subMerchantContractNumber;
+    protected ?string $subMerchantContractNumber = null;
 
     /**
      * Merchant identifier of the Payment Facilitator in the context of Collecting offer or a Marketplace offer.
-     *
-     * @var string
      */
-    protected $subMerchantId;
+    protected ?string $subMerchantId = null;
 
     /**
      * Legal identifier of vendor as merchant of the Payment Facilitator, expressed in the legal codification specific to each country.
-     *
-     * @var string
      */
-    protected $subMerchantLegalId;
+    protected ?string $subMerchantLegalId = null;
 
     /**
      * Name of the merchant of the Payment Facilitator in the context of Collecting offer or a Marketplace offer.
-     *
-     * @var string
      */
-    protected $subMerchantName;
+    protected ?string $subMerchantName = null;
 
     /**
      * Short name of the merchant of the Payment Facilitator in the context of Collecting offer or a Marketplace offer.
-     *
-     * @var string
      */
-    protected $subMerchantShortName;
+    protected ?string $subMerchantShortName = null;
 
     /**
      * Name of the file corresponding to the style sheet (name of the zip file) used to personalize the payment pages.
-     *
-     * @var string
      */
-    protected $templateName;
+    protected ?string $templateName = null;
 
     /**
      * Indicates the players in the transaction.
      *
-     * @var string
-     *
      * @todo create the values
      */
-    protected $transactionActors;
+    protected ?string $transactionActors = null;
 
     /**
      * Origin of a transaction (for example: name of the programme), set by the merchant. Exemple: "Website A v1.32".
-     *
-     * @var string
      */
-    protected $transactionOrigin;
+    protected ?string $transactionOrigin = null;
 
     /**
      * The merchant can choose of referencing his transactions by a transactionId or a transactionReference.
      * transactionReference uniquely identifies a transaction throughout the life of the shop.
-     *
-     * @var string
      */
-    protected $transactionReference;
+    protected ?string $transactionReference = null;
 
     /**
      * Contains specific information regarding the travel.
      *
-     * @var string
-     *
      * @todo create the container
      */
-    protected $travelContext;
+    protected ?string $travelContext = null;
 
     /**
      * Payment value date.
      *
      * @var string YYYYMMDD
      */
-    protected $valueDate;
+    protected ?string $valueDate = null;
 
     /**
      * @var string

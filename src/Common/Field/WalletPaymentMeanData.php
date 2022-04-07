@@ -9,64 +9,38 @@ namespace Worldline\Sips\Common\Field;
  */
 class WalletPaymentMeanData extends Field
 {
-    /**
-     * @var int
-     */
-    protected $paymentMeanId;
+    protected ?int $paymentMeanId = null;
 
-    /**
-     * @var string
-     */
-    protected $maskedPan;
+    protected ?string $maskedPan = null;
 
-    /**
-     * @var string
-     */
-    protected $paymentMeanAlias;
+    protected ?string $paymentMeanAlias = null;
 
     /**
      * Format YYYYMM.
-     *
-     * @var int
      */
-    protected $panExpiryDate;
+    protected ?int $panExpiryDate = null;
 
-    /**
-     * @var string
-     */
-    protected $paymentMeanBrand;
+    protected ?string $paymentMeanBrand = null;
 
     /**
      * Indicates the players in the transaction.
      * Values: BTOB, BTOC, BTOF.
-     *
-     * @var string
      */
-    protected $transactionActors;
+    protected ?string $transactionActors = null;
 
-    /**
-     * @var Worldline\Sips\Common\PspData
-     */
-    protected $pspData;
+    protected ?\Worldline\Sips\Common\PspData $pspData = null;
 
-    /**
-     * @var string
-     */
-    protected $mandateId;
+    protected ?string $mandateId = null;
 
     /**
      * Identifier provided by issuer wallet to identify a payment mean.
-     *
-     * @var string
      */
-    protected $issuerWalletId;
+    protected ?string $issuerWalletId = null;
 
     /**
      * Can be "Paylib".
-     *
-     * @var string
      */
-    protected $issuerWalletType;
+    protected ?string $issuerWalletType = null;
 
     public function __construct($data)
     {
