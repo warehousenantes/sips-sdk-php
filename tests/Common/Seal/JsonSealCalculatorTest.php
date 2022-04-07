@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Worldline\Sips\Tests;
+namespace Worldline\Sips\Test\Common\Seal;
 
 use PHPUnit\Framework\TestCase;
 use Worldline\Sips\Common\Field\Address;
@@ -34,7 +34,7 @@ class JsonSealCalculatorTest extends TestCase
     public function testGetSealData(): void
     {
         $calculatedSealData = $this->jsonSealCalculator->getSealData($this->paypageRequest->toArray());
-        $expectedSealData = '2http://test.com978IR_WS_2.19http://localhost/return.phpINTERNETcustomtest';
+        $expectedSealData = '2http://test.com978IR_WS_2.35http://localhost/return.phpINTERNETcustomtest';
 
         $this->assertSame($expectedSealData, $calculatedSealData);
     }
@@ -43,7 +43,7 @@ class JsonSealCalculatorTest extends TestCase
     {
         $this->paypageRequest->setPaymentMeanBrandList(['VISA', 'MASTERCARD']);
         $calculatedSealData = $this->jsonSealCalculator->getSealData($this->paypageRequest->toArray());
-        $expectedSealData = '2http://test.com978IR_WS_2.19http://localhost/return.phpINTERNETVISAMASTERCARDcustomtest';
+        $expectedSealData = '2http://test.com978IR_WS_2.35http://localhost/return.phpINTERNETVISAMASTERCARDcustomtest';
 
         $this->assertSame($expectedSealData, $calculatedSealData);
     }
@@ -59,7 +59,7 @@ class JsonSealCalculatorTest extends TestCase
         $customerAddress->setCountry('CustomerCountry');
         $this->paypageRequest->setCustomerAddress($customerAddress);
 
-        $expectedSealData = '2http://test.com978CustomerCityCustomerCountryFirstnameLastnameIR_WS_2.19http://localhost/return.phpINTERNETcustomtest';
+        $expectedSealData = '2http://test.com978CustomerCityCustomerCountryFirstnameLastnameIR_WS_2.35http://localhost/return.phpINTERNETcustomtest';
         $calculatedSealData = $this->jsonSealCalculator->getSealData($this->paypageRequest->toArray());
 
         $this->assertSame($expectedSealData, $calculatedSealData);
