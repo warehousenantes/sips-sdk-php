@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worldline\Sips\CashManagement;
 
 class DuplicateRequest extends \Worldline\Sips\SipsMessage
@@ -13,7 +15,6 @@ class DuplicateRequest extends \Worldline\Sips\SipsMessage
     protected $customerIpAddress;
 
     /**
-     *
      * @var \Worldline\Sips\Common\Field\FraudData
      */
     protected $fraudData;
@@ -55,17 +56,18 @@ class DuplicateRequest extends \Worldline\Sips\SipsMessage
      */
     public function __construct()
     {
-        $this->connecter        = \Worldline\Sips\Common\SipsEnvironment::OFFICE;
-        $this->serviceUrl       = "rs-services/v2/cashManagement/duplicate";
-        $this->interfaceVersion = "CR_WS_2.3";
+        $this->connecter = \Worldline\Sips\Common\SipsEnvironment::OFFICE;
+        $this->serviceUrl = 'rs-services/v2/cashManagement/duplicate';
+        $this->interfaceVersion = 'CR_WS_2.3';
         $this->setTransactionReference($this->generateReference());
     }
 
     public function generateReference(): string
     {
-        $microtime            = explode(' ', microtime());
-        $microtime[0]         = $microtime[0] * 1000000;
-        $transactionReference = $microtime[1] . $microtime[0];
+        $microtime = explode(' ', microtime());
+        $microtime[0] = $microtime[0] * 1000000;
+        $transactionReference = $microtime[1].$microtime[0];
+
         return $transactionReference;
     }
 
@@ -272,240 +274,280 @@ class DuplicateRequest extends \Worldline\Sips\SipsMessage
     public function setAmount($amount)
     {
         $this->amount = $amount;
+
         return $this;
     }
 
     public function setCaptureDay($captureDay)
     {
         $this->captureDay = $captureDay;
+
         return $this;
     }
 
     public function setCaptureMode($captureMode)
     {
         $this->captureMode = $captureMode;
+
         return $this;
     }
 
     public function setCurrencyCode($currencyCode)
     {
         $this->currencyCode = $currencyCode;
+
         return $this;
     }
 
     public function setCustomerEmail($customerEmail)
     {
         $this->customerEmail = $customerEmail;
+
         return $this;
     }
 
     public function setCustomerId($customerId)
     {
         $this->customerId = $customerId;
+
         return $this;
     }
 
     public function setCustomerIpAddress($customerIpAddress)
     {
         $this->customerIpAddress = $customerIpAddress;
+
         return $this;
     }
 
     public function setFraudData(\Worldline\Sips\Common\Field\FraudData $fraudData)
     {
         $this->fraudData = $fraudData;
+
         return $this;
     }
 
     public function setFromTransactionReference($fromTransactionReference)
     {
         $this->fromTransactionReference = $fromTransactionReference;
+
         return $this;
     }
 
     public function setMerchantTransactionDateTime($merchantTransactionDateTime)
     {
         $this->merchantTransactionDateTime = $merchantTransactionDateTime;
+
         return $this;
     }
 
     public function setOrderChannel($orderChannel)
     {
         $this->orderChannel = $orderChannel;
+
         return $this;
     }
 
     public function setOrderId($orderId)
     {
         $this->orderId = $orderId;
+
         return $this;
     }
 
     public function setReturnContext($returnContext)
     {
         $this->returnContext = $returnContext;
+
         return $this;
     }
 
     public function setTransactionReference($transactionReference)
     {
         $this->transactionReference = $transactionReference;
+
         return $this;
     }
 
     public function setTransactionOrigin($transactionOrigin)
     {
         $this->transactionOrigin = $transactionOrigin;
+
         return $this;
     }
 
     public function setFromMerchantId($fromMerchantId)
     {
         $this->fromMerchantId = $fromMerchantId;
+
         return $this;
     }
 
     public function setDeliveryAddress($deliveryAddress)
     {
         $this->deliveryAddress = $deliveryAddress;
+
         return $this;
     }
 
     public function setDeliveryContact($deliveryContact)
     {
         $this->deliveryContact = $deliveryContact;
+
         return $this;
     }
 
     public function setBillingAddress($billingAddress)
     {
         $this->billingAddress = $billingAddress;
+
         return $this;
     }
 
     public function setBillingContact($billingContact)
     {
         $this->billingContact = $billingContact;
+
         return $this;
     }
 
     public function setCustomerAddress($customerAddress)
     {
         $this->customerAddress = $customerAddress;
+
         return $this;
     }
 
     public function setCustomerContact($customerContact)
     {
         $this->customerContact = $customerContact;
+
         return $this;
     }
 
     public function setCustomerData($customerData)
     {
         $this->customerData = $customerData;
+
         return $this;
     }
 
     public function setStatementReference($statementReference)
     {
         $this->statementReference = $statementReference;
+
         return $this;
     }
 
     public function setDeliveryData($deliveryData)
     {
         $this->deliveryData = $deliveryData;
+
         return $this;
     }
 
     public function setShoppingCartDetail($shoppingCartDetail)
     {
         $this->shoppingCartDetail = $shoppingCartDetail;
+
         return $this;
     }
 
     public function setS10TransactionReference($s10TransactionReference)
     {
         $this->s10TransactionReference = $s10TransactionReference;
+
         return $this;
     }
 
     public function setS10FromTransactionReference($s10FromTransactionReference)
     {
         $this->s10FromTransactionReference = $s10FromTransactionReference;
+
         return $this;
     }
 
     public function setPaymentMeanData($paymentMeanData)
     {
         $this->paymentMeanData = $paymentMeanData;
+
         return $this;
     }
 
     public function setIntermediateServiceProviderId($intermediateServiceProviderId)
     {
         $this->intermediateServiceProviderId = $intermediateServiceProviderId;
+
         return $this;
     }
 
     public function setSubMerchantId($subMerchantId)
     {
         $this->subMerchantId = $subMerchantId;
+
         return $this;
     }
 
     public function setSubMerchantShortName($subMerchantShortName)
     {
         $this->subMerchantShortName = $subMerchantShortName;
+
         return $this;
     }
 
     public function setSubMerchantCategoryCode($subMerchantCategoryCode)
     {
         $this->subMerchantCategoryCode = $subMerchantCategoryCode;
+
         return $this;
     }
 
     public function setSubMerchantLegalId($subMerchantLegalId)
     {
         $this->subMerchantLegalId = $subMerchantLegalId;
+
         return $this;
     }
 
     public function setSubMerchantAddress($subMerchantAddress)
     {
         $this->subMerchantAddress = $subMerchantAddress;
+
         return $this;
     }
 
     public function setHolderAddress($holderAddress)
     {
         $this->holderAddress = $holderAddress;
+
         return $this;
     }
 
     public function setHolderContact($holderContact)
     {
         $this->holderContact = $holderContact;
+
         return $this;
     }
 
     public function setAuthenticationData($authenticationData)
     {
         $this->authenticationData = $authenticationData;
+
         return $this;
     }
 
     public function setTravelContext($travelContext)
     {
         $this->travelContext = $travelContext;
+
         return $this;
     }
 
     public function setOrderContext($orderContext)
     {
         $this->orderContext = $orderContext;
+
         return $this;
     }
 }

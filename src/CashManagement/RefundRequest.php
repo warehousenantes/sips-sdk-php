@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worldline\Sips\CashManagement;
 
-class RefundRequest  extends \Worldline\Sips\SipsMessage
+class RefundRequest extends \Worldline\Sips\SipsMessage
 {
     protected $operationAmount;
     protected $currencyCode;
@@ -20,130 +22,126 @@ class RefundRequest  extends \Worldline\Sips\SipsMessage
 
     public function __construct()
     {
-        $this->connecter        = \Worldline\Sips\Common\SipsEnvironment::OFFICE;
-        $this->serviceUrl       = "rs-services/v2/cashManagement/refund";
-        $this->interfaceVersion = "CR_WS_2.3";
+        $this->connecter = \Worldline\Sips\Common\SipsEnvironment::OFFICE;
+        $this->serviceUrl = 'rs-services/v2/cashManagement/refund';
+        $this->interfaceVersion = 'CR_WS_2.3';
         $this->setTransactionReference($this->generateReference());
     }
 
     public function generateReference(): string
     {
-        $microtime            = explode(' ', microtime());
-        $microtime[0]         = $microtime[0] * 1000000;
-        $transactionReference = $microtime[1] . $microtime[0];
+        $microtime = explode(' ', microtime());
+        $microtime[0] = $microtime[0] * 1000000;
+        $transactionReference = $microtime[1].$microtime[0];
+
         return $transactionReference;
     }
 
-
-
-    function getOperationAmount()
+    public function getOperationAmount()
     {
         return $this->operationAmount;
     }
 
-    function getCurrencyCode()
+    public function getCurrencyCode()
     {
         return $this->currencyCode;
     }
 
-    function getTransactionReference()
+    public function getTransactionReference()
     {
         return $this->transactionReference;
     }
 
-    function getOperationOrigin()
+    public function getOperationOrigin()
     {
         return $this->operationOrigin;
     }
 
-    function getPaymentMeanData()
+    public function getPaymentMeanData()
     {
         return $this->paymentMeanData;
     }
 
-    function getS10TransactionReference()
+    public function getS10TransactionReference()
     {
         return $this->s10TransactionReference;
     }
 
-    function getShoppingCartDetail()
+    public function getShoppingCartDetail()
     {
         return $this->shoppingCartDetail;
     }
 
-    function getIntermediateServiceProviderId()
+    public function getIntermediateServiceProviderId()
     {
         return $this->intermediateServiceProviderId;
     }
 
-    function getCustomerContact()
+    public function getCustomerContact()
     {
         return $this->customerContact;
     }
 
-    function setOperationAmount($operationAmount)
+    public function setOperationAmount($operationAmount)
     {
         $this->operationAmount = $operationAmount;
 
         return $this;
     }
 
-    function setCurrencyCode($currencyCode)
+    public function setCurrencyCode($currencyCode)
     {
         $this->currencyCode = $currencyCode;
 
         return $this;
     }
 
-    function setTransactionReference($transactionReference)
+    public function setTransactionReference($transactionReference)
     {
         $this->transactionReference = $transactionReference;
 
         return $this;
     }
 
-    function setOperationOrigin($operationOrigin)
+    public function setOperationOrigin($operationOrigin)
     {
         $this->operationOrigin = $operationOrigin;
 
         return $this;
     }
 
-    function setPaymentMeanData($paymentMeanData)
+    public function setPaymentMeanData($paymentMeanData)
     {
         $this->paymentMeanData = $paymentMeanData;
 
         return $this;
     }
 
-    function setS10TransactionReference($s10TransactionReference)
+    public function setS10TransactionReference($s10TransactionReference)
     {
         $this->s10TransactionReference = $s10TransactionReference;
 
         return $this;
     }
 
-    function setShoppingCartDetail($shoppingCartDetail)
+    public function setShoppingCartDetail($shoppingCartDetail)
     {
         $this->shoppingCartDetail = $shoppingCartDetail;
 
         return $this;
     }
 
-    function setIntermediateServiceProviderId($intermediateServiceProviderId)
+    public function setIntermediateServiceProviderId($intermediateServiceProviderId)
     {
         $this->intermediateServiceProviderId = $intermediateServiceProviderId;
 
         return $this;
     }
 
-
-    function setCustomerContact($customerContact)
+    public function setCustomerContact($customerContact)
     {
         $this->customerContact = $customerContact;
 
         return $this;
     }
-
-
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worldline\Sips\CashManagement;
 
 class ValidateRequest extends \Worldline\Sips\SipsMessage
@@ -19,164 +21,162 @@ class ValidateRequest extends \Worldline\Sips\SipsMessage
 
     public function __construct()
     {
-        $this->connecter        = \Worldline\Sips\Common\SipsEnvironment::OFFICE;
-        $this->serviceUrl       = "rs-services/v2/cashManagement/validate";
-        $this->interfaceVersion = "CR_WS_2.3";
+        $this->connecter = \Worldline\Sips\Common\SipsEnvironment::OFFICE;
+        $this->serviceUrl = 'rs-services/v2/cashManagement/validate';
+        $this->interfaceVersion = 'CR_WS_2.3';
         $this->setTransactionReference($this->generateReference());
     }
 
     public function generateReference(): string
     {
-        $microtime            = explode(' ', microtime());
-        $microtime[0]         = $microtime[0] * 1000000;
-        $transactionReference = $microtime[1] . $microtime[0];
+        $microtime = explode(' ', microtime());
+        $microtime[0] = $microtime[0] * 1000000;
+        $transactionReference = $microtime[1].$microtime[0];
+
         return $transactionReference;
     }
 
-    function getOperationAmount()
+    public function getOperationAmount()
     {
         return $this->operationAmount;
     }
 
-    function getCurrencyCode()
+    public function getCurrencyCode()
     {
         return $this->currencyCode;
     }
 
-
-    function getTransactionReference()
+    public function getTransactionReference()
     {
         return $this->transactionReference;
     }
 
-    function getOperationOrigin()
+    public function getOperationOrigin()
     {
         return $this->operationOrigin;
     }
 
-    function getLastRecoveryIndicator()
+    public function getLastRecoveryIndicator()
     {
         return $this->lastRecoveryIndicator;
     }
 
-    function getS10TransactionReference()
+    public function getS10TransactionReference()
     {
         return $this->s10TransactionReference;
     }
 
-    function getIntermediateServiceProviderId()
+    public function getIntermediateServiceProviderId()
     {
         return $this->intermediateServiceProviderId;
     }
 
-    function getSubMerchantId()
+    public function getSubMerchantId()
     {
         return $this->subMerchantId;
     }
 
-    function getSubMerchantShortName()
+    public function getSubMerchantShortName()
     {
         return $this->subMerchantShortName;
     }
 
-    function getSubMerchantCategoryCode()
+    public function getSubMerchantCategoryCode()
     {
         return $this->subMerchantCategoryCode;
     }
 
-    function getSubMerchantLegalId()
+    public function getSubMerchantLegalId()
     {
         return $this->subMerchantLegalId;
     }
 
-    function getSubMerchantAddress()
+    public function getSubMerchantAddress()
     {
         return $this->subMerchantAddress;
     }
 
-    function setOperationAmount($operationAmount)
+    public function setOperationAmount($operationAmount)
     {
         $this->operationAmount = $operationAmount;
 
         return $this;
     }
 
-    function setCurrencyCode($currencyCode)
+    public function setCurrencyCode($currencyCode)
     {
         $this->currencyCode = $currencyCode;
 
         return $this;
     }
 
-    function setTransactionReference($transactionReference)
+    public function setTransactionReference($transactionReference)
     {
         $this->transactionReference = $transactionReference;
 
         return $this;
     }
 
-    function setOperationOrigin($operationOrigin)
+    public function setOperationOrigin($operationOrigin)
     {
         $this->operationOrigin = $operationOrigin;
 
         return $this;
     }
 
-    function setLastRecoveryIndicator($lastRecoveryIndicator)
+    public function setLastRecoveryIndicator($lastRecoveryIndicator)
     {
         $this->lastRecoveryIndicator = $lastRecoveryIndicator;
 
         return $this;
     }
 
-    function setS10TransactionReference($s10TransactionReference)
+    public function setS10TransactionReference($s10TransactionReference)
     {
         $this->s10TransactionReference = $s10TransactionReference;
 
         return $this;
     }
 
-    function setIntermediateServiceProviderId($intermediateServiceProviderId)
+    public function setIntermediateServiceProviderId($intermediateServiceProviderId)
     {
         $this->intermediateServiceProviderId = $intermediateServiceProviderId;
 
         return $this;
     }
 
-    function setSubMerchantId($subMerchantId)
+    public function setSubMerchantId($subMerchantId)
     {
         $this->subMerchantId = $subMerchantId;
 
         return $this;
     }
 
-    function setSubMerchantShortName($subMerchantShortName)
+    public function setSubMerchantShortName($subMerchantShortName)
     {
         $this->subMerchantShortName = $subMerchantShortName;
 
         return $this;
     }
 
-    function setSubMerchantCategoryCode($subMerchantCategoryCode)
+    public function setSubMerchantCategoryCode($subMerchantCategoryCode)
     {
         $this->subMerchantCategoryCode = $subMerchantCategoryCode;
 
         return $this;
     }
 
-    function setSubMerchantLegalId($subMerchantLegalId)
+    public function setSubMerchantLegalId($subMerchantLegalId)
     {
         $this->subMerchantLegalId = $subMerchantLegalId;
 
         return $this;
     }
 
-    function setSubMerchantAddress($subMerchantAddress)
+    public function setSubMerchantAddress($subMerchantAddress)
     {
         $this->subMerchantAddress = $subMerchantAddress;
 
         return $this;
     }
-
-
 }

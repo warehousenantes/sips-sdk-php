@@ -1,9 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Worldline\Sips\Common\Field;
 
 /**
- * Class Contact
- * @package Worldline\Sips\Common\Field
+ * Class Contact.
  */
 class Contact extends Field
 {
@@ -60,10 +62,7 @@ class Contact extends Field
         return $this->email;
     }
 
-    /**
-     * @param string $email
-     */
-    public function setEmail(string $email)
+    public function setEmail(string $email): void
     {
         $this->email = $email;
     }
@@ -76,10 +75,7 @@ class Contact extends Field
         return $this->firstname;
     }
 
-    /**
-     * @param string $firstname
-     */
-    public function setFirstname(string $firstname)
+    public function setFirstname(string $firstname): void
     {
         $this->firstname = $firstname;
     }
@@ -92,10 +88,7 @@ class Contact extends Field
         return $this->gender;
     }
 
-    /**
-     * @param string $gender
-     */
-    public function setGender(string $gender)
+    public function setGender(string $gender): void
     {
         $this->gender = $gender;
     }
@@ -108,10 +101,7 @@ class Contact extends Field
         return $this->lastname;
     }
 
-    /**
-     * @param string $lastname
-     */
-    public function setLastname(string $lastname)
+    public function setLastname(string $lastname): void
     {
         $this->lastname = $lastname;
     }
@@ -124,10 +114,7 @@ class Contact extends Field
         return $this->mobile;
     }
 
-    /**
-     * @param string $mobile
-     */
-    public function setMobile(string $mobile)
+    public function setMobile(string $mobile): void
     {
         $this->mobile = $mobile;
     }
@@ -140,10 +127,7 @@ class Contact extends Field
         return $this->phone;
     }
 
-    /**
-     * @param string $phone
-     */
-    public function setPhone(string $phone)
+    public function setPhone(string $phone): void
     {
         $this->phone = $phone;
     }
@@ -156,10 +140,7 @@ class Contact extends Field
         return $this->title;
     }
 
-    /**
-     * @param string $title
-     */
-    public function setTitle(string $title)
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
@@ -187,24 +168,28 @@ class Contact extends Field
     public function setInitials($initials)
     {
         $this->initials = $initials;
+
         return $this;
     }
 
     public function setLegalId($legalId)
     {
         $this->legalId = $legalId;
+
         return $this;
     }
 
     public function setPositionOccupied($positionOccupied)
     {
         $this->positionOccupied = $positionOccupied;
+
         return $this;
     }
 
     public function setWorkPhone($workPhone)
     {
         $this->workPhone = $workPhone;
+
         return $this;
     }
 }

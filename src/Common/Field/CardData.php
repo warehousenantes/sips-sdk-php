@@ -1,117 +1,134 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worldline\Sips\Common\Field;
 
 class CardData extends Field
 {
     /**
      * Network name associated with the card.
+     *
      * @var string
      */
     protected $cardScheme;
 
     /**
      * Name of the payment method that is used. It is related to one paymentMeanType.
+     *
      * @var string
      */
     protected $cardBrand;
 
     /**
      * Product code of the card.
+     *
      * @var string
      */
     protected $cardProductCode;
 
     /**
      * Product name of the card.
+     *
      * @var string
      */
     protected $cardProductName;
 
     /**
      * Indicates whether the card is an Enterprise / Commercial card or not.
+     *
      * @var string
      */
     protected $cardCorporateIndicator;
 
     /**
-     * Indicator of existence of a card effective date (Y/N/Empty)
+     * Indicator of existence of a card effective date (Y/N/Empty).
+     *
      * @var string
      */
     protected $cardEffectiveDateIndicator;
 
     /**
-     * Indicator of existence of an issue number
+     * Indicator of existence of an issue number.
+     *
      * @var string
      */
     protected $cardSeqNumberIndicator;
 
     /**
-     * Issuer code of the card
+     * Issuer code of the card.
+     *
      * @var string
      */
     protected $issuerCode;
 
     /**
-     * Issuer name of the card
+     * Issuer name of the card.
+     *
      * @var string
      */
     protected $issuerName;
 
     /**
-     * Country code of the card issuer
+     * Country code of the card issuer.
+     *
      * @var string
      */
     protected $issuerCountryCode;
 
     /**
-     * region code of the card issuer
+     * region code of the card issuer.
+     *
      * @var string
      */
     protected $issuerRegionCode;
 
     /**
-     * Minimal length of the PAN
+     * Minimal length of the PAN.
+     *
      * @var int
      */
     protected $panLengthMin;
 
     /**
-     * Maximum length of the PAN
+     * Maximum length of the PAN.
+     *
      * @var int
      */
     protected $panLengthMax;
 
     /**
-     * Control algorithm applied on the PAN (L/V/N/Empty)
+     * Control algorithm applied on the PAN (L/V/N/Empty).
+     *
      * @var string
      */
     protected $panCheckAlgorithm;
 
     /**
      * Profile code of the card.
+     *
      * @var string
      */
     protected $cardProductProfile;
 
     /**
-     * Indicates whether the card is a virtual card
+     * Indicates whether the card is a virtual card.
+     *
      * @var string
      */
     protected $virtualCardIndicator;
 
     /**
      * Profile name of the card which is displayed on payment electronic ticket in accordance with MPADS requirements.
+     *
      * @var string
      */
     protected $cardProductUsageLabel;
 
-    
-
     /**
      * Get network name associated with the card.
      *
-     * @return  string
+     * @return string
      */
     public function getCardScheme()
     {
@@ -121,9 +138,9 @@ class CardData extends Field
     /**
      * Set network name associated with the card.
      *
-     * @param  string  $cardScheme  Network name associated with the card.
+     * @param string $cardScheme network name associated with the card
      *
-     * @return  self
+     * @return self
      */
     public function setCardScheme(string $cardScheme)
     {
@@ -135,7 +152,7 @@ class CardData extends Field
     /**
      * Get name of the payment method that is used. It is related to one paymentMeanType.
      *
-     * @return  string
+     * @return string
      */
     public function getCardBrand()
     {
@@ -145,9 +162,9 @@ class CardData extends Field
     /**
      * Set name of the payment method that is used. It is related to one paymentMeanType.
      *
-     * @param  string  $cardBrand  Name of the payment method that is used. It is related to one paymentMeanType.
+     * @param string $cardBrand Name of the payment method that is used. It is related to one paymentMeanType.
      *
-     * @return  self
+     * @return self
      */
     public function setCardBrand(string $cardBrand)
     {
@@ -159,7 +176,7 @@ class CardData extends Field
     /**
      * Get product code of the card.
      *
-     * @return  string
+     * @return string
      */
     public function getCardProductCode()
     {
@@ -169,9 +186,9 @@ class CardData extends Field
     /**
      * Set product code of the card.
      *
-     * @param  string  $cardProductCode  Product code of the card.
+     * @param string $cardProductCode product code of the card
      *
-     * @return  self
+     * @return self
      */
     public function setCardProductCode(string $cardProductCode)
     {
@@ -183,7 +200,7 @@ class CardData extends Field
     /**
      * Get product name of the card.
      *
-     * @return  string
+     * @return string
      */
     public function getCardProductName()
     {
@@ -193,9 +210,9 @@ class CardData extends Field
     /**
      * Set product name of the card.
      *
-     * @param  string  $cardProductName  Product name of the card.
+     * @param string $cardProductName product name of the card
      *
-     * @return  self
+     * @return self
      */
     public function setCardProductName(string $cardProductName)
     {
@@ -207,7 +224,7 @@ class CardData extends Field
     /**
      * Get indicates whether the card is an Enterprise / Commercial card or not.
      *
-     * @return  string
+     * @return string
      */
     public function getCardCorporateIndicator()
     {
@@ -217,9 +234,9 @@ class CardData extends Field
     /**
      * Set indicates whether the card is an Enterprise / Commercial card or not.
      *
-     * @param  string  $cardCorporateIndicator  Indicates whether the card is an Enterprise / Commercial card or not.
+     * @param string $cardCorporateIndicator indicates whether the card is an Enterprise / Commercial card or not
      *
-     * @return  self
+     * @return self
      */
     public function setCardCorporateIndicator(string $cardCorporateIndicator)
     {
@@ -229,9 +246,9 @@ class CardData extends Field
     }
 
     /**
-     * Get indicator of existence of a card effective date (Y/N/Empty)
+     * Get indicator of existence of a card effective date (Y/N/Empty).
      *
-     * @return  string
+     * @return string
      */
     public function getCardEffectiveDateIndicator()
     {
@@ -239,11 +256,11 @@ class CardData extends Field
     }
 
     /**
-     * Set indicator of existence of a card effective date (Y/N/Empty)
+     * Set indicator of existence of a card effective date (Y/N/Empty).
      *
-     * @param  string  $cardEffectiveDateIndicator  Indicator of existence of a card effective date (Y/N/Empty)
+     * @param string $cardEffectiveDateIndicator Indicator of existence of a card effective date (Y/N/Empty)
      *
-     * @return  self
+     * @return self
      */
     public function setCardEffectiveDateIndicator(string $cardEffectiveDateIndicator)
     {
@@ -253,9 +270,9 @@ class CardData extends Field
     }
 
     /**
-     * Get indicator of existence of an issue number
+     * Get indicator of existence of an issue number.
      *
-     * @return  string
+     * @return string
      */
     public function getCardSeqNumberIndicator()
     {
@@ -263,11 +280,11 @@ class CardData extends Field
     }
 
     /**
-     * Set indicator of existence of an issue number
+     * Set indicator of existence of an issue number.
      *
-     * @param  string  $cardSeqNumberIndicator  Indicator of existence of an issue number
+     * @param string $cardSeqNumberIndicator Indicator of existence of an issue number
      *
-     * @return  self
+     * @return self
      */
     public function setCardSeqNumberIndicator(string $cardSeqNumberIndicator)
     {
@@ -277,9 +294,9 @@ class CardData extends Field
     }
 
     /**
-     * Get issuer code of the card
+     * Get issuer code of the card.
      *
-     * @return  string
+     * @return string
      */
     public function getIssuerCode()
     {
@@ -287,11 +304,11 @@ class CardData extends Field
     }
 
     /**
-     * Set issuer code of the card
+     * Set issuer code of the card.
      *
-     * @param  string  $issuerCode  Issuer code of the card
+     * @param string $issuerCode Issuer code of the card
      *
-     * @return  self
+     * @return self
      */
     public function setIssuerCode(string $issuerCode)
     {
@@ -301,9 +318,9 @@ class CardData extends Field
     }
 
     /**
-     * Get country code of the card issuer
+     * Get country code of the card issuer.
      *
-     * @return  string
+     * @return string
      */
     public function getIssuerCountryCode()
     {
@@ -311,11 +328,11 @@ class CardData extends Field
     }
 
     /**
-     * Set country code of the card issuer
+     * Set country code of the card issuer.
      *
-     * @param  string  $issuerCountryCode  Country code of the card issuer
+     * @param string $issuerCountryCode Country code of the card issuer
      *
-     * @return  self
+     * @return self
      */
     public function setIssuerCountryCode(string $issuerCountryCode)
     {
@@ -325,9 +342,9 @@ class CardData extends Field
     }
 
     /**
-     * Get region code of the card issuer
+     * Get region code of the card issuer.
      *
-     * @return  string
+     * @return string
      */
     public function getIssuerRegionCode()
     {
@@ -335,11 +352,11 @@ class CardData extends Field
     }
 
     /**
-     * Set region code of the card issuer
+     * Set region code of the card issuer.
      *
-     * @param  string  $issuerRegionCode  region code of the card issuer
+     * @param string $issuerRegionCode region code of the card issuer
      *
-     * @return  self
+     * @return self
      */
     public function setIssuerRegionCode(string $issuerRegionCode)
     {
@@ -349,9 +366,9 @@ class CardData extends Field
     }
 
     /**
-     * Get minimal length of the PAN
+     * Get minimal length of the PAN.
      *
-     * @return  int
+     * @return int
      */
     public function getPanLengthMin()
     {
@@ -359,11 +376,11 @@ class CardData extends Field
     }
 
     /**
-     * Set minimal length of the PAN
+     * Set minimal length of the PAN.
      *
-     * @param  int  $panLengthMin  Minimal length of the PAN
+     * @param int $panLengthMin Minimal length of the PAN
      *
-     * @return  self
+     * @return self
      */
     public function setPanLengthMin(int $panLengthMin)
     {
@@ -373,9 +390,9 @@ class CardData extends Field
     }
 
     /**
-     * Get maximum length of the PAN
+     * Get maximum length of the PAN.
      *
-     * @return  int
+     * @return int
      */
     public function getPanLengthMax()
     {
@@ -383,11 +400,11 @@ class CardData extends Field
     }
 
     /**
-     * Set maximum length of the PAN
+     * Set maximum length of the PAN.
      *
-     * @param  int  $panLengthMax  Maximum length of the PAN
+     * @param int $panLengthMax Maximum length of the PAN
      *
-     * @return  self
+     * @return self
      */
     public function setPanLengthMax(int $panLengthMax)
     {
@@ -397,9 +414,9 @@ class CardData extends Field
     }
 
     /**
-     * Get control algorithm applied on the PAN (L/V/N/Empty)
+     * Get control algorithm applied on the PAN (L/V/N/Empty).
      *
-     * @return  string
+     * @return string
      */
     public function getPanCheckAlgorithm()
     {
@@ -407,11 +424,11 @@ class CardData extends Field
     }
 
     /**
-     * Set control algorithm applied on the PAN (L/V/N/Empty)
+     * Set control algorithm applied on the PAN (L/V/N/Empty).
      *
-     * @param  string  $panCheckAlgorithm  Control algorithm applied on the PAN (L/V/N/Empty)
+     * @param string $panCheckAlgorithm Control algorithm applied on the PAN (L/V/N/Empty)
      *
-     * @return  self
+     * @return self
      */
     public function setPanCheckAlgorithm(string $panCheckAlgorithm)
     {
@@ -423,7 +440,7 @@ class CardData extends Field
     /**
      * Get profile code of the card.
      *
-     * @return  string
+     * @return string
      */
     public function getCardProductProfile()
     {
@@ -433,9 +450,9 @@ class CardData extends Field
     /**
      * Set profile code of the card.
      *
-     * @param  string  $cardProductProfile  Profile code of the card.
+     * @param string $cardProductProfile profile code of the card
      *
-     * @return  self
+     * @return self
      */
     public function setCardProductProfile(string $cardProductProfile)
     {
@@ -445,9 +462,9 @@ class CardData extends Field
     }
 
     /**
-     * Get indicates whether the card is a virtual card
+     * Get indicates whether the card is a virtual card.
      *
-     * @return  string
+     * @return string
      */
     public function getVirtualCardIndicator()
     {
@@ -455,11 +472,11 @@ class CardData extends Field
     }
 
     /**
-     * Set indicates whether the card is a virtual card
+     * Set indicates whether the card is a virtual card.
      *
-     * @param  string  $virtualCardIndicator  Indicates whether the card is a virtual card
+     * @param string $virtualCardIndicator Indicates whether the card is a virtual card
      *
-     * @return  self
+     * @return self
      */
     public function setVirtualCardIndicator(string $virtualCardIndicator)
     {
@@ -471,7 +488,7 @@ class CardData extends Field
     /**
      * Get profile name of the card which is displayed on payment electronic ticket in accordance with MPADS requirements.
      *
-     * @return  string
+     * @return string
      */
     public function getCardProductUsageLabel()
     {
@@ -481,9 +498,9 @@ class CardData extends Field
     /**
      * Set profile name of the card which is displayed on payment electronic ticket in accordance with MPADS requirements.
      *
-     * @param  string  $cardProductUsageLabel  Profile name of the card which is displayed on payment electronic ticket in accordance with MPADS requirements.
+     * @param string $cardProductUsageLabel profile name of the card which is displayed on payment electronic ticket in accordance with MPADS requirements
      *
-     * @return  self
+     * @return self
      */
     public function setCardProductUsageLabel(string $cardProductUsageLabel)
     {

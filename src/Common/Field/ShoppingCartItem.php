@@ -1,9 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Worldline\Sips\Common\Field;
 
 class ShoppingCartItem extends Field
 {
-
     protected $productName;
     protected $productDescription;
     protected $productCode;
@@ -68,60 +70,70 @@ class ShoppingCartItem extends Field
     public function setProductName($productName)
     {
         $this->productName = $productName;
+
         return $this;
     }
 
     public function setProductDescription($productDescription)
     {
         $this->productDescription = $productDescription;
+
         return $this;
     }
 
     public function setProductCode($productCode)
     {
         $this->productCode = $productCode;
+
         return $this;
     }
 
     public function setProductSKU($productSKU)
     {
         $this->productSKU = $productSKU;
+
         return $this;
     }
 
     public function setProductUnitAmount($productUnitAmount)
     {
         $this->productUnitAmount = $productUnitAmount;
+
         return $this;
     }
 
     public function setProductQuantity($productQuantity)
     {
         $this->productQuantity = $productQuantity;
+
         return $this;
     }
 
     public function setProductTaxRate($productTaxRate)
     {
         $this->productTaxRate = $productTaxRate;
+
         return $this;
     }
 
     public function setProductUnitTaxAmount($productUnitTaxAmount)
     {
         $this->productUnitTaxAmount = $productUnitTaxAmount;
+
         return $this;
     }
 
     public function setProductCategory($productCategory)
     {
         $this->productCategory = $productCategory;
+
         return $this;
     }
 
     public function setProductTaxCategory($productTaxCategory)
     {
         $this->productTaxCategory = $productTaxCategory;
+
         return $this;
     }
 }

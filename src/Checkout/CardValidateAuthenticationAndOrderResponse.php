@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worldline\Sips\Checkout;
 
 use Worldline\Sips\Common\Field\CardData;
@@ -55,7 +57,7 @@ class CardValidateAuthenticationAndOrderResponse
     protected $acquirerNativeResponseCode;
     protected $transactionPlatform;
     protected $holderAuthentRelegationCode;
-    
+
     /**
      * @var \Worldline\Sips\Common\Field\CardData
      */
@@ -72,11 +74,11 @@ class CardValidateAuthenticationAndOrderResponse
     public function __construct($data)
     {
         foreach ($data as $key => $value) {
-            if ($key === 's10TransactionReference') {
-                $s10   = new \Worldline\Sips\Common\Field\S10TransactionReference();
+            if ('s10TransactionReference' === $key) {
+                $s10 = new \Worldline\Sips\Common\Field\S10TransactionReference();
                 $s10->hydrate($value);
                 $value = $s10;
-            } elseif ($key === 'cardData') {
+            } elseif ('cardData' === $key) {
                 $cardData = new CardData();
                 $cardData->hydrate($value);
                 $value = $cardData;
@@ -377,6 +379,4 @@ class CardValidateAuthenticationAndOrderResponse
     {
         return $this->holderAuthentType;
     }
-
-
 }

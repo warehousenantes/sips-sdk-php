@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worldline\Sips\Diagnostic;
 
 use Worldline\Sips\SipsMessage;
 
 /**
- * Description of TransactionData
+ * Description of TransactionData.
  *
  * @author guiled
  */
@@ -17,9 +19,9 @@ class TransactionDataRequest extends SipsMessage
 
     public function __construct()
     {
-        $this->connecter        = \Worldline\Sips\Common\SipsEnvironment::OFFICE;
-        $this->serviceUrl       = "rs-services/v2/diagnostic/getTransactionData";
-        $this->interfaceVersion = "DR_WS_2.23";
+        $this->connecter = \Worldline\Sips\Common\SipsEnvironment::OFFICE;
+        $this->serviceUrl = 'rs-services/v2/diagnostic/getTransactionData';
+        $this->interfaceVersion = 'DR_WS_2.23';
     }
 
     public function getTransactionReference()
@@ -40,6 +42,7 @@ class TransactionDataRequest extends SipsMessage
     public function setTransactionReference($transactionReference)
     {
         $this->transactionReference = $transactionReference;
+
         return $this;
     }
 
@@ -47,12 +50,14 @@ class TransactionDataRequest extends SipsMessage
     {
         unset($this->transactionReference);
         $this->s10TransactionReference = $s10TransactionReference;
+
         return $this;
     }
 
     public function setIntermediateServiceProviderId($intermediateServiceProviderId)
     {
         $this->intermediateServiceProviderId = $intermediateServiceProviderId;
+
         return $this;
     }
 }

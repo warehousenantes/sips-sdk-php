@@ -1,7 +1,8 @@
 <?php
 
-namespace Worldline\Sips\Tests;
+declare(strict_types=1);
 
+namespace Worldline\Sips\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Worldline\Sips\Common\Field\Address;
@@ -13,10 +14,11 @@ class JsonSealCalculatorTest extends TestCase
 {
     protected $paypageRequest;
     protected $jsonSealCalculator;
+
     /**
      * @before
      */
-    public function setupParameters()
+    public function setupParameters(): void
     {
         $this->paypageRequest = new PaypageRequest();
         $this->paypageRequest->setAmount(2);
@@ -29,46 +31,37 @@ class JsonSealCalculatorTest extends TestCase
         $this->jsonSealCalculator = new JsonSealCalculator();
     }
 
-    /**
-     * @test
-     */
-    public function getSealData()
+    public function testGetSealData(): void
     {
         $calculatedSealData = $this->jsonSealCalculator->getSealData($this->paypageRequest->toArray());
-        $expectedSealData = "2http://test.com978IR_WS_2.19http://localhost/return.phpINTERNETcustomtest";
+        $expectedSealData = '2http://test.com978IR_WS_2.19http://localhost/return.phpINTERNETcustomtest';
 
-        $this->assertEquals($expectedSealData, $calculatedSealData);
+        $this->assertSame($expectedSealData, $calculatedSealData);
     }
 
-    /**
-     * @test
-     */
-    public function getSealDataWithList()
+    public function testGetSealDataWithList(): void
     {
-        $this->paypageRequest->setPaymentMeanBrandList(["VISA","MASTERCARD"]);
+        $this->paypageRequest->setPaymentMeanBrandList(['VISA', 'MASTERCARD']);
         $calculatedSealData = $this->jsonSealCalculator->getSealData($this->paypageRequest->toArray());
-        $expectedSealData = "2http://test.com978IR_WS_2.19http://localhost/return.phpINTERNETVISAMASTERCARDcustomtest";
+        $expectedSealData = '2http://test.com978IR_WS_2.19http://localhost/return.phpINTERNETVISAMASTERCARDcustomtest';
 
-        $this->assertEquals($expectedSealData, $calculatedSealData);
+        $this->assertSame($expectedSealData, $calculatedSealData);
     }
 
-    /**
-     * @test
-     */
-    public function getSealDataWithContainer()
+    public function testGetSealDataWithContainer(): void
     {
         $customerContact = new Contact();
-        $customerContact->setFirstname("Firstname");
+        $customerContact->setFirstname('Firstname');
         $customerContact->setLastname('Lastname');
         $this->paypageRequest->setCustomerContact($customerContact);
         $customerAddress = new Address();
-        $customerAddress->setCity("CustomerCity");
-        $customerAddress->setCountry("CustomerCountry");
+        $customerAddress->setCity('CustomerCity');
+        $customerAddress->setCountry('CustomerCountry');
         $this->paypageRequest->setCustomerAddress($customerAddress);
 
-        $expectedSealData = "2http://test.com978CustomerCityCustomerCountryFirstnameLastnameIR_WS_2.19http://localhost/return.phpINTERNETcustomtest";
+        $expectedSealData = '2http://test.com978CustomerCityCustomerCountryFirstnameLastnameIR_WS_2.19http://localhost/return.phpINTERNETcustomtest';
         $calculatedSealData = $this->jsonSealCalculator->getSealData($this->paypageRequest->toArray());
 
-        $this->assertEquals($expectedSealData, $calculatedSealData);
+        $this->assertSame($expectedSealData, $calculatedSealData);
     }
 }

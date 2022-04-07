@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worldline\Sips\CashManagement;
 
 class CancelResponse
@@ -19,37 +21,37 @@ class CancelResponse
         }
     }
 
-    function getAcquirerResponseCode()
+    public function getAcquirerResponseCode()
     {
         return $this->acquirerResponseCode;
     }
 
-    function getNewAmount()
+    public function getNewAmount()
     {
         return $this->newAmount;
     }
 
-    function getNewStatus()
+    public function getNewStatus()
     {
         return $this->newStatus;
     }
 
-    function getOperationDateTime()
+    public function getOperationDateTime()
     {
         return $this->operationDateTime;
     }
 
-    function getResponseCode()
+    public function getResponseCode()
     {
         return $this->responseCode;
     }
 
-    function getSeal()
+    public function getSeal()
     {
         return $this->seal;
     }
 
-    function getErrorFieldName()
+    public function getErrorFieldName()
     {
         return $this->errorFieldName;
     }

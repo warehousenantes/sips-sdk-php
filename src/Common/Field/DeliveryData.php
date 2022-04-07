@@ -1,9 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Worldline\Sips\Common\Field;
 
 class DeliveryData extends Field
 {
-
     protected $deliveryChargeAmount;
     protected $estimatedDeliveryDate;
     protected $deliveryMode;
@@ -56,50 +58,56 @@ class DeliveryData extends Field
     public function setDeliveryChargeAmount($deliveryChargeAmount)
     {
         $this->deliveryChargeAmount = $deliveryChargeAmount;
+
         return $this;
     }
 
     public function setEstimatedDeliveryDate($estimatedDeliveryDate)
     {
         $this->estimatedDeliveryDate = $estimatedDeliveryDate;
+
         return $this;
     }
 
     public function setDeliveryMode($deliveryMode)
     {
         $this->deliveryMode = $deliveryMode;
+
         return $this;
     }
 
     public function setDeliveryMethod($deliveryMethod)
     {
         $this->deliveryMethod = $deliveryMethod;
+
         return $this;
     }
 
     public function setDeliveryOperator($deliveryOperator)
     {
         $this->deliveryOperator = $deliveryOperator;
+
         return $this;
     }
 
     public function setEstimatedDeliveryDelay($estimatedDeliveryDelay)
     {
         $this->estimatedDeliveryDelay = $estimatedDeliveryDelay;
+
         return $this;
     }
 
     public function setDeliveryAddressCreationDate($deliveryAddressCreationDate)
     {
         $this->deliveryAddressCreationDate = $deliveryAddressCreationDate;
+
         return $this;
     }
 
     public function setElectronicDeliveryIndicator($electronicDeliveryIndicator)
     {
         $this->electronicDeliveryIndicator = $electronicDeliveryIndicator;
+
         return $this;
     }
-
-
 }

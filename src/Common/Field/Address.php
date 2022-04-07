@@ -1,11 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worldline\Sips\Common\Field;
 
-
 /**
- * Class Address
- * @package Worldline\Sips\Common\Field
+ * Class Address.
  */
 class Address extends Field
 {
@@ -54,200 +54,133 @@ class Address extends Field
      */
     protected $zipCode;
 
-    /**
-     * @return string|null
-     */
     public function getAddressAdditional1(): ?string
     {
         return $this->addressAdditional1;
     }
 
-    /**
-     * @param string $addressAdditional1
-     * @return Address
-     */
-    public function setAddressAdditional1(string $addressAdditional1): Address
+    public function setAddressAdditional1(string $addressAdditional1): self
     {
         $this->addressAdditional1 = $addressAdditional1;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAddressAdditional2(): ?string
     {
         return $this->addressAdditional2;
     }
 
-    /**
-     * @param string $addressAdditional2
-     * @return Address
-     */
-    public function setAddressAdditional2(string $addressAdditional2): Address
+    public function setAddressAdditional2(string $addressAdditional2): self
     {
         $this->addressAdditional2 = $addressAdditional2;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAddressAdditional3(): ?string
     {
         return $this->addressAdditional3;
     }
 
-    /**
-     * @param string $addressAdditional3
-     * @return Address
-     */
-    public function setAddressAdditional3(string $addressAdditional3): Address
+    public function setAddressAdditional3(string $addressAdditional3): self
     {
         $this->addressAdditional3 = $addressAdditional3;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCity(): ?string
     {
         return $this->city;
     }
 
-    /**
-     * @param string $city
-     * @return Address
-     */
-    public function setCity(string $city): Address
+    public function setCity(string $city): self
     {
         $this->city = $city;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCompany(): ?string
     {
         return $this->company;
     }
 
-    /**
-     * @param string $company
-     * @return Address
-     */
-    public function setCompany(string $company): Address
+    public function setCompany(string $company): self
     {
         $this->company = $company;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCountry(): ?string
     {
         return $this->country;
     }
 
-    /**
-     * @param string $country
-     * @return Address
-     */
-    public function setCountry(string $country): Address
+    public function setCountry(string $country): self
     {
         $this->country = $country;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getPostBox(): ?string
     {
         return $this->postBox;
     }
 
-    /**
-     * @param string $postBox
-     * @return Address
-     */
-    public function setPostBox(string $postBox): Address
+    public function setPostBox(string $postBox): self
     {
         $this->postBox = $postBox;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getState(): ?string
     {
         return $this->state;
     }
 
-    /**
-     * @param string $state
-     */
-    public function setState(string $state)
+    public function setState(string $state): void
     {
         $this->state = $state;
     }
 
-    /**
-     * @return string|null
-     */
     public function getStreet(): ?string
     {
         return $this->street;
     }
 
-    /**
-     * @param string $street
-     * @return Address
-     */
-    public function setStreet(string $street): Address
+    public function setStreet(string $street): self
     {
         $this->street = $street;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getStreetNumber(): ?string
     {
         return $this->streetNumber;
     }
 
-    /**
-     * @param string $streetNumber
-     * @return Address
-     */
-    public function setStreetNumber(string $streetNumber): Address
+    public function setStreetNumber(string $streetNumber): self
     {
         $this->streetNumber = $streetNumber;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getZipCode(): ?string
     {
         return $this->zipCode;
     }
 
-    /**
-     * @param string $zipCode
-     * @return Address
-     */
-    public function setZipCode(string $zipCode): Address
+    public function setZipCode(string $zipCode): self
     {
         $this->zipCode = $zipCode;
+
         return $this;
     }
-
 }

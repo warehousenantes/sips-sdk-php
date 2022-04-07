@@ -1,9 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Worldline\Sips\Common\Field;
 
 class CustomerAccountHistoric extends Field
 {
-
     protected $addPaymentMeanDate;
     protected $changeDate;
     protected $creationDate;
@@ -63,54 +65,63 @@ class CustomerAccountHistoric extends Field
     public function setAddPaymentMeanDate($addPaymentMeanDate)
     {
         $this->addPaymentMeanDate = $addPaymentMeanDate;
+
         return $this;
     }
 
     public function setChangeDate($changeDate)
     {
         $this->changeDate = $changeDate;
+
         return $this;
     }
 
     public function setCreationDate($creationDate)
     {
         $this->creationDate = $creationDate;
+
         return $this;
     }
 
     public function setCustomerAccountId($customerAccountId)
     {
         $this->customerAccountId = $customerAccountId;
+
         return $this;
     }
 
     public function setNumberOfAttemptsAddCard24Hours($numberOfAttemptsAddCard24Hours)
     {
         $this->numberOfAttemptsAddCard24Hours = $numberOfAttemptsAddCard24Hours;
+
         return $this;
     }
 
     public function setNumberOfPurchase180Days($numberOfPurchase180Days)
     {
         $this->numberOfPurchase180Days = $numberOfPurchase180Days;
+
         return $this;
     }
 
     public function setNumberOfTransaction24Hours($numberOfTransaction24Hours)
     {
         $this->numberOfTransaction24Hours = $numberOfTransaction24Hours;
+
         return $this;
     }
 
     public function setPasswordChangeDate($passwordChangeDate)
     {
         $this->passwordChangeDate = $passwordChangeDate;
+
         return $this;
     }
 
     public function setSuspiciousActivityIndicator($suspiciousActivityIndicator)
     {
         $this->suspiciousActivityIndicator = $suspiciousActivityIndicator;
+
         return $this;
     }
 
@@ -122,6 +133,7 @@ class CustomerAccountHistoric extends Field
     public function setNumberOfTransactionYear($numberOfTransactionYear)
     {
         $this->numberOfTransactionYear = $numberOfTransactionYear;
+
         return $this;
     }
 }

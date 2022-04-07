@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worldline\Sips\Checkout;
 
 class CheckEnrollmentResponse
@@ -53,6 +55,4 @@ class CheckEnrollmentResponse
     {
         return $this->responseCode;
     }
-
-
 }

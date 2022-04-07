@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worldline\Sips\Wallet;
 
 class DeletePaymentMeanResponse
@@ -34,20 +36,21 @@ class DeletePaymentMeanResponse
     public function setWalletActionDateTime($walletActionDateTime)
     {
         $this->walletActionDateTime = $walletActionDateTime;
+
         return $this;
     }
 
     public function setWalletResponseCode($walletResponseCode)
     {
         $this->walletResponseCode = $walletResponseCode;
+
         return $this;
     }
 
     public function setErrorFieldName($errorFieldName)
     {
         $this->errorFieldName = $errorFieldName;
+
         return $this;
     }
-
-
 }

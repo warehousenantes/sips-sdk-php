@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worldline\Sips\Common\Seal;
 
 use Worldline\Sips\Paypage\InitializationResponse;
@@ -7,71 +9,72 @@ use Worldline\Sips\SipsMessage;
 
 class JsonSealCalculator
 {
-    const ALGORITHM_SHA256      = 'SHA-256';
-    const ALGORITHM_HMAC_SHA256 = 'HMAC-SHA-256';
-    const ALGORITHM_HMAC_SHA512 = 'HMAC-SHA-512';
-    const ALGORITHM_DEFAULT     = self::ALGORITHM_HMAC_SHA256;
-    const EXCLUDED_FIELD        = ['seal', 'sealAlgorithm', 'keyVersion'];
+    public const ALGORITHM_SHA256 = 'SHA-256';
+    public const ALGORITHM_HMAC_SHA256 = 'HMAC-SHA-256';
+    public const ALGORITHM_HMAC_SHA512 = 'HMAC-SHA-512';
+    public const ALGORITHM_DEFAULT = self::ALGORITHM_HMAC_SHA256;
+    public const EXCLUDED_FIELD = ['seal', 'sealAlgorithm', 'keyVersion'];
 
-    public function calculateSeal(SipsMessage $sipsMessage, $secretKey, $algorithm = self::ALGORITHM_DEFAULT)
+    public function calculateSeal(SipsMessage $sipsMessage, $secretKey, $algorithm = self::ALGORITHM_DEFAULT): void
     {
         $seal = $this->encrypt($this->getSealData($sipsMessage->toArray()), $secretKey, $algorithm);
         $sipsMessage->setSeal($seal);
-        if ($algorithm !== self::ALGORITHM_DEFAULT) {
+        if (self::ALGORITHM_DEFAULT !== $algorithm) {
             $sipsMessage->setSealAlgorithm($algorithm);
         }
     }
 
     protected function encrypt(string $sealData, string $secretKey, string $algorithm = self::ALGORITHM_DEFAULT): string
     {
-        $sealData  = utf8_encode($sealData);
+        $sealData = utf8_encode($sealData);
         $secretKey = utf8_encode($secretKey);
 
         switch ($algorithm) {
             case self::ALGORITHM_SHA256:
-                return hash('sha256', $sealData . $secretKey);
+                return hash('sha256', $sealData.$secretKey);
             case self::ALGORITHM_HMAC_SHA256:
-                return hash_hmac("sha256", $sealData, $secretKey);
+                return hash_hmac('sha256', $sealData, $secretKey);
             case self::ALGORITHM_HMAC_SHA512:
-                return hash_hmac("sha512", $sealData, $secretKey);
+                return hash_hmac('sha512', $sealData, $secretKey);
         }
     }
 
     public function getSealData(array $array): string
     {
-        $sealData = "";
+        $sealData = '';
         ksort($array);
 
         foreach ($array as $key => $value) {
-            if (in_array($key, self::EXCLUDED_FIELD, true)) {
+            if (\in_array($key, self::EXCLUDED_FIELD, true)) {
                 continue;
             }
-            if (is_array($value)) {
+            if (\is_array($value)) {
                 $sealData .= $this->getSealData($value);
             } else {
                 $sealData .= $value;
             }
         }
+
         return $sealData;
     }
 
     public function isCorrectSeal(InitializationResponse $initializationResponse, $secretKey, $sealAlgorithm): bool
     {
         $seal = $this->encrypt($this->getSealData($initializationResponse->toArray()), $secretKey, $sealAlgorithm);
-        if ($seal == $initializationResponse->getSeal()) {
+        if ($seal === $initializationResponse->getSeal()) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     public function checkSeal($response, $secretKey, $sealAlgorithm): bool
     {
         $seal = $this->encrypt($this->getSealData($response), $secretKey, $sealAlgorithm);
-        if ($seal == $response['seal']) {
+        if ($seal === $response['seal']) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 }

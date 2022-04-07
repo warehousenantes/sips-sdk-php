@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worldline\Sips\Wallet;
 
 class AddCardResponse
@@ -17,7 +19,7 @@ class AddCardResponse
     public function __construct($data)
     {
         foreach ($data as $key => $value) {
-            if ($key === 'walletPaymentMeanDataList') {
+            if ('walletPaymentMeanDataList' === $key) {
                 $result = [];
                 foreach ($value as $walletPaymentMeanData) {
                     $result[] = new \Worldline\Sips\Common\Field\WalletPaymentMeanData($walletPaymentMeanData);
@@ -56,31 +58,35 @@ class AddCardResponse
     public function setWalletActionateTime($walletActionateTime)
     {
         $this->walletActionateTime = $walletActionateTime;
+
         return $this;
     }
 
     public function setPaymentMeanId($paymentMeanId)
     {
         $this->paymentMeanId = $paymentMeanId;
+
         return $this;
     }
 
     public function setMaskedPan($maskedPan)
     {
         $this->maskedPan = $maskedPan;
+
         return $this;
     }
 
     public function setWalletResponseCode($walletResponseCode)
     {
         $this->walletResponseCode = $walletResponseCode;
+
         return $this;
     }
 
     public function setErrorFieldName($errorFieldName)
     {
         $this->errorFieldName = $errorFieldName;
+
         return $this;
     }
-
 }

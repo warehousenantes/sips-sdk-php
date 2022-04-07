@@ -1,60 +1,49 @@
 <?php
 
-namespace Worldline\Sips\Values\PanType {
+declare(strict_types=1);
 
+namespace Worldline\Sips\Values\PanType {
     const CSE = 'CSE';              // The PAN provided is encrypted by CSE Javascript library (Client Side Encryption)
     const PAN = 'PAN';              // The PAN is provided in clear text
     const TOKEN_PAN = 'TOKEN_PAN';  // The PAN provided is a token
-
 }
 
 namespace Worldline\Sips\Values\CscType {
-
     const CSE = 'CSE';              // The CSC (Card Security Code) provided is encrypted by the CSE (Client Side Encryption) Javascript library
     const PLAIN = 'PLAIN';          // The CSC (Card Security Code) is provided in clear text. It is the default value
-
 }
 
 namespace Worldline\Sips\Values\paymentMeanBrandSelectionStatus {
-
     const DEFAULT_MODE = 'APPLIED_DEFAULT';     // The cardholder accepted the default merchant choice
     const HOLDER = 'APPLIED_HOLDER';            // The cardholder selected a card brand different from the default merchant choice
     const NOT_APPLICABLE = 'NOT_APPLICABLE';    // Card number filled is not a cobadged card
-
 }
 
 namespace Worldline\Sips\Values\PaymentPattern {
-
     const ONE_SHOT = 'ONE_SHOT';        // One shot payment (default value)
     const ISNTALMENT = 'INSTALMENT';    // Payment by instalment
     const RECURRING_1 = 'RECURRING_1';  // Recurring payment first payment
     const RECURRING_N = 'RECURRING_N';  // Recurring payment nth payment
-
 }
 
 namespace Worldline\Sips\Values\MerchantCustomerAuthentMethod {
-
     const NOAUTHENT = 'NOAUTHENT';          //	No authentication of the customer by the merchant
     const OWNCREDENTIAL = 'OWNCREDENTIAL';  // 	Customer authentication by the merchant using his own system
     const FEDERATEDID = 'FEDERATEDID';      // 	Customer authentication by the merchant using an identifier federated (facebook, ...) (e.g. Facebook)
     const ISSUERID = 'ISSUERID';            // 	Customer authentication by the merchant using information of the issuer's payment mean
     const THIRDPARTY = 'THIRDPARTY';        // 	Customer authentication by the merchant using a third system
     const FIDO = 'FIDO';                    // 	Customer authentication by the merchant with FIDO (Fast IDentity Online) system
-
 }
 
 namespace Worldline\Sips\Values\ChallengeMode3DS {
-
     const CHALLENGE = 'CHALLENGE';                          // The merchant desired authentication challenge mode is to have a client authentication. In other words, it is a "challenge" request
     const CHALLENGE_MANDATE = 'CHALLENGE_MANDATE';          // The merchant need is to apply the regulatory mode to have a strong customer authentication (for example for the first payment of payment schedule)
     const NO_CHALLENGE = 'NO_CHALLENGE';                    // The merchant desired authentication challenge mode is to have no customer authentication. In other words, it is a "challenge" request
     const NO_CHALLENGE_TRA_ACQ = 'NO_CHALLENGE_TRA_ACQ';    // The merchant desired no authentication of the cardholder by invoking the TRA acquirer exemption. It's a request for "Frictionless".
     const NO_PREFERENCE = 'NO_PREFERENCE';                  // The merchant has no desired authentication challenge mode
-
 }
 
 namespace Worldline\Sips\Values\Country {
-
     const ARUBA = 'ABW';
     const AFGHANISTAN = 'AFG';
     const ANGOLA = 'AGO';
@@ -321,7 +310,6 @@ namespace Worldline\Sips\Values\Region {
     const OCEANIA_ASIA = 'C';   // 	Oceania Asia
     const EUROPE = 'D';   // 	Europe
     const AFRICA_MIDDLE_EAST = 'E';   // 	Africa and middle east
-
 }
 
 namespace Worldline\Sips\Values\CardScheme {
@@ -349,7 +337,6 @@ namespace Worldline\Sips\Values\CardSeqNumberIndicator {
     const LENGTH_2 = '2';   // 	Card issue number of length 2
     const LENGTH_3 = '3';   // 	Card issue number of length 3
     const NONE = 'N';       // 	No card issue number
-
 }
 
 namespace Worldline\Sips\Values\PanCheckAlgorithm {
@@ -431,9 +418,7 @@ namespace Worldline\Sips\Values\CurrencyCode {
     const UKRAINE_HRYVNIA = '980';          // 	Ukraine Hryvnia
     const POLAND_ZLOTY = '985';             // 	Poland Zloty
     const BRAZILIAN_REAL = '986';           // 	Brazilian Real
-
 }
-
 
 namespace Worldline\Sips\Values\CustomerLanguage {
     const BULGARIAN = 'bg';     // 	Bulgarian
@@ -469,7 +454,6 @@ namespace Worldline\Sips\Values\CustomerLanguage {
     const CHINESE = 'zh';       // 	Chinese
 }
 
-
 namespace Worldline\Sips\Values\HashAlgorithm {
     const SHA_1 = 'SHA-1';          // 	SHA_1 cryptographic function structure (SHA: secure hash algorithm)
     const SHA_256 = 'SHA-256';    // 	SHA_256 cryptographic function structure (SHA: secure hash algorithm)
@@ -477,61 +461,61 @@ namespace Worldline\Sips\Values\HashAlgorithm {
 }
 
 namespace Worldline\Sips\Values\PaymentMeanBrandType {
-    const ONEEUROCOM  = 'ONLINE_CREDIT';      // 	Cofidis Pay 5x10x20x
-    const THREEXCBCOFINOGA  = 'CARD';       // 	Cofinoga 3xCB
-    const ACCEPTGIRO  = 'CREDIT_TRANSFER';      // 	AcceptGiro
-    const ACCORD  = 'CARD';     // 	Oney card
-    const ACCORD_KDO  = 'CARD';     // 	Oney gift card
-    const ACCORD_3X  = 'ONLINE_CREDIT';     // 	Facily Pay Payment 3 times
-    const ACCORD_4X  = 'ONLINE_CREDIT';     // 	Facily Pay Payment 4 times
-    const AMEX  = 'CARD';       // 	American Express card
-    const AURORE  = 'CARD';     // 	Aurore CPAY
-    const BCACB_3X  = 'ONLINE_CREDIT';      // 	Banque Casino CB payment 3 times
-    const BCACB_4X  = 'ONLINE_CREDIT';      // 	Banque Casino CB payment 4 times
-    const BCACUP  = 'CARD';     // 	CUP Card of Banque Casino
-    const BCMC  = 'CARD';       // 	Bancontact
-    const CACF_3X  = 'ONLINE_CREDIT';       // 	CACF Payment 3 times
-    const CACF_4X  = 'ONLINE_CREDIT';       // 	CACF Payment 4 times
-    const CADHOC  = 'CARD';     // 	Cadhoc
-    const CADOCARTE  = 'CARD';      // 	Cado Card
-    const CB  = 'CARD';     // 	Carte Bancaire
-    const CBCONLINE  = 'CREDIT_TRANSFER';       // 	PayButton CBC Online
-    const CETELEM_3X  = 'ONLINE_CREDIT';        // 	Cetelem 3xCB
-    const CETELEM_4X  = 'ONLINE_CREDIT';        // 	Cetelem 4xCB
-    const COFIDIS_3X  = 'ONLINE_CREDIT';        // 	Cofidis 3xCB
-    const COFIDIS_4X  = 'ONLINE_CREDIT';        // 	Cofidis 4xCB
-    const CONECS  = 'VOUCHER';      // 	Titles restaurants dematerialized Conecs
-    const CUP  = 'CARD';        // 	China Union Pay card
-    const CVA  = 'CARD';        // 	Visa Aurore card
-    const CVCO  = 'VOUCHER';        // 	Chèque-Vacances Connect
-    const DINERS  = 'CARD';     // 	Diners club international card
-    const ECV  = 'VOUCHER';     // 	e-Chèque-Vacances
-    const ELV  = 'DIRECT_DEBIT';        // 	Elektronisches LastschriftVerfahren
-    const FIVORY  = 'WALLET';       // 	Lyf Pay
-    const FRANFINANCE_3X  = 'ONLINE_CREDIT';        // 	Franfinance 3xCB
-    const FRANFINANCE_4X  = 'ONLINE_CREDIT';        // 	Franfinance 4xCB
-    const GIROPAY  = 'CREDIT_TRANSFER';     // 	Giropay
-    const IDEAL  = 'CREDIT_TRANSFER';       // 	iDeal
-    const ILLICADO  = 'CARD';       // 	Illicado
-    const INCASSO  = 'DIRECT_DEBIT';        // 	Incasso
-    const INGHOMEPAY  = 'CREDIT_TRANSFER';      // 	PayButton ING Home’Pay
-    const JCB  = 'CARD';        // 	Japan credit bureau card
-    const KBCONLINE  = 'CREDIT_TRANSFER';       // 	PayButton KBC Online
-    const LEPOTCOMMUN  = 'CARD';        // 	Le Pot Commun
-    const LYDIA  = 'PROVIDER';      // 	Lydia
-    const MAESTRO  = 'CARD';        // 	Maestro card (Mastercard)
-    const MASTERCARD  = 'CARD';     // 	Mastercard card
-    const PASSCADO  = 'CARD';       // 	Pass Cadeau
-    const PAY_BY_BANK  = 'CREDIT_TRANSFER';     // 	SEPA bank transfer
-    const PAYPAL  = 'WALLET';       // 	Paypal
-    const PAYTRAIL  = 'CREDIT_TRANSFER';        // 	Paytrail
-    const POSTFINANCE  = 'CARD';        // 	PostFinance card
-    const PRESTO  = 'ONLINE_CREDIT';        // 	Presto Plus
-    const SEPA_DIRECT_DEBIT  = 'DIRECT_DEBIT';      // 	SDD (SEPA Direct Debit)
-    const SOFINCO  = 'CARD';        // 	Sofinco card
-    const SOFORTUBERWEISUNG  = 'CREDIT_TRANSFER';       // 	Sofortüberweisung (Sofort Banking)
-    const SPIRITOFCADEAU  = 'CARD';     // 	Spirit Of Cadeau
-    const VISA  = 'CARD';       // 	Visa card
-    const VISA_ELECTRON  = 'CARD';      // 	Visa Electron card
-    const VPAY  = 'CARD';       // 	VPAY card (Visa)
+    const ONEEUROCOM = 'ONLINE_CREDIT';      // 	Cofidis Pay 5x10x20x
+    const THREEXCBCOFINOGA = 'CARD';       // 	Cofinoga 3xCB
+    const ACCEPTGIRO = 'CREDIT_TRANSFER';      // 	AcceptGiro
+    const ACCORD = 'CARD';     // 	Oney card
+    const ACCORD_KDO = 'CARD';     // 	Oney gift card
+    const ACCORD_3X = 'ONLINE_CREDIT';     // 	Facily Pay Payment 3 times
+    const ACCORD_4X = 'ONLINE_CREDIT';     // 	Facily Pay Payment 4 times
+    const AMEX = 'CARD';       // 	American Express card
+    const AURORE = 'CARD';     // 	Aurore CPAY
+    const BCACB_3X = 'ONLINE_CREDIT';      // 	Banque Casino CB payment 3 times
+    const BCACB_4X = 'ONLINE_CREDIT';      // 	Banque Casino CB payment 4 times
+    const BCACUP = 'CARD';     // 	CUP Card of Banque Casino
+    const BCMC = 'CARD';       // 	Bancontact
+    const CACF_3X = 'ONLINE_CREDIT';       // 	CACF Payment 3 times
+    const CACF_4X = 'ONLINE_CREDIT';       // 	CACF Payment 4 times
+    const CADHOC = 'CARD';     // 	Cadhoc
+    const CADOCARTE = 'CARD';      // 	Cado Card
+    const CB = 'CARD';     // 	Carte Bancaire
+    const CBCONLINE = 'CREDIT_TRANSFER';       // 	PayButton CBC Online
+    const CETELEM_3X = 'ONLINE_CREDIT';        // 	Cetelem 3xCB
+    const CETELEM_4X = 'ONLINE_CREDIT';        // 	Cetelem 4xCB
+    const COFIDIS_3X = 'ONLINE_CREDIT';        // 	Cofidis 3xCB
+    const COFIDIS_4X = 'ONLINE_CREDIT';        // 	Cofidis 4xCB
+    const CONECS = 'VOUCHER';      // 	Titles restaurants dematerialized Conecs
+    const CUP = 'CARD';        // 	China Union Pay card
+    const CVA = 'CARD';        // 	Visa Aurore card
+    const CVCO = 'VOUCHER';        // 	Chèque-Vacances Connect
+    const DINERS = 'CARD';     // 	Diners club international card
+    const ECV = 'VOUCHER';     // 	e-Chèque-Vacances
+    const ELV = 'DIRECT_DEBIT';        // 	Elektronisches LastschriftVerfahren
+    const FIVORY = 'WALLET';       // 	Lyf Pay
+    const FRANFINANCE_3X = 'ONLINE_CREDIT';        // 	Franfinance 3xCB
+    const FRANFINANCE_4X = 'ONLINE_CREDIT';        // 	Franfinance 4xCB
+    const GIROPAY = 'CREDIT_TRANSFER';     // 	Giropay
+    const IDEAL = 'CREDIT_TRANSFER';       // 	iDeal
+    const ILLICADO = 'CARD';       // 	Illicado
+    const INCASSO = 'DIRECT_DEBIT';        // 	Incasso
+    const INGHOMEPAY = 'CREDIT_TRANSFER';      // 	PayButton ING Home’Pay
+    const JCB = 'CARD';        // 	Japan credit bureau card
+    const KBCONLINE = 'CREDIT_TRANSFER';       // 	PayButton KBC Online
+    const LEPOTCOMMUN = 'CARD';        // 	Le Pot Commun
+    const LYDIA = 'PROVIDER';      // 	Lydia
+    const MAESTRO = 'CARD';        // 	Maestro card (Mastercard)
+    const MASTERCARD = 'CARD';     // 	Mastercard card
+    const PASSCADO = 'CARD';       // 	Pass Cadeau
+    const PAY_BY_BANK = 'CREDIT_TRANSFER';     // 	SEPA bank transfer
+    const PAYPAL = 'WALLET';       // 	Paypal
+    const PAYTRAIL = 'CREDIT_TRANSFER';        // 	Paytrail
+    const POSTFINANCE = 'CARD';        // 	PostFinance card
+    const PRESTO = 'ONLINE_CREDIT';        // 	Presto Plus
+    const SEPA_DIRECT_DEBIT = 'DIRECT_DEBIT';      // 	SDD (SEPA Direct Debit)
+    const SOFINCO = 'CARD';        // 	Sofinco card
+    const SOFORTUBERWEISUNG = 'CREDIT_TRANSFER';       // 	Sofortüberweisung (Sofort Banking)
+    const SPIRITOFCADEAU = 'CARD';     // 	Spirit Of Cadeau
+    const VISA = 'CARD';       // 	Visa card
+    const VISA_ELECTRON = 'CARD';      // 	Visa Electron card
+    const VPAY = 'CARD';       // 	VPAY card (Visa)
 }

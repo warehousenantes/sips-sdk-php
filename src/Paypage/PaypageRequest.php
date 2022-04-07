@@ -1,7 +1,8 @@
 <?php
 
-namespace Worldline\Sips\Paypage;
+declare(strict_types=1);
 
+namespace Worldline\Sips\Paypage;
 
 use Worldline\Sips\Common\Field\Address;
 use Worldline\Sips\Common\Field\Contact;
@@ -9,436 +10,529 @@ use Worldline\Sips\Common\Field\PaypageData;
 use Worldline\Sips\SipsMessage;
 
 /**
- * Class PaypageRequest
- * @package Worldline\Sips\Paypage
+ * Class PaypageRequest.
  */
 class PaypageRequest extends SipsMessage
 {
     /**
      * Transaction amount. The amount must be transmitted in the smallest unit of currency.
-     * For example in euros: an amount of EUR 10.50 must be transmitted in the form 1050. 
+     * For example in euros: an amount of EUR 10.50 must be transmitted in the form 1050.
+     *
      * @var int
      */
     protected $amount;
     /**
      * Contains the information on the cardholder's authentication.
+     *
      * @var string
      * @toto Create the container
      */
     protected $authenticationData;
     /**
      * URL provided by the merchant and used by the payment server to automatically notify the merchant of the result of the transaction online.
+     *
      * @var string
      */
     protected $automaticResponseUrl;
     /**
      * Contains the billing address information for the buyer.
+     *
      * @var Address
      */
     protected $billingAddress;
     /**
      * Contains the billing contact's information.
+     *
      * @var Contact
      */
     protected $billingContact;
     /**
-     * First successful billing date for the customer address. For example, the merchant gives this information to allow the certification of an electronic signature
+     * First successful billing date for the customer address. For example, the merchant gives this information to allow the certification of an electronic signature.
+     *
      * @var string YYYYMMMDD
      */
     protected $billingFirstDate;
     /**
      * Indicator used by the merchant to bypass the dcc procedure.
+     *
      * @var string Y/N
      */
     protected $bypassDcc;
     /**
      * Flag indicating that WL Sips must not edit the ticket receipt. This action is at charge of the trader. At the end of the payment, the customer is directly redirected to the response url from the shop (normalReturnUrl).
+     *
      * @var string
      */
     protected $bypassReceiptPage;
     /**
-     * Deadline for settlement. 
+     * Deadline for settlement.
+     *
      * @var int
      */
     protected $captureDay;
     /**
      * Payment collection method for the transaction.
+     *
      * @var string
+     *
      * @see \Worldline\Sips\Values\CaptureMode
      */
     protected $captureMode;
     /**
      * Currency code for the transaction. This code is ISO 4217 compatible.
+     *
      * @var string
+     *
      * @see Worldline\Sips\Values\CurrencyCode
      */
     protected $currencyCode;
     /**
      * Date of a 3D Secure transaction successfuly realised for the customer. For example, the merchant gives this information to allow the certification of an electronic signature.
+     *
      * @var string YYYYMMDD
      */
     protected $customer3DSTransactionDate;
     /**
      * Contains information from the customer's account at the merchant (date of creation, number of transactions in the last 24h, ...).
+     *
      * @var \Worldline\Sips\Common\Field\CustomerAccountHistoric
      */
     protected $customerAccountHistoric;
     /**
      * Contains the customer's address information.
+     *
      * @var Address
      */
     protected $customerAddress;
     /**
      * Number of billing realised for the customer address. For example, the merchant gives this information to allow the certification of an electronic signature.
-     * @var integer
+     *
+     * @var int
      */
     protected $customerBillingNb;
     /**
      * Contains the customer's information.
+     *
      * @var Contact
      */
     protected $customerContact;
     /**
      * Contains the customer's information.
+     *
      * @var \Worldline\Sips\Common\Field\Contact
      */
     protected $customerData;
     /**
      * Successful delivery flag for the customer. For example, the merchant gives this information to allow the certification of an electronic signature.
+     *
      * @var string Y/N
      */
     protected $customerDeliverySuccessFlag;
     /**
      * Deprecated, replaced by "email" in the container customerContact.
+     *
      * @var string
+     *
      * @deprecated
      */
     protected $customerEmail;
     /**
-     * Customer identifier
+     * Customer identifier.
+     *
      * @var string
      */
     protected $customerId;
     /**
      * Buyer's IP address.
+     *
      * @var string
      */
     protected $customerIpAddress;
     /**
      * Language of the user, used on the payment pages.
+     *
      * @var string
+     *
      * @see Worldline\Sips\Values\CustomerLanguage
      */
     protected $customerLanguage;
     /**
      * Method used to validate the customer phone number. For example, the merchant gives this information to allow the certification of an electronic signature.
+     *
      * @var string
      */
     protected $customerPhoneValidationMethod;
     /**
      * Online registration date of the customer. For example, the merchant gives this information to allow the certification of an electronic signature.
+     *
      * @var string YYYYMMDD
      */
     protected $customerRegistrationDateOnline;
     /**
      * On site (Point Of Sale) registration date of the customer. For example, the merchant gives this information to allow the certification of an electronic signature.
+     *
      * @var string YYYYMMDD
      */
     protected $customerRegistrationDateProxi;
     /**
-     * ** NOT DOCUMENTED **
+     * ** NOT DOCUMENTED **.
+     *
      * @var string
+     *
      * @todo
      */
     protected $customerTimestampIpAddress;
     /**
      * Contains the delivery address information.
+     *
      * @var Address
      */
     protected $deliveryAddress;
     /**
      * Contains the delivery contact's information.
+     *
      * @var Contact
      */
     protected $deliveryContact;
     /**
      * Contains the delivery information.
+     *
      * @var \Worldline\Sips\Common\Field\DeliveryData
      */
     protected $deliveryData;
     /**
      * First successful delivery date at the customer address. For example, the merchant gives this information to allow the certification of an electronic signature.
+     *
      * @var string YYYYMMDD
      */
     protected $deliveryFirstDate;
     /**
      * Date when the customer has provided the proof to the merchant. For example, the merchant gives this information to allow the certification of an electronic signature.
+     *
      * @var string YYYYMMDD
      */
     protected $evidenceAcquisitionDate;
     /**
      * Number of the proof provided by the customer. For example, the merchant gives this information to allow the certification of an electronic signature.
+     *
      * @var string
      */
     protected $evidenceNumber;
     /**
      * Type of proof provided by the customer. For example, the merchant gives this information to allow the certification of an electronic signature.
+     *
      * @var string
      */
     protected $evidenceType;
     /**
      * Contains the transaction's antifraud rules parameters, allowing the merchant to dynamically customise the rules registered in the merchant configuration.
+     *
      * @var \Worldline\Sips\Common\Field\FraudData
      */
     protected $fraudData;
     /**
      * Cryptographic function used to calculate the hashPan.
+     *
      * @var string
      * @var \Worldline\Sips\Common\Field\HashAlgorithm
      */
     protected $hashAlgorithm1;
     /**
      * Cryptographic function used to calculate the hashPan.
+     *
      * @var string
      * @var \Worldline\Sips\Common\Field\HashAlgorithm
      */
     protected $hashAlgorithm2;
     /**
      * Random value (called a seed) provided by the merchant to calculate the hashPan.
+     *
      * @var string
      */
     protected $hashSalt1;
     /**
      * Random value (called a seed) provided by the merchant to calculate the hashPan.
+     *
      * @var string
      */
     protected $hashSalt2;
     /**
      * Additional reference of the holder that is communicated to the acquirer system or the issuer system in order to make some additional dedicated checks.
+     *
      * @var string
      */
     protected $holderAdditionalReference;
     /**
      * Contains the payment mean holder's address information.
+     *
      * @var Address
      */
     protected $holderAddress;
     /**
      * Contains contact details of the payment mean holder.
+     *
      * @var Contact
      */
     protected $holderContact;
     /**
      * Contains the payment mean holder's information.
+     *
      * @var string
-     * @todo create the container 
+     *
+     * @todo create the container
      */
     protected $holderData;
     /**
      * Contains the information making it possible to make a payment in instalments.
+     *
      * @var string
+     *
      * @todo
      */
     protected $instalmentData;
     /**
      * Identifier of the Service used by the merchant for the exchanges with the WL Sips platform.
+     *
      * @var string
      */
     protected $intermediateServiceProviderId;
     /**
      * Invoice reference.
+     *
      * @var string
      */
     protected $invoiceReference;
     /**
      * Mandate number.
+     *
      * @var string
      */
     protected $mandateId;
     /**
      * Merchant name (equivalent to the Merchant name registered during the Shop enrollment).
      * If indicated in the payment request, allows to change the name displayed on the 3-D Secure authentication page.
+     *
      * @var string
      */
     protected $merchantName;
     /**
      * Merchant's session number. Allows consolidation between requests and responses.
+     *
      * @var string
      */
     protected $merchantSessionId;
     /**
-     * Date and time of the transaction, set by the merchant at the merchant's local time (in the merchant's time zone)
+     * Date and time of the transaction, set by the merchant at the merchant's local time (in the merchant's time zone).
+     *
      * @var string date time ISO8601
      */
     protected $merchantTransactionDateTime;
     /**
      * Merchant web site URL.
+     *
      * @var string
      */
     protected $merchantUrl;
     /**
      * Customer's Wallet identifier.
+     *
      * @var string
      */
     protected $merchantWalletId;
     /**
      * Merchant's URL for the return to the shop.
+     *
      * @var string
      */
     protected $normalReturnUrl;
     /**
      * Order channel used (Internet, Telephone, Post, Fax etc), Internet is the default value.
-     * Use of this field should be reconciled with the conditions defined in the acquirer contract. 
+     * Use of this field should be reconciled with the conditions defined in the acquirer contract.
+     *
      * @var string
+     *
      * @todo Create the values
      */
     protected $orderChannel;
     /**
-     * Contains specific information regarding the order context
+     * Contains specific information regarding the order context.
+     *
      * @var string
+     *
      * @todo Create the container
      */
     protected $orderContext;
     /**
      * Order number associated with the payment transaction.
+     *
      * @var string
      */
     protected $orderId;
     /**
      * List of payment methods accepted for a transaction.
      * If this field is not filled out, the WL Sips server recovers the list of payment methods available for the configuration of the shop.
+     *
      * @var string
+     *
      * @see \Worldline\Sips\Values\PaymentMeanBrandType
      */
     protected $paymentMeanBrandList;
     /**
      * Contains specific information regarding the payment method used by the buyer.
+     *
      * @var string
+     *
      * @todo Create the container
      */
     protected $paymentMeanData;
     /**
      * Type of payment (per operation, 1st recurring payment etc).
+     *
      * @var string
+     *
      * @see \Worldline\Sips\Values\PaymentPattern
      */
     protected $paymentPattern;
     /**
      * Contains the parameters for the payment pages, allowing the merchant to dynamically customise the options on payment pages.
+     *
      * @var PaypageData
      */
     protected $paypageData;
     /**
      * Encoding type of the response expected by the merchant.
+     *
      * @var string
+     *
      * @todo create the values
      */
     protected $responseEncoding;
     /**
      * Identifier of the merchant's secret key used to calculate the imprint of the response.
-     * @var integer
+     *
+     * @var int
      */
     protected $responseKeyVersion;
     /**
      * Context of a buyer's order.
      * All information transmitted in this field by the merchant during the payment request is sent back in the response without amendment.
-     * Attention : the following characters "|", "«", "»", and «"» are forbidden in this field. If they are used, they will be replaced by blanks
+     * Attention : the following characters "|", "«", "»", and «"» are forbidden in this field. If they are used, they will be replaced by blanks.
+     *
      * @var string
      */
     protected $returnContext;
     /**
      * List of merchant privative information transmitted by the a Business Score scoring system.
+     *
      * @var string
      */
     protected $riskManagementCustomDataList;
     /**
      * Contains the identification of the original transaction (to be compliant with WL Sips 1.0).
+     *
      * @var \Worldline\Sips\Common\Field\S10TransactionReference
      */
     protected $s10TransactionReference;
     /**
      * Information specific to the basket.
+     *
      * @var \Worldline\Sips\Common\Field\ShoppingCartDetail
      */
     protected $shoppingCartDetail;
     /**
      * Reference provided by the merchant which is sent in the payment collection flow. This reference appears on the account statements of the cardholder.
+     *
      * @var string
      */
     protected $statementReference;
     /**
      * Contains address information of a merchant of the Payment Facilitator in the context of Collecting offer or a Marketplace offer.
+     *
      * @var \Worldline\Sips\Common\Field\Address
      */
     protected $subMerchantAddress;
     /**
      * MCC Code of the vendor at the Payment Facilitator in a context of Collecting offer or a Marketplace offer.
+     *
      * @var string
      */
     protected $subMerchantCategoryCode;
     /**
      * Merchant contract number of the Payment Facilitator in the context of Collecting offer or a Marketplace offer (only used for Cetelem).
+     *
      * @var string
      */
     protected $subMerchantContractNumber;
     /**
      * Merchant identifier of the Payment Facilitator in the context of Collecting offer or a Marketplace offer.
+     *
      * @var string
      */
     protected $subMerchantId;
     /**
      * Legal identifier of vendor as merchant of the Payment Facilitator, expressed in the legal codification specific to each country.
+     *
      * @var string
      */
     protected $subMerchantLegalId;
     /**
      * Name of the merchant of the Payment Facilitator in the context of Collecting offer or a Marketplace offer.
+     *
      * @var string
      */
     protected $subMerchantName;
     /**
      * Short name of the merchant of the Payment Facilitator in the context of Collecting offer or a Marketplace offer.
+     *
      * @var string
      */
     protected $subMerchantShortName;
     /**
-     * Name of the file corresponding to the style sheet (name of the zip file) used to personalize the payment pages. 
+     * Name of the file corresponding to the style sheet (name of the zip file) used to personalize the payment pages.
+     *
      * @var string
      */
     protected $templateName;
     /**
      * Indicates the players in the transaction.
+     *
      * @var string
+     *
      * @todo create the values
      */
     protected $transactionActors;
     /**
      * Origin of a transaction (for example: name of the programme), set by the merchant. Exemple: "Website A v1.32".
+     *
      * @var string
      */
     protected $transactionOrigin;
     /**
      * The merchant can choose of referencing his transactions by a transactionId or a transactionReference.
-     * transactionReference uniquely identifies a transaction throughout the life of the shop. 
+     * transactionReference uniquely identifies a transaction throughout the life of the shop.
+     *
      * @var string
      */
     protected $transactionReference;
     /**
      * Contains specific information regarding the travel.
+     *
      * @var string
+     *
      * @todo create the container
      */
     protected $travelContext;
     /**
-     * Payment value date
+     * Payment value date.
+     *
      * @var string YYYYMMDD
      */
     protected $valueDate;
 
-    const PAYMENT_MEAN_BRAND_CB = 'CB';
-    const PAYMENT_MEAN_BRAND_MASTERCARD = 'MASTERCARD';
-    const PAYMENT_MEAN_BRAND_VISA = 'VISA';
-    const PAYMENT_MEAN_BRAND_AMEX = 'AMEX';
+    public const PAYMENT_MEAN_BRAND_CB = 'CB';
+    public const PAYMENT_MEAN_BRAND_MASTERCARD = 'MASTERCARD';
+    public const PAYMENT_MEAN_BRAND_VISA = 'VISA';
+    public const PAYMENT_MEAN_BRAND_AMEX = 'AMEX';
 
     /**
      * PaypageRequest constructor.
@@ -446,230 +540,179 @@ class PaypageRequest extends SipsMessage
     public function __construct()
     {
         $this->connecter = \Worldline\Sips\Common\SipsEnvironment::PAYPAGE;
-        $this->serviceUrl       = "rs-services/v2/paymentInit";
-        $this->interfaceVersion = "IR_WS_2.35";
+        $this->serviceUrl = 'rs-services/v2/paymentInit';
+        $this->interfaceVersion = 'IR_WS_2.35';
         $this->setTransactionReference($this->generateReference());
     }
 
     /**
-     * Let SIPS server generated the transaction key
+     * Let SIPS server generated the transaction key.
      */
-    public function useAutoGeneratedTransactionKey()
+    public function useAutoGeneratedTransactionKey(): void
     {
         $this->setTransactionReference(null);
     }
 
-    /**
-     * @return string
-     */
     public function generateReference(): string
     {
-        $microtime            = explode(' ', microtime());
-        $microtime[0]         = $microtime[0] * 1000000;
-        $transactionReference = $microtime[1] . $microtime[0];
+        $microtime = explode(' ', microtime());
+        $microtime[0] = $microtime[0] * 1000000;
+        $transactionReference = $microtime[1].$microtime[0];
+
         return $transactionReference;
     }
 
-    /**
-     * @return int|null
-     */
     public function getAmount(): ?int
     {
         return $this->amount;
     }
 
-    /**
-     * @param int $amount
-     * @return PaypageRequest
-     */
-    public function setAmount(int $amount): PaypageRequest
+    public function setAmount(int $amount): self
     {
         $this->amount = $amount;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAutomaticResponseUrl(): ?string
     {
         return $this->automaticResponseUrl;
     }
 
-    /**
-     * @param string $automaticResponseUrl
-     * @return PaypageRequest
-     */
-    public function setAutomaticResponseUrl(string $automaticResponseUrl): PaypageRequest
+    public function setAutomaticResponseUrl(string $automaticResponseUrl): self
     {
         $this->automaticResponseUrl = $automaticResponseUrl;
+
         return $this;
     }
 
-    /**
-     * @return Address|null
-     */
     public function getBillingAddress(): ?Address
     {
         return $this->billingAddress;
     }
 
-    /**
-     * @param Address $billingAddress
-     * @return PaypageRequest
-     */
-    public function setBillingAddress(Address $billingAddress): PaypageRequest
+    public function setBillingAddress(Address $billingAddress): self
     {
         $this->billingAddress = $billingAddress;
+
         return $this;
     }
 
-    /**
-     * @return Contact|null
-     */
     public function getBillingContact(): ?Contact
     {
         return $this->billingContact;
     }
 
-    /**
-     * @param Contact $billingContact
-     * @return PaypageRequest
-     */
-    public function setBillingContact(Contact $billingContact): PaypageRequest
+    public function setBillingContact(Contact $billingContact): self
     {
         $this->billingContact = $billingContact;
+
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getCaptureDay(): ?int
     {
         return $this->captureDay;
     }
 
-    /**
-     * @param int $captureDay
-     * @return PaypageRequest
-     */
-    public function setCaptureDay(int $captureDay): PaypageRequest
+    public function setCaptureDay(int $captureDay): self
     {
         $this->captureDay = $captureDay;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCaptureMode(): ?string
     {
         return $this->captureMode;
     }
 
-    /**
-     * @param string $captureMode
-     * @return PaypageRequest
-     */
-    public function setCaptureMode(string $captureMode): PaypageRequest
+    public function setCaptureMode(string $captureMode): self
     {
-        if (in_array($captureMode, ['AUTHOR_CAPTURE', 'IMMEDIATE', 'VALIDATION'])) {
+        if (\in_array($captureMode, ['AUTHOR_CAPTURE', 'IMMEDIATE', 'VALIDATION'], true)) {
             $this->captureMode = $captureMode;
+
             return $this;
-        } else {
-            throw new \InvalidArgumentException("Invalid captureMode. Choose between AUTHOR_CAPTURE, IMMEDIATE or VALIDATION.");
         }
+        throw new \InvalidArgumentException('Invalid captureMode. Choose between AUTHOR_CAPTURE, IMMEDIATE or VALIDATION.');
     }
 
-    /**
-     * @return string|null
-     */
     public function getCurrencyCode(): ?string
     {
         return $this->currencyCode;
     }
 
-    /**
-     * @param string $currencyCode
-     * @return PaypageRequest
-     */
-    public function setCurrencyCode(string $currencyCode): PaypageRequest
+    public function setCurrencyCode(string $currencyCode): self
     {
         $validCurrencyCodes = [
-            "ARS" => "032",
-            "AUD" => "036",
-            "BHD" => "048",
-            "KHR" => "116",
-            "CAD" => "124",
-            "LKR" => "144",
-            "CNY" => "156",
-            "HRK" => "191",
-            "CZK" => "203",
-            "DKK" => "208",
-            "HKD" => "344",
-            "HUF" => "348",
-            "ISK" => "352",
-            "INR" => "356",
-            "ILS" => "376",
-            "JPY" => "392",
-            "KRW" => "410",
-            "KWD" => "414",
-            "MYR" => "458",
-            "MUR" => "480",
-            "MXN" => "484",
-            "NPR" => "524",
-            "NZD" => "554",
-            "NOK" => "578",
-            "QAR" => "634",
-            "RUB" => "643",
-            "SAR" => "682",
-            "SGD" => "702",
-            "ZAR" => "710",
-            "SEK" => "752",
-            "CHF" => "756",
-            "THB" => "764",
-            "AED" => "784",
-            "TND" => "788",
-            "GBP" => "826",
-            "USD" => "840",
-            "TWD" => "901",
-            "RON" => "946",
-            "TRY" => "949",
-            "XOF" => "952",
-            "XPF" => "953",
-            "BGN" => "975",
-            "EUR" => "978",
-            "UAH" => "980",
-            "PLN" => "985",
-            "BRL" => "986",
+            'ARS' => '032',
+            'AUD' => '036',
+            'BHD' => '048',
+            'KHR' => '116',
+            'CAD' => '124',
+            'LKR' => '144',
+            'CNY' => '156',
+            'HRK' => '191',
+            'CZK' => '203',
+            'DKK' => '208',
+            'HKD' => '344',
+            'HUF' => '348',
+            'ISK' => '352',
+            'INR' => '356',
+            'ILS' => '376',
+            'JPY' => '392',
+            'KRW' => '410',
+            'KWD' => '414',
+            'MYR' => '458',
+            'MUR' => '480',
+            'MXN' => '484',
+            'NPR' => '524',
+            'NZD' => '554',
+            'NOK' => '578',
+            'QAR' => '634',
+            'RUB' => '643',
+            'SAR' => '682',
+            'SGD' => '702',
+            'ZAR' => '710',
+            'SEK' => '752',
+            'CHF' => '756',
+            'THB' => '764',
+            'AED' => '784',
+            'TND' => '788',
+            'GBP' => '826',
+            'USD' => '840',
+            'TWD' => '901',
+            'RON' => '946',
+            'TRY' => '949',
+            'XOF' => '952',
+            'XPF' => '953',
+            'BGN' => '975',
+            'EUR' => '978',
+            'UAH' => '980',
+            'PLN' => '985',
+            'BRL' => '986',
         ];
-        if (key_exists($currencyCode, $validCurrencyCodes)) {
+        if (\array_key_exists($currencyCode, $validCurrencyCodes)) {
             $this->currencyCode = $validCurrencyCodes[$currencyCode];
+
             return $this;
-        } elseif (in_array($currencyCode, $validCurrencyCodes)) {
+        } elseif (\in_array($currencyCode, $validCurrencyCodes, true)) {
             $this->currencyCode = $currencyCode;
+
             return $this;
-        } else {
-            throw new \InvalidArgumentException("Invalid currencyCode. Select a valid code from the data dictionary.");
         }
+        throw new \InvalidArgumentException('Invalid currencyCode. Select a valid code from the data dictionary.');
     }
 
-    /**
-     * @return string|null
-     */
     public function getCustomerId(): ?string
     {
         return $this->customerId;
     }
 
-    /**
-     * @param string $customerId
-     * @return PaypageRequest
-     */
-    public function setCustomerId(string $customerId): PaypageRequest
+    public function setCustomerId(string $customerId): self
     {
         $this->customerId = $customerId;
+
         return $this;
     }
 
@@ -681,88 +724,72 @@ class PaypageRequest extends SipsMessage
         return $this->customerAddress;
     }
 
-    /**
-     * @param Address $customerAddress
-     * @return PaypageRequest
-     */
-    public function setCustomerAddress(Address $customerAddress): PaypageRequest
+    public function setCustomerAddress(Address $customerAddress): self
     {
         $this->customerAddress = $customerAddress;
+
         return $this;
     }
 
-    /**
-     * @return Contact|null
-     */
     public function getCustomerContact(): ?Contact
     {
         return $this->customerContact;
     }
 
-    /**
-     * @param Contact $customerContact
-     * @return PaypageRequest
-     */
-    public function setCustomerContact(Contact $customerContact): PaypageRequest
+    public function setCustomerContact(Contact $customerContact): self
     {
         $this->customerContact = $customerContact;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCustomerLanguage(): ?string
     {
         return $this->customerLanguage;
     }
 
-    /**
-     * @param string $customerLanguage
-     * @return PaypageRequest
-     */
-    public function setCustomerLanguage(string $customerLanguage): PaypageRequest
+    public function setCustomerLanguage(string $customerLanguage): self
     {
         $validCustomerLanguages = [
-            "bg",
-            "br",
-            "cs",
-            "da",
-            "de",
-            "el",
-            "en",
-            "es",
-            "et",
-            "fi",
-            "fr",
-            "hi",
-            "hr",
-            "hu",
-            "it",
-            "ja",
-            "ko",
-            "lt",
-            "lv",
-            "nl",
-            "no",
-            "pl",
-            "pt",
-            "ro",
-            "ru",
-            "sk",
-            "sl",
-            "sv",
-            "tr",
-            "tr",
-            "uk",
-            "zh"
+            'bg',
+            'br',
+            'cs',
+            'da',
+            'de',
+            'el',
+            'en',
+            'es',
+            'et',
+            'fi',
+            'fr',
+            'hi',
+            'hr',
+            'hu',
+            'it',
+            'ja',
+            'ko',
+            'lt',
+            'lv',
+            'nl',
+            'no',
+            'pl',
+            'pt',
+            'ro',
+            'ru',
+            'sk',
+            'sl',
+            'sv',
+            'tr',
+            'tr',
+            'uk',
+            'zh',
         ];
-        if (in_array($customerLanguage, $validCustomerLanguages)) {
+        if (\in_array($customerLanguage, $validCustomerLanguages, true)) {
             $this->customerLanguage = $customerLanguage;
+
             return $this;
-        } else {
-            throw new \InvalidArgumentException("Invalid customerLanguage. Select a valid code from the data dictionary.");
         }
+        throw new \InvalidArgumentException('Invalid customerLanguage. Select a valid code from the data dictionary.');
     }
 
     /**
@@ -773,31 +800,22 @@ class PaypageRequest extends SipsMessage
         return $this->deliveryAddress;
     }
 
-    /**
-     * @param Address $deliveryAddress
-     * @return PaypageRequest
-     */
-    public function setDeliveryAddress(Address $deliveryAddress): PaypageRequest
+    public function setDeliveryAddress(Address $deliveryAddress): self
     {
         $this->deliveryAddress = $deliveryAddress;
+
         return $this;
     }
 
-    /**
-     * @return Contact|null
-     */
     public function getDeliveryContact(): ?Contact
     {
         return $this->deliveryContact;
     }
 
-    /**
-     * @param Contact $deliveryContact
-     * @return PaypageRequest
-     */
-    public function setDeliveryContact(Contact $deliveryContact): PaypageRequest
+    public function setDeliveryContact(Contact $deliveryContact): self
     {
         $this->deliveryContact = $deliveryContact;
+
         return $this;
     }
 
@@ -809,207 +827,138 @@ class PaypageRequest extends SipsMessage
         return $this->holderAddress;
     }
 
-    /**
-     * @param Address $holderAddress
-     * @return PaypageRequest
-     */
-    public function setHolderAddress(Address $holderAddress): PaypageRequest
+    public function setHolderAddress(Address $holderAddress): self
     {
         $this->holderAddress = $holderAddress;
+
         return $this;
     }
 
-    /**
-     * @return Contact|null
-     */
     public function getHolderContact(): ?Contact
     {
         return $this->holderContact;
     }
 
-    /**
-     * @param Contact $holderContact
-     * @return PaypageRequest
-     */
-    public function setHolderContact(Contact $holderContact): PaypageRequest
+    public function setHolderContact(Contact $holderContact): self
     {
         $this->holderContact = $holderContact;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getIntermediateServiceProviderId(): ?string
     {
         return $this->intermediateServiceProviderId;
     }
 
-    /**
-     * @param string $intermediateServiceProviderId
-     * @return PaypageRequest
-     */
-    public function setIntermediateServiceProviderId(string $intermediateServiceProviderId): PaypageRequest
+    public function setIntermediateServiceProviderId(string $intermediateServiceProviderId): self
     {
         $this->intermediateServiceProviderId = $intermediateServiceProviderId;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getMerchantWalletId(): ?string
     {
         return $this->merchantWalletId;
     }
 
-    /**
-     * @param string $merchantWalletId
-     * @return PaypageRequest
-     */
-    public function setMerchantWalletId(string $merchantWalletId): PaypageRequest
+    public function setMerchantWalletId(string $merchantWalletId): self
     {
         $this->merchantWalletId = $merchantWalletId;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getNormalReturnUrl(): ?string
     {
         return $this->normalReturnUrl;
     }
 
-    /**
-     *
-     * @return bool
-     */
     public function getBypassReceiptPage(): bool
     {
-        return ($this->bypassReceiptPage === 'true');
+        return 'true' === $this->bypassReceiptPage;
     }
 
-    /**
-     * @param string $normalReturnUrl
-     * @return PaypageRequest
-     */
-    public function setNormalReturnUrl(string $normalReturnUrl): PaypageRequest
+    public function setNormalReturnUrl(string $normalReturnUrl): self
     {
         $this->normalReturnUrl = $normalReturnUrl;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getOrderChannel(): ?string
     {
         return $this->orderChannel;
     }
 
-    /**
-     * @param string $orderChannel
-     * @return PaypageRequest
-     */
-    public function setOrderChannel(string $orderChannel): PaypageRequest
+    public function setOrderChannel(string $orderChannel): self
     {
-        if (in_array($orderChannel, ["INTERNET", "MOTO", "INAPP"])) {
+        if (\in_array($orderChannel, ['INTERNET', 'MOTO', 'INAPP'], true)) {
             $this->orderChannel = $orderChannel;
+
             return $this;
-        } else {
-            throw new \InvalidArgumentException("Invalid orderChannel. Choose between INTERNET, MOTO or INAPP");
         }
+        throw new \InvalidArgumentException('Invalid orderChannel. Choose between INTERNET, MOTO or INAPP');
     }
 
-    /**
-     * @return string|null
-     */
     public function getOrderId(): ?string
     {
         return $this->orderId;
     }
 
-    /**
-     * @param string $orderId
-     * @return PaypageRequest
-     */
-    public function setOrderId(string $orderId): PaypageRequest
+    public function setOrderId(string $orderId): self
     {
         $this->orderId = $orderId;
+
         return $this;
     }
 
-    /**
-     * @return array|null
-     */
     public function getPaymentMeanBrandList(): ?array
     {
         return $this->paymentMeanBrandList;
     }
 
-    /**
-     * @param array $paymentMeanBrandList
-     * @return PaypageRequest
-     */
-    public function setPaymentMeanBrandList(array $paymentMeanBrandList): PaypageRequest
+    public function setPaymentMeanBrandList(array $paymentMeanBrandList): self
     {
         $this->paymentMeanBrandList = $paymentMeanBrandList;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTransactionReference(): ?string
     {
         return $this->transactionReference;
     }
 
-    /**
-     * @param string $transactionReference
-     * @return PaypageRequest
-     */
-    public function setTransactionReference(string $transactionReference): PaypageRequest
+    public function setTransactionReference(string $transactionReference): self
     {
         $this->transactionReference = $transactionReference;
+
         return $this;
     }
 
-
-    /**
-     * @return string|null
-     */
     public function getStatementReference(): ?string
     {
         return $this->statementReference;
     }
 
-    /**
-     * @param string $statementReference
-     * @return PaypageRequest
-     */
-    public function setStatementReference(string $statementReference): PaypageRequest
+    public function setStatementReference(string $statementReference): self
     {
         $this->statementReference = $statementReference;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTemplateName(): ?string
     {
         return $this->templateName;
     }
 
-    /**
-     * @param string $templateName
-     * @return PaypageRequest
-     */
-    public function setTemplateName(string $templateName): PaypageRequest
+    public function setTemplateName(string $templateName): self
     {
         $this->templateName = $templateName;
+
         return $this;
     }
 
@@ -1021,26 +970,19 @@ class PaypageRequest extends SipsMessage
         return $this->paypageData;
     }
 
-    /**
-     * @param PaypageData $paypageData
-     * @return PaypageRequest
-     */
-    public function setPaypageData(PaypageData $paypageData): PaypageRequest
+    public function setPaypageData(PaypageData $paypageData): self
     {
         $this->paypageData = $paypageData;
+
         return $this;
     }
 
-    /**
-     *
-     * @param bool $bypass
-     */
-    public function setBypassReceiptPage(bool $bypass)
+    public function setBypassReceiptPage(bool $bypass): void
     {
         // Seems that this parameter is a string (A5, restricted value)
         $this->bypassReceiptPage = ($bypass ? 'true' : 'false');
     }
-    
+
     public function getS10TransactionReference(): \Worldline\Sips\Common\Field\S10TransactionReference
     {
         return $this->s10TransactionReference;
@@ -1050,41 +992,41 @@ class PaypageRequest extends SipsMessage
     {
         unset($this->transactionReference);
         $this->s10TransactionReference = $s10TransactionReference;
+
         return $this;
     }
 
     /**
-     * Get the value of customerEmail
+     * Get the value of customerEmail.
      *
-     * @return  string
      * @deprecated
      */
     public function getCustomerEmail(): string
     {
-        trigger_error('Method ' . __METHOD__ . ' is deprecated', E_USER_DEPRECATED);
+        @trigger_error('Method '.__METHOD__.' is deprecated', \E_USER_DEPRECATED);
+
         return $this->customerEmail;
     }
 
     /**
-     * Set the value of customerEmail
+     * Set the value of customerEmail.
      *
-     * @param  string  $customerEmail
      * @deprecated
      *
-     * @return  self
+     * @return self
      */
     public function setCustomerEmail(string $customerEmail)
     {
-        trigger_error('Method ' . __METHOD__ . ' is deprecated', E_USER_DEPRECATED);
+        @trigger_error('Method '.__METHOD__.' is deprecated', \E_USER_DEPRECATED);
         $this->customerEmail = $customerEmail;
 
         return $this;
     }
 
     /**
-     * Get the value of fraudData
+     * Get the value of fraudData.
      *
-     * @return  \Worldline\Sips\Common\Field\FraudData
+     * @return \Worldline\Sips\Common\Field\FraudData
      */
     public function getFraudData(): ?\Worldline\Sips\Common\Field\FraudData
     {
@@ -1092,11 +1034,9 @@ class PaypageRequest extends SipsMessage
     }
 
     /**
-     * Set the value of fraudData
+     * Set the value of fraudData.
      *
-     * @param  \Worldline\Sips\Common\Field\FraudData  $fraudData
-     *
-     * @return  self
+     * @return self
      */
     public function setFraudData(\Worldline\Sips\Common\Field\FraudData $fraudData)
     {
@@ -1108,7 +1048,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get contains the information on the cardholder's authentication.
      *
-     * @return  string
+     * @return string
      */
     public function getAuthenticationData()
     {
@@ -1118,9 +1058,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set contains the information on the cardholder's authentication.
      *
-     * @param  string  $authenticationData  Contains the information on the cardholder's authentication.
+     * @param string $authenticationData contains the information on the cardholder's authentication
      *
-     * @return  self
+     * @return self
      */
     public function setAuthenticationData(string $authenticationData)
     {
@@ -1130,9 +1070,9 @@ class PaypageRequest extends SipsMessage
     }
 
     /**
-     * Get yYYYMMMDD
+     * Get yYYYMMMDD.
      *
-     * @return  string
+     * @return string
      */
     public function getBillingFirstDate()
     {
@@ -1140,11 +1080,11 @@ class PaypageRequest extends SipsMessage
     }
 
     /**
-     * Set yYYYMMMDD
+     * Set yYYYMMMDD.
      *
-     * @param  string  $billingFirstDate  YYYYMMMDD
+     * @param string $billingFirstDate YYYYMMMDD
      *
-     * @return  self
+     * @return self
      */
     public function setBillingFirstDate(string $billingFirstDate)
     {
@@ -1154,9 +1094,9 @@ class PaypageRequest extends SipsMessage
     }
 
     /**
-     * Get y/N
+     * Get y/N.
      *
-     * @return  string
+     * @return string
      */
     public function getBypassDcc()
     {
@@ -1164,11 +1104,11 @@ class PaypageRequest extends SipsMessage
     }
 
     /**
-     * Set y/N
+     * Set y/N.
      *
-     * @param  string  $bypassDcc  Y/N
+     * @param string $bypassDcc Y/N
      *
-     * @return  self
+     * @return self
      */
     public function setBypassDcc(string $bypassDcc)
     {
@@ -1178,9 +1118,9 @@ class PaypageRequest extends SipsMessage
     }
 
     /**
-     * Get yYYYMMDD
+     * Get yYYYMMDD.
      *
-     * @return  string
+     * @return string
      */
     public function getCustomer3DSTransactionDate()
     {
@@ -1188,11 +1128,11 @@ class PaypageRequest extends SipsMessage
     }
 
     /**
-     * Set yYYYMMDD
+     * Set yYYYMMDD.
      *
-     * @param  string  $customer3DSTransactionDate  YYYYMMDD
+     * @param string $customer3DSTransactionDate YYYYMMDD
      *
-     * @return  self
+     * @return self
      */
     public function setCustomer3DSTransactionDate(string $customer3DSTransactionDate)
     {
@@ -1204,7 +1144,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get contains information from the customer's account at the merchant (date of creation, number of transactions in the last 24h, ...).
      *
-     * @return  \Worldline\Sips\Common\Field\CustomerAccountHistoric
+     * @return \Worldline\Sips\Common\Field\CustomerAccountHistoric
      */
     public function getCustomerAccountHistoric()
     {
@@ -1214,9 +1154,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set contains information from the customer's account at the merchant (date of creation, number of transactions in the last 24h, ...).
      *
-     * @param  \Worldline\Sips\Common\Field\CustomerAccountHistoric  $customerAccountHistoric  Contains information from the customer's account at the merchant (date of creation, number of transactions in the last 24h, ...).
+     * @param \Worldline\Sips\Common\Field\CustomerAccountHistoric $customerAccountHistoric Contains information from the customer's account at the merchant (date of creation, number of transactions in the last 24h, ...).
      *
-     * @return  self
+     * @return self
      */
     public function setCustomerAccountHistoric(\Worldline\Sips\Common\Field\CustomerAccountHistoric $customerAccountHistoric)
     {
@@ -1228,7 +1168,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get number of billing realised for the customer address. For example, the merchant gives this information to allow the certification of an electronic signature.
      *
-     * @return  integer
+     * @return int
      */
     public function getCustomerBillingNb()
     {
@@ -1238,9 +1178,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set number of billing realised for the customer address. For example, the merchant gives this information to allow the certification of an electronic signature.
      *
-     * @param  integer  $customerBillingNb  Number of billing realised for the customer address. For example, the merchant gives this information to allow the certification of an electronic signature.
+     * @param int $customerBillingNb Number of billing realised for the customer address. For example, the merchant gives this information to allow the certification of an electronic signature.
      *
-     * @return  self
+     * @return self
      */
     public function setCustomerBillingNb($customerBillingNb)
     {
@@ -1252,7 +1192,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get contains the customer's information.
      *
-     * @return  \Worldline\Sips\Common\Field\Contact
+     * @return \Worldline\Sips\Common\Field\Contact
      */
     public function getCustomerData()
     {
@@ -1262,11 +1202,11 @@ class PaypageRequest extends SipsMessage
     /**
      * Set contains the customer's information.
      *
-     * @param  \Worldline\Sips\Common\Field\Contact  $customerData  Contains the customer's information.
+     * @param \Worldline\Sips\Common\Field\Contact $customerData contains the customer's information
      *
-     * @return  self
+     * @return self
      */
-    public function setCustomerData(\Worldline\Sips\Common\Field\Contact $customerData)
+    public function setCustomerData(Contact $customerData)
     {
         $this->customerData = $customerData;
 
@@ -1274,9 +1214,9 @@ class PaypageRequest extends SipsMessage
     }
 
     /**
-     * Get y/N
+     * Get y/N.
      *
-     * @return  string
+     * @return string
      */
     public function getCustomerDeliverySuccessFlag()
     {
@@ -1284,11 +1224,11 @@ class PaypageRequest extends SipsMessage
     }
 
     /**
-     * Set y/N
+     * Set y/N.
      *
-     * @param  string  $customerDeliverySuccessFlag  Y/N
+     * @param string $customerDeliverySuccessFlag Y/N
      *
-     * @return  self
+     * @return self
      */
     public function setCustomerDeliverySuccessFlag(string $customerDeliverySuccessFlag)
     {
@@ -1300,7 +1240,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get buyer's IP address.
      *
-     * @return  string
+     * @return string
      */
     public function getCustomerIpAddress()
     {
@@ -1310,9 +1250,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set buyer's IP address.
      *
-     * @param  string  $customerIpAddress  Buyer's IP address.
+     * @param string $customerIpAddress buyer's IP address
      *
-     * @return  self
+     * @return self
      */
     public function setCustomerIpAddress(string $customerIpAddress)
     {
@@ -1324,7 +1264,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get method used to validate the customer phone number. For example, the merchant gives this information to allow the certification of an electronic signature.
      *
-     * @return  string
+     * @return string
      */
     public function getCustomerPhoneValidationMethod()
     {
@@ -1334,9 +1274,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set method used to validate the customer phone number. For example, the merchant gives this information to allow the certification of an electronic signature.
      *
-     * @param  string  $customerPhoneValidationMethod  Method used to validate the customer phone number. For example, the merchant gives this information to allow the certification of an electronic signature.
+     * @param string $customerPhoneValidationMethod Method used to validate the customer phone number. For example, the merchant gives this information to allow the certification of an electronic signature.
      *
-     * @return  self
+     * @return self
      */
     public function setCustomerPhoneValidationMethod(string $customerPhoneValidationMethod)
     {
@@ -1346,9 +1286,9 @@ class PaypageRequest extends SipsMessage
     }
 
     /**
-     * Get yYYYMMDD
+     * Get yYYYMMDD.
      *
-     * @return  string
+     * @return string
      */
     public function getCustomerRegistrationDateOnline()
     {
@@ -1356,11 +1296,11 @@ class PaypageRequest extends SipsMessage
     }
 
     /**
-     * Set yYYYMMDD
+     * Set yYYYMMDD.
      *
-     * @param  string  $customerRegistrationDateOnline  YYYYMMDD
+     * @param string $customerRegistrationDateOnline YYYYMMDD
      *
-     * @return  self
+     * @return self
      */
     public function setCustomerRegistrationDateOnline(string $customerRegistrationDateOnline)
     {
@@ -1370,9 +1310,9 @@ class PaypageRequest extends SipsMessage
     }
 
     /**
-     * Get yYYYMMDD
+     * Get yYYYMMDD.
      *
-     * @return  string
+     * @return string
      */
     public function getCustomerRegistrationDateProxi()
     {
@@ -1380,11 +1320,11 @@ class PaypageRequest extends SipsMessage
     }
 
     /**
-     * Set yYYYMMDD
+     * Set yYYYMMDD.
      *
-     * @param  string  $customerRegistrationDateProxi  YYYYMMDD
+     * @param string $customerRegistrationDateProxi YYYYMMDD
      *
-     * @return  self
+     * @return self
      */
     public function setCustomerRegistrationDateProxi(string $customerRegistrationDateProxi)
     {
@@ -1394,9 +1334,9 @@ class PaypageRequest extends SipsMessage
     }
 
     /**
-     * Get ** NOT DOCUMENTED **
+     * Get ** NOT DOCUMENTED **.
      *
-     * @return  string
+     * @return string
      */
     public function getCustomerTimestampIpAddress()
     {
@@ -1404,11 +1344,11 @@ class PaypageRequest extends SipsMessage
     }
 
     /**
-     * Set ** NOT DOCUMENTED **
+     * Set ** NOT DOCUMENTED **.
      *
-     * @param  string  $customerTimestampIpAddress  ** NOT DOCUMENTED **
+     * @param string $customerTimestampIpAddress ** NOT DOCUMENTED **
      *
-     * @return  self
+     * @return self
      */
     public function setCustomerTimestampIpAddress(string $customerTimestampIpAddress)
     {
@@ -1420,7 +1360,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get contains the delivery information.
      *
-     * @return  \Worldline\Sips\Common\Field\DeliveryData
+     * @return \Worldline\Sips\Common\Field\DeliveryData
      */
     public function getDeliveryData()
     {
@@ -1430,9 +1370,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set contains the delivery information.
      *
-     * @param  \Worldline\Sips\Common\Field\DeliveryData  $deliveryData  Contains the delivery information.
+     * @param \Worldline\Sips\Common\Field\DeliveryData $deliveryData contains the delivery information
      *
-     * @return  self
+     * @return self
      */
     public function setDeliveryData(\Worldline\Sips\Common\Field\DeliveryData $deliveryData)
     {
@@ -1442,9 +1382,9 @@ class PaypageRequest extends SipsMessage
     }
 
     /**
-     * Get yYYYMMDD
+     * Get yYYYMMDD.
      *
-     * @return  string
+     * @return string
      */
     public function getDeliveryFirstDate()
     {
@@ -1452,11 +1392,11 @@ class PaypageRequest extends SipsMessage
     }
 
     /**
-     * Set yYYYMMDD
+     * Set yYYYMMDD.
      *
-     * @param  string  $deliveryFirstDate  YYYYMMDD
+     * @param string $deliveryFirstDate YYYYMMDD
      *
-     * @return  self
+     * @return self
      */
     public function setDeliveryFirstDate(string $deliveryFirstDate)
     {
@@ -1468,7 +1408,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get type of proof provided by the customer. For example, the merchant gives this information to allow the certification of an electronic signature.
      *
-     * @return  string
+     * @return string
      */
     public function getEvidenceType()
     {
@@ -1478,9 +1418,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set type of proof provided by the customer. For example, the merchant gives this information to allow the certification of an electronic signature.
      *
-     * @param  string  $evidenceType  Type of proof provided by the customer. For example, the merchant gives this information to allow the certification of an electronic signature.
+     * @param string $evidenceType Type of proof provided by the customer. For example, the merchant gives this information to allow the certification of an electronic signature.
      *
-     * @return  self
+     * @return self
      */
     public function setEvidenceType(string $evidenceType)
     {
@@ -1492,7 +1432,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get number of the proof provided by the customer. For example, the merchant gives this information to allow the certification of an electronic signature.
      *
-     * @return  string
+     * @return string
      */
     public function getEvidenceNumber()
     {
@@ -1502,9 +1442,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set number of the proof provided by the customer. For example, the merchant gives this information to allow the certification of an electronic signature.
      *
-     * @param  string  $evidenceNumber  Number of the proof provided by the customer. For example, the merchant gives this information to allow the certification of an electronic signature.
+     * @param string $evidenceNumber Number of the proof provided by the customer. For example, the merchant gives this information to allow the certification of an electronic signature.
      *
-     * @return  self
+     * @return self
      */
     public function setEvidenceNumber(string $evidenceNumber)
     {
@@ -1514,9 +1454,9 @@ class PaypageRequest extends SipsMessage
     }
 
     /**
-     * Get yYYYMMDD
+     * Get yYYYMMDD.
      *
-     * @return  string
+     * @return string
      */
     public function getEvidenceAcquisitionDate()
     {
@@ -1524,11 +1464,11 @@ class PaypageRequest extends SipsMessage
     }
 
     /**
-     * Set yYYYMMDD
+     * Set yYYYMMDD.
      *
-     * @param  string  $evidenceAcquisitionDate  YYYYMMDD
+     * @param string $evidenceAcquisitionDate YYYYMMDD
      *
-     * @return  self
+     * @return self
      */
     public function setEvidenceAcquisitionDate(string $evidenceAcquisitionDate)
     {
@@ -1540,7 +1480,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get additional reference of the holder that is communicated to the acquirer system or the issuer system in order to make some additional dedicated checks.
      *
-     * @return  string
+     * @return string
      */
     public function getHolderAdditionalReference()
     {
@@ -1550,9 +1490,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set additional reference of the holder that is communicated to the acquirer system or the issuer system in order to make some additional dedicated checks.
      *
-     * @param  string  $holderAdditionalReference  Additional reference of the holder that is communicated to the acquirer system or the issuer system in order to make some additional dedicated checks.
+     * @param string $holderAdditionalReference additional reference of the holder that is communicated to the acquirer system or the issuer system in order to make some additional dedicated checks
      *
-     * @return  self
+     * @return self
      */
     public function setHolderAdditionalReference(string $holderAdditionalReference)
     {
@@ -1564,7 +1504,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get random value (called a seed) provided by the merchant to calculate the hashPan.
      *
-     * @return  string
+     * @return string
      */
     public function getHashSalt2()
     {
@@ -1574,9 +1514,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set random value (called a seed) provided by the merchant to calculate the hashPan.
      *
-     * @param  string  $hashSalt2  Random value (called a seed) provided by the merchant to calculate the hashPan.
+     * @param string $hashSalt2 random value (called a seed) provided by the merchant to calculate the hashPan
      *
-     * @return  self
+     * @return self
      */
     public function setHashSalt2(string $hashSalt2)
     {
@@ -1588,7 +1528,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get random value (called a seed) provided by the merchant to calculate the hashPan.
      *
-     * @return  string
+     * @return string
      */
     public function getHashSalt1()
     {
@@ -1598,9 +1538,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set random value (called a seed) provided by the merchant to calculate the hashPan.
      *
-     * @param  string  $hashSalt1  Random value (called a seed) provided by the merchant to calculate the hashPan.
+     * @param string $hashSalt1 random value (called a seed) provided by the merchant to calculate the hashPan
      *
-     * @return  self
+     * @return self
      */
     public function setHashSalt1(string $hashSalt1)
     {
@@ -1612,7 +1552,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get cryptographic function used to calculate the hashPan.
      *
-     * @return  string
+     * @return string
      */
     public function getHashAlgorithm2()
     {
@@ -1622,9 +1562,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set cryptographic function used to calculate the hashPan.
      *
-     * @param  string  $hashAlgorithm2  Cryptographic function used to calculate the hashPan.
+     * @param string $hashAlgorithm2 cryptographic function used to calculate the hashPan
      *
-     * @return  self
+     * @return self
      */
     public function setHashAlgorithm2(string $hashAlgorithm2)
     {
@@ -1636,7 +1576,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get cryptographic function used to calculate the hashPan.
      *
-     * @return  string
+     * @return string
      */
     public function getHashAlgorithm1()
     {
@@ -1646,9 +1586,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set cryptographic function used to calculate the hashPan.
      *
-     * @param  string  $hashAlgorithm1  Cryptographic function used to calculate the hashPan.
+     * @param string $hashAlgorithm1 cryptographic function used to calculate the hashPan
      *
-     * @return  self
+     * @return self
      */
     public function setHashAlgorithm1(string $hashAlgorithm1)
     {
@@ -1660,7 +1600,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get contains the payment mean holder's information.
      *
-     * @return  string
+     * @return string
      */
     public function getHolderData()
     {
@@ -1670,9 +1610,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set contains the payment mean holder's information.
      *
-     * @param  string  $holderData  Contains the payment mean holder's information.
+     * @param string $holderData contains the payment mean holder's information
      *
-     * @return  self
+     * @return self
      */
     public function setHolderData(string $holderData)
     {
@@ -1684,7 +1624,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get contains the information making it possible to make a payment in instalments.
      *
-     * @return  string
+     * @return string
      */
     public function getInstalmentData()
     {
@@ -1694,9 +1634,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set contains the information making it possible to make a payment in instalments.
      *
-     * @param  string  $instalmentData  Contains the information making it possible to make a payment in instalments.
+     * @param string $instalmentData contains the information making it possible to make a payment in instalments
      *
-     * @return  self
+     * @return self
      */
     public function setInstalmentData(string $instalmentData)
     {
@@ -1708,7 +1648,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get invoice reference.
      *
-     * @return  string
+     * @return string
      */
     public function getInvoiceReference()
     {
@@ -1718,9 +1658,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set invoice reference.
      *
-     * @param  string  $invoiceReference  Invoice reference.
+     * @param string $invoiceReference invoice reference
      *
-     * @return  self
+     * @return self
      */
     public function setInvoiceReference(string $invoiceReference)
     {
@@ -1732,7 +1672,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get mandate number.
      *
-     * @return  string
+     * @return string
      */
     public function getMandateId()
     {
@@ -1742,9 +1682,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set mandate number.
      *
-     * @param  string  $mandateId  Mandate number.
+     * @param string $mandateId mandate number
      *
-     * @return  self
+     * @return self
      */
     public function setMandateId(string $mandateId)
     {
@@ -1756,7 +1696,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get if indicated in the payment request, allows to change the name displayed on the 3-D Secure authentication page.
      *
-     * @return  string
+     * @return string
      */
     public function getMerchantName()
     {
@@ -1766,9 +1706,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set if indicated in the payment request, allows to change the name displayed on the 3-D Secure authentication page.
      *
-     * @param  string  $merchantName  If indicated in the payment request, allows to change the name displayed on the 3-D Secure authentication page.
+     * @param string $merchantName if indicated in the payment request, allows to change the name displayed on the 3-D Secure authentication page
      *
-     * @return  self
+     * @return self
      */
     public function setMerchantName(string $merchantName)
     {
@@ -1780,7 +1720,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get merchant's session number. Allows consolidation between requests and responses.
      *
-     * @return  string
+     * @return string
      */
     public function getMerchantSessionId()
     {
@@ -1790,9 +1730,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set merchant's session number. Allows consolidation between requests and responses.
      *
-     * @param  string  $merchantSessionId  Merchant's session number. Allows consolidation between requests and responses.
+     * @param string $merchantSessionId Merchant's session number. Allows consolidation between requests and responses.
      *
-     * @return  self
+     * @return self
      */
     public function setMerchantSessionId(string $merchantSessionId)
     {
@@ -1802,9 +1742,9 @@ class PaypageRequest extends SipsMessage
     }
 
     /**
-     * Get date time ISO8601
+     * Get date time ISO8601.
      *
-     * @return  string
+     * @return string
      */
     public function getMerchantTransactionDateTime()
     {
@@ -1812,11 +1752,11 @@ class PaypageRequest extends SipsMessage
     }
 
     /**
-     * Set date time ISO8601
+     * Set date time ISO8601.
      *
-     * @param  string  $merchantTransactionDateTime  date time ISO8601
+     * @param string $merchantTransactionDateTime date time ISO8601
      *
-     * @return  self
+     * @return self
      */
     public function setMerchantTransactionDateTime(string $merchantTransactionDateTime)
     {
@@ -1828,7 +1768,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get merchant web site URL.
      *
-     * @return  string
+     * @return string
      */
     public function getMerchantUrl()
     {
@@ -1838,9 +1778,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set merchant web site URL.
      *
-     * @param  string  $merchantUrl  Merchant web site URL.
+     * @param string $merchantUrl merchant web site URL
      *
-     * @return  self
+     * @return self
      */
     public function setMerchantUrl(string $merchantUrl)
     {
@@ -1850,9 +1790,9 @@ class PaypageRequest extends SipsMessage
     }
 
     /**
-     * Get contains specific information regarding the order context
+     * Get contains specific information regarding the order context.
      *
-     * @return  string
+     * @return string
      */
     public function getOrderContext()
     {
@@ -1860,11 +1800,11 @@ class PaypageRequest extends SipsMessage
     }
 
     /**
-     * Set contains specific information regarding the order context
+     * Set contains specific information regarding the order context.
      *
-     * @param  string  $orderContext  Contains specific information regarding the order context
+     * @param string $orderContext Contains specific information regarding the order context
      *
-     * @return  self
+     * @return self
      */
     public function setOrderContext(string $orderContext)
     {
@@ -1876,7 +1816,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get type of payment (per operation, 1st recurring payment etc).
      *
-     * @return  string
+     * @return string
      */
     public function getPaymentPattern()
     {
@@ -1886,9 +1826,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set type of payment (per operation, 1st recurring payment etc).
      *
-     * @param  string  $paymentPattern  Type of payment (per operation, 1st recurring payment etc).
+     * @param string $paymentPattern type of payment (per operation, 1st recurring payment etc)
      *
-     * @return  self
+     * @return self
      */
     public function setPaymentPattern(string $paymentPattern)
     {
@@ -1900,7 +1840,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get contains specific information regarding the payment method used by the buyer.
      *
-     * @return  string
+     * @return string
      */
     public function getPaymentMeanData()
     {
@@ -1910,9 +1850,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set contains specific information regarding the payment method used by the buyer.
      *
-     * @param  string  $paymentMeanData  Contains specific information regarding the payment method used by the buyer.
+     * @param string $paymentMeanData contains specific information regarding the payment method used by the buyer
      *
-     * @return  self
+     * @return self
      */
     public function setPaymentMeanData(string $paymentMeanData)
     {
@@ -1924,7 +1864,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get list of merchant privative information transmitted by the a Business Score scoring system.
      *
-     * @return  string
+     * @return string
      */
     public function getRiskManagementCustomDataList()
     {
@@ -1934,9 +1874,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set list of merchant privative information transmitted by the a Business Score scoring system.
      *
-     * @param  string  $riskManagementCustomDataList  List of merchant privative information transmitted by the a Business Score scoring system.
+     * @param string $riskManagementCustomDataList list of merchant privative information transmitted by the a Business Score scoring system
      *
-     * @return  self
+     * @return self
      */
     public function setRiskManagementCustomDataList(string $riskManagementCustomDataList)
     {
@@ -1946,9 +1886,9 @@ class PaypageRequest extends SipsMessage
     }
 
     /**
-     * Get attention : the following characters "|", "«", "»", and «"» are forbidden in this field. If they are used, they will be replaced by blanks
+     * Get attention : the following characters "|", "«", "»", and «"» are forbidden in this field. If they are used, they will be replaced by blanks.
      *
-     * @return  string
+     * @return string
      */
     public function getReturnContext()
     {
@@ -1956,11 +1896,11 @@ class PaypageRequest extends SipsMessage
     }
 
     /**
-     * Set attention : the following characters "|", "«", "»", and «"» are forbidden in this field. If they are used, they will be replaced by blanks
+     * Set attention : the following characters "|", "«", "»", and «"» are forbidden in this field. If they are used, they will be replaced by blanks.
      *
-     * @param  string  $returnContext  Attention : the following characters "|", "«", "»", and «"» are forbidden in this field. If they are used, they will be replaced by blanks
+     * @param string $returnContext Attention : the following characters "|", "«", "»", and «"» are forbidden in this field. If they are used, they will be replaced by blanks
      *
-     * @return  self
+     * @return self
      */
     public function setReturnContext(string $returnContext)
     {
@@ -1972,7 +1912,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get identifier of the merchant's secret key used to calculate the imprint of the response.
      *
-     * @return  integer
+     * @return int
      */
     public function getResponseKeyVersion()
     {
@@ -1982,9 +1922,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set identifier of the merchant's secret key used to calculate the imprint of the response.
      *
-     * @param  integer  $responseKeyVersion  Identifier of the merchant's secret key used to calculate the imprint of the response.
+     * @param int $responseKeyVersion identifier of the merchant's secret key used to calculate the imprint of the response
      *
-     * @return  self
+     * @return self
      */
     public function setResponseKeyVersion($responseKeyVersion)
     {
@@ -1996,7 +1936,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get encoding type of the response expected by the merchant.
      *
-     * @return  string
+     * @return string
      */
     public function getResponseEncoding()
     {
@@ -2006,9 +1946,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set encoding type of the response expected by the merchant.
      *
-     * @param  string  $responseEncoding  Encoding type of the response expected by the merchant.
+     * @param string $responseEncoding encoding type of the response expected by the merchant
      *
-     * @return  self
+     * @return self
      */
     public function setResponseEncoding(string $responseEncoding)
     {
@@ -2020,7 +1960,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get information specific to the basket.
      *
-     * @return  \Worldline\Sips\Common\Field\ShoppingCartDetail
+     * @return \Worldline\Sips\Common\Field\ShoppingCartDetail
      */
     public function getShoppingCartDetail()
     {
@@ -2030,9 +1970,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set information specific to the basket.
      *
-     * @param  \Worldline\Sips\Common\Field\ShoppingCartDetail  $shoppingCartDetail  Information specific to the basket.
+     * @param \Worldline\Sips\Common\Field\ShoppingCartDetail $shoppingCartDetail information specific to the basket
      *
-     * @return  self
+     * @return self
      */
     public function setShoppingCartDetail(\Worldline\Sips\Common\Field\ShoppingCartDetail $shoppingCartDetail)
     {
@@ -2044,7 +1984,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get contains address information of a merchant of the Payment Facilitator in the context of Collecting offer or a Marketplace offer.
      *
-     * @return  \Worldline\Sips\Common\Field\Address
+     * @return \Worldline\Sips\Common\Field\Address
      */
     public function getSubMerchantAddress()
     {
@@ -2054,11 +1994,11 @@ class PaypageRequest extends SipsMessage
     /**
      * Set contains address information of a merchant of the Payment Facilitator in the context of Collecting offer or a Marketplace offer.
      *
-     * @param  \Worldline\Sips\Common\Field\Address  $subMerchantAddress  Contains address information of a merchant of the Payment Facilitator in the context of Collecting offer or a Marketplace offer.
+     * @param \Worldline\Sips\Common\Field\Address $subMerchantAddress contains address information of a merchant of the Payment Facilitator in the context of Collecting offer or a Marketplace offer
      *
-     * @return  self
+     * @return self
      */
-    public function setSubMerchantAddress(\Worldline\Sips\Common\Field\Address $subMerchantAddress)
+    public function setSubMerchantAddress(Address $subMerchantAddress)
     {
         $this->subMerchantAddress = $subMerchantAddress;
 
@@ -2068,7 +2008,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get mCC Code of the vendor at the Payment Facilitator in a context of Collecting offer or a Marketplace offer.
      *
-     * @return  string
+     * @return string
      */
     public function getSubMerchantCategoryCode()
     {
@@ -2078,9 +2018,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set mCC Code of the vendor at the Payment Facilitator in a context of Collecting offer or a Marketplace offer.
      *
-     * @param  string  $subMerchantCategoryCode  MCC Code of the vendor at the Payment Facilitator in a context of Collecting offer or a Marketplace offer.
+     * @param string $subMerchantCategoryCode MCC Code of the vendor at the Payment Facilitator in a context of Collecting offer or a Marketplace offer
      *
-     * @return  self
+     * @return self
      */
     public function setSubMerchantCategoryCode(string $subMerchantCategoryCode)
     {
@@ -2092,7 +2032,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get merchant contract number of the Payment Facilitator in the context of Collecting offer or a Marketplace offer (only used for Cetelem).
      *
-     * @return  string
+     * @return string
      */
     public function getSubMerchantContractNumber()
     {
@@ -2102,9 +2042,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set merchant contract number of the Payment Facilitator in the context of Collecting offer or a Marketplace offer (only used for Cetelem).
      *
-     * @param  string  $subMerchantContractNumber  Merchant contract number of the Payment Facilitator in the context of Collecting offer or a Marketplace offer (only used for Cetelem).
+     * @param string $subMerchantContractNumber merchant contract number of the Payment Facilitator in the context of Collecting offer or a Marketplace offer (only used for Cetelem)
      *
-     * @return  self
+     * @return self
      */
     public function setSubMerchantContractNumber(string $subMerchantContractNumber)
     {
@@ -2116,7 +2056,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get merchant identifier of the Payment Facilitator in the context of Collecting offer or a Marketplace offer.
      *
-     * @return  string
+     * @return string
      */
     public function getSubMerchantId()
     {
@@ -2126,9 +2066,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set merchant identifier of the Payment Facilitator in the context of Collecting offer or a Marketplace offer.
      *
-     * @param  string  $subMerchantId  Merchant identifier of the Payment Facilitator in the context of Collecting offer or a Marketplace offer.
+     * @param string $subMerchantId merchant identifier of the Payment Facilitator in the context of Collecting offer or a Marketplace offer
      *
-     * @return  self
+     * @return self
      */
     public function setSubMerchantId(string $subMerchantId)
     {
@@ -2140,7 +2080,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get legal identifier of vendor as merchant of the Payment Facilitator, expressed in the legal codification specific to each country.
      *
-     * @return  string
+     * @return string
      */
     public function getSubMerchantLegalId()
     {
@@ -2150,9 +2090,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set legal identifier of vendor as merchant of the Payment Facilitator, expressed in the legal codification specific to each country.
      *
-     * @param  string  $subMerchantLegalId  Legal identifier of vendor as merchant of the Payment Facilitator, expressed in the legal codification specific to each country.
+     * @param string $subMerchantLegalId legal identifier of vendor as merchant of the Payment Facilitator, expressed in the legal codification specific to each country
      *
-     * @return  self
+     * @return self
      */
     public function setSubMerchantLegalId(string $subMerchantLegalId)
     {
@@ -2164,7 +2104,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get name of the merchant of the Payment Facilitator in the context of Collecting offer or a Marketplace offer.
      *
-     * @return  string
+     * @return string
      */
     public function getSubMerchantName()
     {
@@ -2174,9 +2114,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set name of the merchant of the Payment Facilitator in the context of Collecting offer or a Marketplace offer.
      *
-     * @param  string  $subMerchantName  Name of the merchant of the Payment Facilitator in the context of Collecting offer or a Marketplace offer.
+     * @param string $subMerchantName name of the merchant of the Payment Facilitator in the context of Collecting offer or a Marketplace offer
      *
-     * @return  self
+     * @return self
      */
     public function setSubMerchantName(string $subMerchantName)
     {
@@ -2188,7 +2128,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get short name of the merchant of the Payment Facilitator in the context of Collecting offer or a Marketplace offer.
      *
-     * @return  string
+     * @return string
      */
     public function getSubMerchantShortName()
     {
@@ -2198,9 +2138,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set short name of the merchant of the Payment Facilitator in the context of Collecting offer or a Marketplace offer.
      *
-     * @param  string  $subMerchantShortName  Short name of the merchant of the Payment Facilitator in the context of Collecting offer or a Marketplace offer.
+     * @param string $subMerchantShortName short name of the merchant of the Payment Facilitator in the context of Collecting offer or a Marketplace offer
      *
-     * @return  self
+     * @return self
      */
     public function setSubMerchantShortName(string $subMerchantShortName)
     {
@@ -2212,7 +2152,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get indicates the players in the transaction.
      *
-     * @return  string
+     * @return string
      */
     public function getTransactionActors()
     {
@@ -2222,9 +2162,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set indicates the players in the transaction.
      *
-     * @param  string  $transactionActors  Indicates the players in the transaction.
+     * @param string $transactionActors indicates the players in the transaction
      *
-     * @return  self
+     * @return self
      */
     public function setTransactionActors(string $transactionActors)
     {
@@ -2236,7 +2176,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get origin of a transaction (for example: name of the programme), set by the merchant. Exemple: "Website A v1.32".
      *
-     * @return  string
+     * @return string
      */
     public function getTransactionOrigin()
     {
@@ -2246,9 +2186,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set origin of a transaction (for example: name of the programme), set by the merchant. Exemple: "Website A v1.32".
      *
-     * @param  string  $transactionOrigin  Origin of a transaction (for example: name of the programme), set by the merchant. Exemple: "Website A v1.32".
+     * @param string $transactionOrigin Origin of a transaction (for example: name of the programme), set by the merchant. Exemple: "Website A v1.32".
      *
-     * @return  self
+     * @return self
      */
     public function setTransactionOrigin(string $transactionOrigin)
     {
@@ -2260,7 +2200,7 @@ class PaypageRequest extends SipsMessage
     /**
      * Get contains specific information regarding the travel.
      *
-     * @return  string
+     * @return string
      */
     public function getTravelContext()
     {
@@ -2270,9 +2210,9 @@ class PaypageRequest extends SipsMessage
     /**
      * Set contains specific information regarding the travel.
      *
-     * @param  string  $travelContext  Contains specific information regarding the travel.
+     * @param string $travelContext contains specific information regarding the travel
      *
-     * @return  self
+     * @return self
      */
     public function setTravelContext(string $travelContext)
     {
@@ -2282,9 +2222,9 @@ class PaypageRequest extends SipsMessage
     }
 
     /**
-     * Get yYYYMMDD
+     * Get yYYYMMDD.
      *
-     * @return  string
+     * @return string
      */
     public function getValueDate()
     {
@@ -2292,11 +2232,11 @@ class PaypageRequest extends SipsMessage
     }
 
     /**
-     * Set yYYYMMDD
+     * Set yYYYMMDD.
      *
-     * @param  string  $valueDate  YYYYMMDD
+     * @param string $valueDate YYYYMMDD
      *
-     * @return  self
+     * @return self
      */
     public function setValueDate(string $valueDate)
     {

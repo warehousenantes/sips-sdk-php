@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worldline\Sips\Checkout;
 
 class CardCheckEnrollmentResponse extends CheckEnrollmentResponse
@@ -24,5 +26,4 @@ class CardCheckEnrollmentResponse extends CheckEnrollmentResponse
     {
         return $this->tokenPan;
     }
-
 }

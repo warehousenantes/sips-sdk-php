@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worldline\Sips\Wallet;
 
 class GetWalletDataResponse
@@ -9,16 +11,15 @@ class GetWalletDataResponse
     protected $walletResponseCode;
 
     /**
-     *
      * @var array
      */
-    protected $walletPaymentMeanDataList = []; //List of container walletPaymentMeanData . See the Containers part
+    protected $walletPaymentMeanDataList = []; // List of container walletPaymentMeanData . See the Containers part
     protected $errorFieldName; //	Available if walletResponseCode 12 or 30
 
     public function __construct($data)
     {
         foreach ($data as $key => $value) {
-            if ($key === 'walletPaymentMeanDataList') {
+            if ('walletPaymentMeanDataList' === $key) {
                 $result = [];
                 foreach ($value as $walletPaymentMeanData) {
                     $result[] = new \Worldline\Sips\Common\Field\WalletPaymentMeanData($walletPaymentMeanData);
@@ -57,32 +58,35 @@ class GetWalletDataResponse
     public function setWalletCreationDateTime($walletCreationDateTime)
     {
         $this->walletCreationDateTime = $walletCreationDateTime;
+
         return $this;
     }
 
     public function setWalletLastActionDateTime($walletLastActionDateTime)
     {
         $this->walletLastActionDateTime = $walletLastActionDateTime;
+
         return $this;
     }
 
     public function setWalletResponseCode($walletResponseCode)
     {
         $this->walletResponseCode = $walletResponseCode;
+
         return $this;
     }
 
     public function setWalletPaymentMeanDataList($walletPaymentMeanDataList)
     {
         $this->walletPaymentMeanDataList = $walletPaymentMeanDataList;
+
         return $this;
     }
 
     public function setErrorFieldName($errorFieldName)
     {
         $this->errorFieldName = $errorFieldName;
+
         return $this;
     }
-
-
 }

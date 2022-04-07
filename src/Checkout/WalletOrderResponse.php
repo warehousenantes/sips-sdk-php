@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worldline\Sips\Checkout;
 
 use Worldline\Sips\Common\Field\CardData;
 
 /**
- *
  * @author Guiled <guislain.duthieuw@gmail.com>
  */
 class WalletOrderResponse
@@ -26,7 +27,6 @@ class WalletOrderResponse
     protected $scoreThreshold;
     protected $scoreValue;
     /**
-     *
      * @var \Worldline\Sips\Common\Field\S10TransactionReference
      */
     protected $s10TransactionReference;
@@ -60,12 +60,12 @@ class WalletOrderResponse
     public function __construct($data)
     {
         foreach ($data as $key => $value) {
-            if ($key === 's10TransactionReference') {
-                $s10   = new \Worldline\Sips\Common\Field\S10TransactionReference();
+            if ('s10TransactionReference' === $key) {
+                $s10 = new \Worldline\Sips\Common\Field\S10TransactionReference();
                 $s10->setS10TransactionId($value['s10TransactionId']);
                 $s10->setS10TransactionIdDate($value['s10TransactionIdDate']);
                 $value = $s10;
-            } elseif ($key === 'cardData') {
+            } elseif ('cardData' === $key) {
                 $cardData = new CardData();
                 $cardData->hydrate($value);
                 $value = $cardData;

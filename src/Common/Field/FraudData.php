@@ -1,9 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Worldline\Sips\Common\Field;
 
 class FraudData extends Field
 {
-
     protected $addressDeliveryBillingMatchIndicator;
     protected $allowedCardArea;
     protected $allowedCardCountryList;
@@ -119,108 +121,126 @@ class FraudData extends Field
     public function setBypassCtrlList($bypassCtrlList)
     {
         $this->bypassCtrlList = $bypassCtrlList;
+
         return $this;
     }
 
     public function setBypassInfoList($bypassInfoList)
     {
         $this->bypassInfoList = $bypassInfoList;
+
         return $this;
     }
 
     public function setBypass3DS($bypass3DS)
     {
         $this->bypass3DS = $bypass3DS;
+
         return $this;
     }
 
     public function setAllowedCardCountryList($allowedCardCountryList)
     {
         $this->allowedCardCountryList = $allowedCardCountryList;
+
         return $this;
     }
 
     public function setDeniedCardCountryList($deniedCardCountryList)
     {
         $this->deniedCardCountryList = $deniedCardCountryList;
+
         return $this;
     }
 
     public function setAllowedIpCountryList($allowedIpCountryList)
     {
         $this->allowedIpCountryList = $allowedIpCountryList;
+
         return $this;
     }
 
     public function setDeniedIpCountryList($deniedIpCountryList)
     {
         $this->deniedIpCountryList = $deniedIpCountryList;
+
         return $this;
     }
 
     public function setAllowedCardArea($allowedCardArea)
     {
         $this->allowedCardArea = $allowedCardArea;
+
         return $this;
     }
 
     public function setDeniedCardArea($deniedCardArea)
     {
         $this->deniedCardArea = $deniedCardArea;
+
         return $this;
     }
 
     public function setAllowedIpArea($allowedIpArea)
     {
         $this->allowedIpArea = $allowedIpArea;
+
         return $this;
     }
 
     public function setDeniedIpArea($deniedIpArea)
     {
         $this->deniedIpArea = $deniedIpArea;
+
         return $this;
     }
 
     public function setRiskManagementDynamicSettingList($riskManagementDynamicSettingList)
     {
         $this->riskManagementDynamicSettingList = $riskManagementDynamicSettingList;
+
         return $this;
     }
 
     public function setChallengeMode3DS($challengeMode3DS)
     {
         $this->challengeMode3DS = $challengeMode3DS;
+
         return $this;
     }
 
     public function setAddressDeliveryBillingMatchIndicator($addressDeliveryBillingMatchIndicator)
     {
         $this->addressDeliveryBillingMatchIndicator = $addressDeliveryBillingMatchIndicator;
+
         return $this;
     }
 
     public function setNameDeliveryCustomerMatchIndicator($nameDeliveryCustomerMatchIndicator)
     {
         $this->nameDeliveryCustomerMatchIndicator = $nameDeliveryCustomerMatchIndicator;
+
         return $this;
     }
 
     public function setProductAvailabilityIndicator($productAvailabilityIndicator)
     {
         $this->productAvailabilityIndicator = $productAvailabilityIndicator;
+
         return $this;
     }
 
     public function setReorderProductIndicator($reorderProductIndicator)
     {
         $this->reorderProductIndicator = $reorderProductIndicator;
+
         return $this;
     }
 
     public function setMerchantCustomerAuthentMethod($merchantCustomerAuthentMethod)
     {
         $this->merchantCustomerAuthentMethod = $merchantCustomerAuthentMethod;
+
         return $this;
     }
 
@@ -242,18 +262,21 @@ class FraudData extends Field
     public function setMerchantCustomerAuthentData($merchantCustomerAuthentData)
     {
         $this->merchantCustomerAuthentData = $merchantCustomerAuthentData;
+
         return $this;
     }
 
     public function setMerchantCustomerAuthentDateTime($merchantCustomerAuthentDateTime)
     {
         $this->merchantCustomerAuthentDateTime = $merchantCustomerAuthentDateTime;
+
         return $this;
     }
 
     public function setProductAvailabilityDate($productAvailabilityDate)
     {
         $this->productAvailabilityDate = $productAvailabilityDate;
+
         return $this;
     }
 }

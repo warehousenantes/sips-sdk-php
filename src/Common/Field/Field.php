@@ -1,15 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worldline\Sips\Common\Field;
 
-
 /**
- * Class Field
- * @package Worldline\Sips\Common\Field
+ * Class Field.
  */
 class Field
 {
-
     /**
      * @return Field
      */
@@ -20,20 +19,18 @@ class Field
                 $this->$key = $value;
             }
         }
+
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = [];
         foreach ($this as $key => $value) {
-            if ($value != null) {
-                if ($value instanceof Field) {
+            if (null !== $value) {
+                if ($value instanceof self) {
                     $array[$key] = $value->toArray();
-                } elseif (is_bool($value)) {
+                } elseif (\is_bool($value)) {
                     $array[$key] = ($value ? 'true' : 'false');
                 } else {
                     $array[$key] = $value;
@@ -41,6 +38,7 @@ class Field
             }
         }
         ksort($array);
+
         return $array;
     }
 }
