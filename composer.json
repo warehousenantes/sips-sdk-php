@@ -1,5 +1,5 @@
 {
-  "name": "worldline/sips-payment-sdk",
+  "name": "warehousenantes/sips-payment-sdk",
   "description": "This library simplifies the use of Sips 2.0, the e-payments API.",
   "keywords": [
     "Sips",
