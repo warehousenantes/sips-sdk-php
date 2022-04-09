@@ -82,7 +82,7 @@ class SipsClient
         );
 
         $this->lastResponseAsJson = $response->getBody()->getContents();
-        $data = json_decode($this->lastResponseAsJson);
+        $data = json_decode($this->lastResponseAsJson, true);
         if (!empty($data['seal'])) {
             $validSeal = $sealCalculator->checkSeal($data, $this->getSecretKey(), $sealAlgorithm);
             if (!$validSeal) {

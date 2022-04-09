@@ -13,7 +13,7 @@ class RefundRequest extends SipsMessage
 
     protected $currencyCode;
 
-    protected $interfaceVersion;
+    protected ?string $interfaceVersion;
 
     protected $transactionReference;
 
@@ -27,11 +27,11 @@ class RefundRequest extends SipsMessage
 
     protected $intermediateServiceProviderId;
 
-    protected $seal;
+    protected ?string $seal;
 
-    protected $keyVersion;
+    protected ?int $keyVersion;
 
-    protected $sealAlgorithm;
+    protected ?string $sealAlgorithm;
 
     protected $customerContact;
 
