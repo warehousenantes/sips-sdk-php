@@ -48,9 +48,6 @@ class JsonSealCalculator
 
     protected function encrypt(string $sealData, string $secretKey, string $algorithm = self::ALGORITHM_DEFAULT): string
     {
-        $sealData = utf8_encode($sealData);
-        $secretKey = utf8_encode($secretKey);
-
         switch ($algorithm) {
             case self::ALGORITHM_SHA256:
                 return hash('sha256', $sealData.$secretKey);
