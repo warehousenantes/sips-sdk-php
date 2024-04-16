@@ -25,10 +25,6 @@ class SipsClient
 
     protected ?string $sealAlgorithm = null;
 
-    protected ?string $lastRequestAsJson = null;
-
-    protected ?string $lastResponseAsJson = null;
-
     /**
      * SipsClient constructor.
      */
@@ -59,23 +55,18 @@ class SipsClient
         $sealCalculator = new JsonSealCalculator();
         $sealAlgorithm = $this->sealAlgorithm ?? JsonSealCalculator::ALGORITHM_DEFAULT;
         $sealCalculator->calculateSeal($sipsMessage, $this->secretKey, $sealAlgorithm);
-        $json = json_encode($sipsMessage->toArray());
-        $this->lastRequestAsJson = $json;
-
-        $headers = [
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-            'timeout' => $timeout,
-        ];
 
         $client = HttpClient::createForBaseUri($this->environment->getEnvironment($sipsMessage->getConnecter()));
         $response = $client->request('POST', $sipsMessage->getServiceUrl(), [
-            'headers' => $headers,
-            'json' => $json,
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json',
+                'timeout' => $timeout,
+            ],
+            'json' => $sipsMessage->toArray(),
         ]);
 
-        $this->lastResponseAsJson = $response->getContent();
-        $data = json_decode($this->lastResponseAsJson, true);
+        $data = $response->toArray();
         if (!empty($data['seal'])) {
             $validSeal = $sealCalculator->checkSeal($data, $this->getSecretKey(), $sealAlgorithm);
             if (!$validSeal) {
@@ -116,18 +107,13 @@ class SipsClient
         $this->keyVersion = $keyVersion;
     }
 
-    public function getLastRequestAsJson(): ?string
-    {
-        return $this->lastRequestAsJson;
-    }
-
     public function getSealAlgorithm(): ?string
     {
         return $this->sealAlgorithm;
     }
 
     /**
-     * @param type $sealAlgorithm
+     * @param string $sealAlgorithm
      *
      * @return $this
      */
@@ -138,18 +124,13 @@ class SipsClient
         return $this;
     }
 
-    public function getLastResponseAsJson(): ?string
-    {
-        return $this->lastResponseAsJson;
-    }
-
     /**
      * @throws \Exception
      */
     public function finalizeTransaction(): PaypageResult
     {
-        $data = $_POST['Data'];
-        $seal = $_POST['Seal'];
+        $data = $_POST['Data'] ?? '';
+        $seal = $_POST['Seal'] ?? '';
         $sealCalculator = new PostSealCalculator();
         if (!$sealCalculator->isCorrectSeal($data, $this->secretKey, $seal)) {
             throw new \Exception('Invalid seal in response. Response not trusted.');
