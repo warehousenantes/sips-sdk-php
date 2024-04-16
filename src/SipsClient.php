@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace Worldline\Sips;
 
-use Http\Discovery\HttpClientDiscovery;
-use Http\Discovery\MessageFactoryDiscovery;
+use Symfony\Component\HttpClient\HttpClient;
 use Worldline\Sips\Common\Seal\JsonSealCalculator;
 use Worldline\Sips\Common\Seal\PostSealCalculator;
 use Worldline\Sips\Common\SipsEnvironment;
 use Worldline\Sips\Paypage\PaypageResult;
 
 /**
- * @see \Worldline\Sips\Test\SipsClientTest
+ * @see Test\SipsClientTest
  */
 class SipsClient
 {
@@ -69,19 +68,13 @@ class SipsClient
             'timeout' => $timeout,
         ];
 
-        $client = HttpClientDiscovery::find();
-        $messageFactory = MessageFactoryDiscovery::find();
+        $client = HttpClient::createForBaseUri($this->environment->getEnvironment($sipsMessage->getConnecter()));
+        $response = $client->request('POST', $sipsMessage->getServiceUrl(), [
+            'headers' => $headers,
+            'json' => $json,
+        ]);
 
-        $response = $client->sendRequest(
-            $messageFactory->createRequest(
-                'POST',
-                $this->environment->getEnvironment($sipsMessage->getConnecter()).$sipsMessage->getServiceUrl(),
-                $headers,
-                $json
-            )
-        );
-
-        $this->lastResponseAsJson = $response->getBody()->getContents();
+        $this->lastResponseAsJson = $response->getContent();
         $data = json_decode($this->lastResponseAsJson, true);
         if (!empty($data['seal'])) {
             $validSeal = $sealCalculator->checkSeal($data, $this->getSecretKey(), $sealAlgorithm);

@@ -670,9 +670,6 @@ class PaypageRequest extends SipsMessage
         return $this;
     }
 
-    /**
-     * @return Address
-     */
     public function getCustomerAddress(): ?Address
     {
         return $this->customerAddress;
@@ -747,9 +744,6 @@ class PaypageRequest extends SipsMessage
         throw new \InvalidArgumentException('Invalid customerLanguage. Select a valid code from the data dictionary.');
     }
 
-    /**
-     * @return Address
-     */
     public function getDeliveryAddress(): ?Address
     {
         return $this->deliveryAddress;
@@ -774,9 +768,6 @@ class PaypageRequest extends SipsMessage
         return $this;
     }
 
-    /**
-     * @return Address
-     */
     public function getHolderAddress(): ?Address
     {
         return $this->holderAddress;
@@ -918,9 +909,6 @@ class PaypageRequest extends SipsMessage
         return $this;
     }
 
-    /**
-     * @return PaypageData
-     */
     public function getPaypageData(): ?PaypageData
     {
         return $this->paypageData;
@@ -954,8 +942,6 @@ class PaypageRequest extends SipsMessage
 
     /**
      * Get the value of fraudData.
-     *
-     * @return FraudData
      */
     public function getFraudData(): ?FraudData
     {

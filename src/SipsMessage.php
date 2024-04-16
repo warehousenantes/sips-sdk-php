@@ -101,9 +101,6 @@ class SipsMessage
         return $this;
     }
 
-    /**
-     * @param string $prefixKey Prefix to add in the beginning of each key
-     */
     public function toArray(): array
     {
         $array = [];

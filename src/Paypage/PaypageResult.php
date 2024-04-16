@@ -320,9 +320,6 @@ class PaypageResult
         return $this->complementaryCode;
     }
 
-    /**
-     * @return string
-     */
     public function getComplementaryInfo(): ?string
     {
         return $this->complementaryInfo;
